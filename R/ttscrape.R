@@ -5,23 +5,37 @@ ttscrape <- function(ID) {
           ID,
           "/ttcloud.txt",
           sep = "")
-  #Reading the HTML code from the website
-  mydata0 <- read.csv(url,
-                      sep = ";",
-                      header = FALSE,
-                      fill = TRUE)
 
+
+  if (RCurl::url.exists(url)==T){
+    #Reading the HTML code from the website
+    mydata0 <- read.csv(url,
+                        sep = ";",
+                        header = FALSE,
+                        fill = TRUE)
+    flag0 <- 1
+  } else {flag0 <- 0}
 
   #Specifying the url for desired website to be scraped
   url <-
     paste("http://ittn.altervista.org/", ID, "/ttcloud.txt", sep = "")
   #Reading the HTML code from the website
-  mydata1 <- read.csv(url,
-                      sep = ";",
-                      header = FALSE,
-                      fill = TRUE)
 
-  mydata <- rbind(mydata0, mydata1)
+
+  if (RCurl::url.exists(url)==T){
+    mydata1 <- read.csv(url,
+                        sep = ";",
+                        header = FALSE,
+                        fill = TRUE)
+    flag1 <- 1
+  } else {flag1 <- 0}
+
+
+  if (flag0 == 0){
+    if (flag1 == 0){stop()}else{mydata <- mydata1}
+  }else{
+    if (flag1 == 0){mydata <- mydata0}else{mydata <- rbind(mydata0, mydata1)}
+  }
 
 
   mydata_sep <-
@@ -80,12 +94,12 @@ ttscrape <- function(ID) {
       "AS7263_760",
       "AS7263_810",
       "AS7263_860",
-      "AS7263_450",
-      "AS7263_500",
-      "AS7263_550",
-      "AS7263_570",
-      "AS7263_600",
-      "AS7263_650",
+      "AS7262_450",
+      "AS7262_500",
+      "AS7262_550",
+      "AS7262_570",
+      "AS7262_600",
+      "AS7262_650",
       "integration_T",
       "gain"
     )
@@ -148,7 +162,8 @@ ttscrape <- function(ID) {
 
   colnames(mydata_4C) <- header_4C
 
-  mydata_4D$Timestamp[mydata_4D$Timestamp < 2000000] <- NA
+  #filter all the dates earlier than 2020-01-01 00:00:00
+  mydata_4D$Timestamp[mydata_4D$Timestamp < 1577836800] <- NA
 
   mydata_4D$IT_ID <- as.integer(mydata_4D$IT_ID)
   mydata_4D$gz_mean <- as.integer(mydata_4D$gz_mean)
@@ -167,5 +182,6 @@ ttscrape <- function(ID) {
 
   mydata_4B <<- mydata_4B
   mydata_4D <<- mydata_4D
+  mydata_49 <<- mydata_49
 
 }
