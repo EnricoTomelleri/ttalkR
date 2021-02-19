@@ -5,7 +5,7 @@
 a function to process and plot dendrometer data
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+the function makes use of data frames created by the "ttscrape" function. It is makes use of the "treenetproc" R-package for analyzing the Sharp data within a mesh of TreeTalkers.
 }
 \usage{
 ttgrowth(mydata_4D)

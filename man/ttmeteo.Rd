@@ -5,7 +5,7 @@
 a function to plot and process environmental data
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+the function makes use of data frames created by the "ttscrape" function.
 }
 \usage{
 ttmeteo(mydata_4D, plot_label)
