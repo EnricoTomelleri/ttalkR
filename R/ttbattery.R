@@ -1,7 +1,7 @@
 ttbattery <- function(mydata_4B, mydata_4D, plot_label){
 
-  HR_Timestamp_4D <- as.POSIXct(mydata_4D$Timestamp, origin="1970-01-01")
-  HR_Timestamp_4B <- as.POSIXct(mydata_4B$Timestamp, origin="1970-01-01")
+  HR_Timestamp_4D <- mydata_4D$Timestamp#as.POSIXct(mydata_4D$Timestamp, origin="1970-01-01")
+  HR_Timestamp_4B <- mydata_4B$Timestamp#as.POSIXct(mydata_4B$Timestamp, origin="1970-01-01")
   #create a color index
   id_col <- mydata_4D$IT_ID
   id_col[id_col == max(id_col, na.rm=T)] <- 21
