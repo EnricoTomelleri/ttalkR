@@ -1,11 +1,26 @@
-ttlight <- function(mydata_49, plot_label) {
+ttlight <- function(mydata_49, lat, lon){
+
+  library(suncalc)
+
+  ID <- unique(mydata_49$IT_ID)
+
+  filter_ttlight <- function(mydata_49)
+  ID <- unique(mydata_49$IT_ID)
+  for (j in 1:length(ID)) {
+    ts <- mydata_49$AS7263_610[mydata_49$IT_ID == ID[j]]
+    if (length(ts) < 11) {
+      next()
+    }
+    ts_filt <- savitzkyGolay(ts, 0, 1, 11)
+    #mydata_49$AS7263_610[mydata_49$IT_ID == ID[j]] <- ts_filt[1:length(ts)]
+  }
 
 
-
-  mydata_49$gain_factor[mydata_49$gain == 0] <- 64/1
-  mydata_49$gain_factor[mydata_49$gain == 1] <- 64/3.7
-  mydata_49$gain_factor[mydata_49$gain == 2] <- 64/16
-  mydata_49$gain_factor[mydata_49$gain == 3] <- 64/64
+  #the gain correction seems to occur directly in the ams firmware
+  mydata_49$gain_factor[mydata_49$gain == 0] <- 1
+  mydata_49$gain_factor[mydata_49$gain == 1] <- 1
+  mydata_49$gain_factor[mydata_49$gain == 2] <- 1
+  mydata_49$gain_factor[mydata_49$gain == 3] <- 1
 
   mydata_49$integration_factor <- mydata_49$integration_T/50
 
@@ -23,41 +38,78 @@ ttlight <- function(mydata_49, plot_label) {
   mydata_49$AS7262_650 <- as.numeric(mydata_49$AS7262_650); mydata_49$AS7262_650[mydata_49$AS7262_650 > 65000] <- NA
 
   #Near Infrared
-  AS7263_610_R <-
-   -312.45+(1.6699* (mydata_49$AS7263_610*mydata_49$integration_factor*mydata_49$gain_factor))
-  AS7263_680_R <-
-   -561.56+(1.5199* (mydata_49$AS7263_680*mydata_49$integration_factor*mydata_49$gain_factor))
-  AS7263_730_R <-
-   -1511.2+(1.6209* (mydata_49$AS7263_730*mydata_49$integration_factor*mydata_49$gain_factor))
-  AS7263_760_R <-
-   -1012.5+(1.4549* (mydata_49$AS7263_760*mydata_49$integration_factor*mydata_49$gain_factor))
-  AS7263_810_R <-
-   91.58+(0.8414* (mydata_49$AS7263_810*mydata_49$integration_factor*mydata_49$gain_factor))
-  AS7263_860_R <-
-   334.88+(0.531* (mydata_49$AS7263_860*mydata_49$integration_factor*mydata_49$gain_factor))
+  AS7263_610_R <- mydata_49$AS7263_610*mydata_49$integration_factor*mydata_49$gain_factor
+   #-312.45+(1.6699* (mydata_49$AS7263_610*mydata_49$integration_factor*mydata_49$gain_factor))
+  AS7263_680_R <- mydata_49$AS7263_680*mydata_49$integration_factor*mydata_49$gain_factor
+   #-561.56+(1.5199* (mydata_49$AS7263_680*mydata_49$integration_factor*mydata_49$gain_factor))
+  AS7263_730_R <- mydata_49$AS7263_730*mydata_49$integration_factor*mydata_49$gain_factor
+   #-1511.2+(1.6209* (mydata_49$AS7263_730*mydata_49$integration_factor*mydata_49$gain_factor))
+  AS7263_760_R <- mydata_49$AS7263_760*mydata_49$integration_factor*mydata_49$gain_factor
+   #-1012.5+(1.4549* (mydata_49$AS7263_760*mydata_49$integration_factor*mydata_49$gain_factor))
+  AS7263_810_R <- mydata_49$AS7263_760*mydata_49$integration_factor*mydata_49$gain_factor
+   #91.58+(0.8414* (mydata_49$AS7263_810*mydata_49$integration_factor*mydata_49$gain_factor))
+  AS7263_860_R <- mydata_49$AS7263_810*mydata_49$integration_factor*mydata_49$gain_factor
+   #334.88+(0.531* (mydata_49$AS7263_860*mydata_49$integration_factor*mydata_49$gain_factor))
 
   #Visible Light Spectrum
-  AS7262_450_R <-
-   -212.62+(0.4562* (mydata_49$AS7262_450*mydata_49$integration_factor*mydata_49$gain_factor))
-  AS7262_500_R <-
-   -232.13+(0.6257 * (mydata_49$AS7262_500*mydata_49$integration_factor*mydata_49$gain_factor))
-  AS7262_550_R <-
-   -842.1+(1.0546 * (mydata_49$AS7262_550*mydata_49$integration_factor*mydata_49$gain_factor))
-  AS7262_570_R <-
-   -666.72+(1.0462 * (mydata_49$AS7262_570*mydata_49$integration_factor*mydata_49$gain_factor))
-  AS7262_600_R <-
-   -328.08+(0.8654 * (mydata_49$AS7262_600*mydata_49$integration_factor*mydata_49$gain_factor))
-  AS7262_650_R <-
-   202.77+(0.7829* (mydata_49$AS7262_650*mydata_49$integration_factor*mydata_49$gain_factor))
+  AS7262_450_R <- mydata_49$AS7262_450*mydata_49$integration_factor*mydata_49$gain_factor
+   #-212.62+(0.4562* (mydata_49$AS7262_450*mydata_49$integration_factor*mydata_49$gain_factor))
+  AS7262_500_R <- mydata_49$AS7262_500*mydata_49$integration_factor*mydata_49$gain_factor
+   #-232.13+(0.6257 * (mydata_49$AS7262_500*mydata_49$integration_factor*mydata_49$gain_factor))
+  AS7262_550_R <- mydata_49$AS7262_550*mydata_49$integration_factor*mydata_49$gain_factor
+   #-842.1+(1.0546 * (mydata_49$AS7262_550*mydata_49$integration_factor*mydata_49$gain_factor))
+  AS7262_570_R <- mydata_49$AS7262_570*mydata_49$integration_factor*mydata_49$gain_factor
+   #-666.72+(1.0462 * (mydata_49$AS7262_570*mydata_49$integration_factor*mydata_49$gain_factor))
+  AS7262_600_R <- mydata_49$AS7262_600*mydata_49$integration_factor*mydata_49$gain_factor
+   #-328.08+(0.8654 * (mydata_49$AS7262_600*mydata_49$integration_factor*mydata_49$gain_factor))
+  AS7262_650_R <- mydata_49$AS7262_650*mydata_49$integration_factor*mydata_49$gain_factor
+   #202.77+(0.7829* (mydata_49$AS7262_650*mydata_49$integration_factor*mydata_49$gain_factor))
+
+  #solar geometry
+  #"altitude" : sun altitude above the horizon in radians, e.g. 0 at the horizon and PI/2 at the zenith (straight over your head)
+  #"azimuth": sun azimuth in radians (direction along the horizon,measured from south to west), e.g. 0 is south and Math.PI * 3/4 is northwest
+  lat <- 46.453676
+  lon <- 11.232666
+  solarGeom <-  getSunlightPosition(date= mydata_49$Timestamp, lat = lat, lon = lon)
+  solarGeom$altitude <- (solarGeom$altitude * 180) / (pi)
+  solarGeom$azimuth <-  (solarGeom$azimuth * 180) / (pi)
 
   TT_ID <- mydata_49$IT_ID
+  Timestamp <- mydata_49$Timestamp
 
-  out <- data.frame(TT_ID, AS7262_450_R, AS7262_500_R, AS7262_550_R, AS7262_570_R, AS7262_600_R, AS7262_650_R, AS7263_610_R, AS7263_680_R, AS7263_730_R, AS7263_760_R, AS7263_810_R, AS7263_860_R)
-  out[out<0] <- NA
+  out <- data.frame(TT_ID,
+                    Timestamp,
+                    subset(solarGeom, select =-date),
+                    AS7262_450_R,
+                    AS7262_500_R,
+                    AS7262_550_R,
+                    AS7262_570_R,
+                    AS7262_600_R,
+                    AS7262_650_R,
+                    AS7263_610_R,
+                    AS7263_680_R,
+                    AS7263_730_R,
+                    AS7263_760_R,
+                    AS7263_810_R,
+                    AS7263_860_R
+                    )
+  #out[out<0] <- NA
+
+  #it is possible to find dates out of range
+  out <- out[format(out$Timestamp, format="%Y")>2010,]
+
+  #keep data with with sun in +/-20 degrees from solar noon
+  out <- out[out$azimuth > -30 & out$azimuth < 30,]
 
   write.table(x = out, file = "ttlight_test.csv", row.names = F)
 
+
+
 #plotting
+
+  plot(out$AS7263_610[out$TT_ID == ID[21]] ~out$Timestamp[out$TT_ID == ID[21]], typ="l", col="red")
+  plot(out$AS7263_610[out$TT_ID == ID[1]] ~out$Timestamp[out$TT_ID == ID[1]], typ="l")
+
 
 par(mfrow=c(1,1))
   ID <- unique(out$TT_ID)
@@ -73,3 +125,5 @@ par(mfrow=c(1,1))
     plot(ts, typ="l", ylim=c(0,10000))
     }
   }
+}
+

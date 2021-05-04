@@ -165,15 +165,23 @@ ttscrape <- function(ID) {
   #filter all the dates earlier than 2020-01-01 00:00:00
   mydata_4D$Timestamp[mydata_4D$Timestamp < 1577836800] <- NA
 
+  #convert the ids to integers
   mydata_4D$IT_ID <- as.integer(mydata_4D$IT_ID)
+  mydata_49$IT_ID <- as.integer(mydata_49$IT_ID)
+  mydata_4B$IT_ID <- as.integer(mydata_4B$IT_ID)
+  mydata_4C$IT_ID <- as.integer(mydata_4C$IT_ID)
+
   mydata_4D$gz_mean <- as.integer(mydata_4D$gz_mean)
 
 
   #timestamp conversion
-  HR_Timestamp_4D <-
-    as.POSIXct(mydata_4D$Timestamp, origin = "1970-01-01")
-  HR_Timestamp_4B <-
-    as.POSIXct(mydata_4B$Timestamp, origin = "1970-01-01")
+  #Timestamp of the router when the individual device send the data string. The timestamp is the number of seconds since 1st January 1970.
+  mydata_4D$Timestamp <-
+    as.POSIXct(mydata_4D$Timestamp, origin = "1970-01-01", tz="GMT")
+  mydata_4B$Timestamp <-
+    as.POSIXct(mydata_4B$Timestamp, origin = "1970-01-01", tz="GMT")
+  mydata_49$Timestamp <-
+    as.POSIXct(mydata_49$Timestamp, origin = "1970-01-01", tz="GMT")
   #create a color index
   id_col <- mydata_4D$IT_ID
   id_col[id_col == max(id_col, na.rm = T)] <- 21
