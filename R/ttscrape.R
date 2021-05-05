@@ -1,4 +1,12 @@
 ttscrape <- function(ID) {
+
+  library(tidyr)
+  library(ggplot2)
+  library(tidyverse)
+  library(signal)
+  library(zoo)
+  library(prospectr)
+
   #Specifying the url for desired website to be scraped
   url <-
     paste("http://naturetalkers.altervista.org/",
@@ -58,7 +66,7 @@ ttscrape <- function(ID) {
     c(
       "SDate",
       "STime",
-      "IT_ID",
+      "TT_ID",
       "Rec_Nr",
       "Dev_Ty",
       "Timestamp",
@@ -84,7 +92,7 @@ ttscrape <- function(ID) {
     c(
       "SDate",
       "STime",
-      "IT_ID",
+      "TT_ID",
       "Rec_Nr",
       "Dev_Ty",
       "Timestamp",
@@ -108,7 +116,7 @@ ttscrape <- function(ID) {
     c(
       "SDate",
       "STime",
-      "IT_ID",
+      "TT_ID",
       "Rec_Nr",
       "Dev_Ty",
       "Timestamp",
@@ -126,7 +134,7 @@ ttscrape <- function(ID) {
     c(
       "SDate",
       "STime",
-      "IT_ID",
+      "TT_ID",
       "Rec_Nr",
       "Dev_Ty",
       "Timestamp",
@@ -166,10 +174,10 @@ ttscrape <- function(ID) {
   mydata_4D$Timestamp[mydata_4D$Timestamp < 1577836800] <- NA
 
   #convert the ids to integers
-  mydata_4D$IT_ID <- as.integer(mydata_4D$IT_ID)
-  mydata_49$IT_ID <- as.integer(mydata_49$IT_ID)
-  mydata_4B$IT_ID <- as.integer(mydata_4B$IT_ID)
-  mydata_4C$IT_ID <- as.integer(mydata_4C$IT_ID)
+  mydata_4D$TT_ID <- as.integer(mydata_4D$TT_ID)
+  mydata_49$TT_ID <- as.integer(mydata_49$TT_ID)
+  mydata_4B$TT_ID <- as.integer(mydata_4B$TT_ID)
+  mydata_4C$TT_ID <- as.integer(mydata_4C$TT_ID)
 
   mydata_4D$gz_mean <- as.integer(mydata_4D$gz_mean)
 
@@ -183,10 +191,13 @@ ttscrape <- function(ID) {
   mydata_49$Timestamp <-
     as.POSIXct(mydata_49$Timestamp, origin = "1970-01-01", tz="GMT")
   #create a color index
-  id_col <- mydata_4D$IT_ID
+  id_col <- mydata_4D$TT_ID
   id_col[id_col == max(id_col, na.rm = T)] <- 21
   id_col[id_col != 21] <- id_col[id_col != 21] - max(id_col, na.rm = T)
   mydata_4D$id_col <- abs(id_col)
+
+  #it might happen that a ttcloud intercepts data from tt+ out of the site. I've had a case with few data points.
+  #That's why a filter on the time series length might be necessary
 
   mydata_4B <<- mydata_4B
   mydata_4D <<- mydata_4D

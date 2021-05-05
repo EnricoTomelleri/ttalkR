@@ -3,11 +3,15 @@ ttbattery <- function(mydata_4B, mydata_4D, plot_label){
   HR_Timestamp_4D <- mydata_4D$Timestamp#as.POSIXct(mydata_4D$Timestamp, origin="1970-01-01")
   HR_Timestamp_4B <- mydata_4B$Timestamp#as.POSIXct(mydata_4B$Timestamp, origin="1970-01-01")
   #create a color index
-  id_col <- mydata_4D$IT_ID
-  id_col[id_col == max(id_col, na.rm=T)] <- 21
-  id_col[id_col != 21] <- id_col[id_col != 21]- max(id_col, na.rm=T)
-  mydata_4D$id_col <- abs(id_col)
+  id_col <- mydata_4D$TT_ID
+  id_col_ind <- data.frame(unique(id_col), 1:length(unique(id_col))); colnames(id_col_ind) <- c("TT_ID", "ID")
 
+
+  #create index for color scale
+  mydata_4D$id_col_ind <- mydata_4D$TT_ID
+  for (i in 1:length(id_col_ind$ID)){
+    mydata_4D$id_col_ind <- replace(mydata_4D$id_col_ind, mydata_4D$id_col_ind==id_col_ind$TT_ID[i], id_col_ind$ID[i])
+  }
 
   #4.8.Battery Voltage
   Bat_mV <- 2*1100*(mydata_4D$adc_Vbat/mydata_4D$adc_bandgap)
@@ -26,13 +30,12 @@ ttbattery <- function(mydata_4B, mydata_4D, plot_label){
 
 
   library(ggplot2)
-  df <- data.frame(HR_Timestamp_4D, Bat_mV, id_col)
-  df1 <-
-    data.frame(HR_Timestamp_4B, mydata_4B$Battery)
+  #df <- data.frame(HR_Timestamp_4D, Bat_mV, mydata_4D$id_col_ind)
+  df1 <- data.frame(HR_Timestamp_4B, mydata_4B$Battery)
   colnames(df1) <- c("HR_Timestamp_4B", "Bat_mV")
   p <- ggplot(data = df, aes(HR_Timestamp_4D, Bat_mV))
-  p + geom_point(aes(colour = id_col), size = 0.2) +
-    scale_color_gradientn(colours = hcl.colors(21, palette = "viridis")) +
+  p + geom_point(aes(colour = mydata_4D$id_col_ind), size = 0.2) +
+    scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
     geom_line(data = df1,
               aes(HR_Timestamp_4B, Bat_mV),
               color = "black") +
