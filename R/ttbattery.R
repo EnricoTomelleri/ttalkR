@@ -1,5 +1,5 @@
 ttbattery <- function(mydata_4B, mydata_4D, plot_label){
-
+  #example call ttbattery(mydata_4B, mydata_4D, "split")
   HR_Timestamp_4D <- mydata_4D$Timestamp#as.POSIXct(mydata_4D$Timestamp, origin="1970-01-01")
   HR_Timestamp_4B <- mydata_4B$Timestamp#as.POSIXct(mydata_4B$Timestamp, origin="1970-01-01")
   #create a color index
@@ -30,30 +30,50 @@ ttbattery <- function(mydata_4B, mydata_4D, plot_label){
 
 
   library(ggplot2)
-  #df <- data.frame(HR_Timestamp_4D, Bat_mV, mydata_4D$id_col_ind)
+
+
+  df <- data.frame(HR_Timestamp_4D, Bat_mV, mydata_4D$id_col_ind)
   df1 <- data.frame(HR_Timestamp_4B, mydata_4B$Battery)
-  colnames(df1) <- c("HR_Timestamp_4B", "Bat_mV")
-  p <- ggplot(data = df, aes(HR_Timestamp_4D, Bat_mV))
-  p + geom_point(aes(colour = mydata_4D$id_col_ind), size = 0.2) +
-    scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
-    geom_line(data = df1,
-              aes(HR_Timestamp_4B, Bat_mV),
-              color = "black") +
-    geom_segment(aes(
-      x = min(HR_Timestamp_4D, na.rm = T),
-      y = 3500,
-      xend = max(HR_Timestamp_4D, na.rm = T),
-      yend = 3500
-    ), color = "red") +
-    labs(x = "Timestamp") +
-    #labs(title = site) +
-    scale_x_datetime(minor_breaks = ("1 week")) +
-    theme(legend.position = "none")
-  #save the plot
-  #ggsave(paste("../Figures/", site, "_BatteryVoltage.png", sep=""),
-  #       plot = last_plot(),
-  #       width = 10,
-  #       height = 7,
-  #       units = c("in"),
-  #       dpi = 300)
+
+    if (plot_label=="all_in_one"){
+    colnames(df1) <- c("HR_Timestamp_4B", "Bat_mV")
+    p <- ggplot(data = df, aes(HR_Timestamp_4D, Bat_mV))
+    p + geom_point(aes(colour = mydata_4D$id_col_ind), size = 0.2) +
+      scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
+      geom_line(data = df1,
+                aes(HR_Timestamp_4B, Bat_mV),
+                color = "black") +
+      geom_segment(aes(
+        x = min(HR_Timestamp_4D, na.rm = T),
+        y = 3500,
+        xend = max(HR_Timestamp_4D, na.rm = T),
+        yend = 3500
+      ), color = "red") +
+      labs(x = "Timestamp") +
+      #labs(title = site) +
+      scale_x_datetime(minor_breaks = ("1 week")) +
+      theme(legend.position = "none")
+    #save the plot
+    #ggsave(paste("../Figures/", site, "_BatteryVoltage.png", sep=""),
+    #       plot = last_plot(),
+    #       width = 10,
+    #       height = 7,
+    #       units = c("in"),
+    #       dpi = 300)
+  }
+
+  if (plot_label=="split"){
+    p <- ggplot(data=df, aes(x=HR_Timestamp_4D, y=Bat_mV, color=mydata_4D$id_col_ind)) +
+      geom_point() +
+      geom_line(aes(group = 1)) +
+      facet_grid(facets = mydata_4D$TT_ID ~ ., margins = FALSE) +
+      labs(x = "Timestamp") +
+      scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
+      scale_x_datetime(minor_breaks = ("1 week")) +
+      theme(legend.position = "none") +
+      theme(strip.text.y = element_text(angle = 0, hjust = 0))
+
+    print(p)
+  }
+
 }
