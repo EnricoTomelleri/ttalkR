@@ -1,4 +1,19 @@
 ttgranier <- function(mydata_4D, plot_label) {
+
+  #load required packages
+  library(Rssa)
+  library(oce)
+
+  #create a color index
+  id_col <- mydata_4D$TT_ID
+  id_col_ind <- data.frame(unique(id_col), 1:length(unique(id_col))); colnames(id_col_ind) <- c("TT_ID", "ID")
+  #create index for color scale
+  mydata_4D$id_col_ind <- mydata_4D$TT_ID
+  for (i in 1:length(id_col_ind$ID)){
+    mydata_4D$id_col_ind <- replace(mydata_4D$id_col_ind, mydata_4D$id_col_ind==id_col_ind$TT_ID[i], id_col_ind$ID[i])
+  }
+
+
   #4.6.Ref & Heat Probes Temperature
   Tref_0C <-
     127.6 - 0.006045 * mydata_4D$Tref_0 + 1.26E-7 * mydata_4D$Tref_0 ^ 2 -
@@ -10,19 +25,19 @@ ttgranier <- function(mydata_4D, plot_label) {
   Tref_0C[Tref_0C < -20] <- NA
   Tref_0C[Tref_0C > 40] <- NA
   #apply a Savitzky-Golay smoothing
-  ID <- unique(mydata_4D$IT_ID)
+  ID <- unique(mydata_4D$TT_ID)
   for (j in 1:length(ID)) {
-    ts <- Tref_0C[mydata_4D$IT_ID == ID[j]]
+    ts <- Tref_0C[mydata_4D$TT_ID == ID[j]]
     if (length(ts) < 11) {
       next()
     }
     ts_filt <- savitzkyGolay(ts, 0, 1, 11)
-    Tref_0C[mydata_4D$IT_ID == ID[j]] <- ts_filt[1:length(ts)]
+    Tref_0C[mydata_4D$TT_ID == ID[j]] <- ts_filt[1:length(ts)]
   }
 
   #Tref_0C <- na.spline(Tref_0C)
   #Tref_0C <- sgolayfilt(Tref_0C, n=11, p=3)
-  plot(Tref_0C, typ = "l", main = "Tref_0C")
+  #plot(Tref_0C, typ = "l", main = "Tref_0C")
   ############################
 
 
@@ -35,18 +50,18 @@ ttgranier <- function(mydata_4D, plot_label) {
   Tref_1C[Tref_1C < -20] <- NA
   Tref_1C[Tref_1C > 40] <- NA
   #apply a Savitzky-Golay smoothing
-  ID <- unique(mydata_4D$IT_ID)
+  ID <- unique(mydata_4D$TT_ID)
   for (j in 1:length(ID)) {
-    ts <- Tref_1C[mydata_4D$IT_ID == ID[j]]
+    ts <- Tref_1C[mydata_4D$TT_ID == ID[j]]
     if (length(ts) < 11) {
       next()
     }
     ts_filt <- savitzkyGolay(ts, 0, 1, 11)
-    Tref_1C[mydata_4D$IT_ID == ID[j]] <- ts_filt[1:length(ts)]
+    Tref_1C[mydata_4D$TT_ID == ID[j]] <- ts_filt[1:length(ts)]
   }
   #Tref_1C <- na.spline(Tref_1C)
   #Tref_1C <- sgolayfilt(Tref_1C, n=5, p=3)
-  plot(Tref_1C, typ = "l", main = "Tref_1C")
+  #plot(Tref_1C, typ = "l", main = "Tref_1C")
   ############################
 
 
@@ -58,17 +73,17 @@ ttgranier <- function(mydata_4D, plot_label) {
   Theat_0C[Theat_0C < -20] <- NA
   Theat_0C[Theat_0C > 40] <- NA
   #apply a Savitzky-Golay smoothing
-  ID <- unique(mydata_4D$IT_ID)
+  ID <- unique(mydata_4D$TT_ID)
   for (j in 1:length(ID)) {
-    ts <- Theat_0C[mydata_4D$IT_ID == ID[j]]
+    ts <- Theat_0C[mydata_4D$TT_ID == ID[j]]
     if (length(ts) < 11) {
       next()
     }
     ts_filt <- savitzkyGolay(ts, 0, 1, 11)
-    Theat_0C[mydata_4D$IT_ID == ID[j]] <- ts_filt[1:length(ts)]
+    Theat_0C[mydata_4D$TT_ID == ID[j]] <- ts_filt[1:length(ts)]
   }
 
-  plot(Theat_0C, typ = "l", main = "Theat_0C")
+  #plot(Theat_0C, typ = "l", main = "Theat_0C")
   ############################
 
 
@@ -82,17 +97,17 @@ ttgranier <- function(mydata_4D, plot_label) {
   Theat_1C[Theat_1C < -20] <- NA
   Theat_1C[Theat_1C > 40] <- NA
   #apply a Savitzky-Golay smoothing
-  ID <- unique(mydata_4D$IT_ID)
+  ID <- unique(mydata_4D$TT_ID)
   for (j in 1:length(ID)) {
-    ts <- Theat_1C[mydata_4D$IT_ID == ID[j]]
+    ts <- Theat_1C[mydata_4D$TT_ID == ID[j]]
     if (length(ts) < 11) {
       next()
     }
     ts_filt <- savitzkyGolay(ts, 0, 1, 11)
-    Theat_1C[mydata_4D$IT_ID == ID[j]] <- ts_filt[1:length(ts)]
+    Theat_1C[mydata_4D$TT_ID == ID[j]] <- ts_filt[1:length(ts)]
   }
 
-  plot(Theat_1C, typ = "l", main = "Theat_1C")
+  #plot(Theat_1C, typ = "l", main = "Theat_1C")
   ############################
 
 
@@ -104,11 +119,11 @@ ttgranier <- function(mydata_4D, plot_label) {
   dTmax <-
     (dTon - dToff) #max(Theat_1C-Theat_0C, na.rm=T)#max(Theat_1C-Theat_0C, na.rm=T)
 
-  ID <- unique(mydata_4D$IT_ID)
+  ID <- unique(mydata_4D$TT_ID)
   for (j in 1:(length(ID))) {
-    #dTmax[mydata_4D$IT_ID == ID[j]] <- (dTon[mydata_4D$IT_ID == ID[j]]  - dToff[mydata_4D$IT_ID == ID[j]] )
+    #dTmax[mydata_4D$TT_ID == ID[j]] <- (dTon[mydata_4D$TT_ID == ID[j]]  - dToff[mydata_4D$TT_ID == ID[j]] )
     df <-
-      data.frame(dTmax[mydata_4D$IT_ID == ID[j]], mydata_4D$SDate[mydata_4D$IT_ID == ID[j]])
+      data.frame(dTmax[mydata_4D$TT_ID == ID[j]], mydata_4D$SDate[mydata_4D$TT_ID == ID[j]])
     colnames(df) <- c("dTmax", "Date")
     if (length(na.omit(df$dTmax)) < 11) {
       next()
@@ -126,21 +141,20 @@ ttgranier <- function(mydata_4D, plot_label) {
       df$daily_Tmax[i] <- max(df$dTmax[df$Date  ==  df$Date[i]])
     }
 
-    mydata_4D$daily_Tmax[mydata_4D$IT_ID == ID[j]] <- df$daily_Tmax
+    mydata_4D$daily_Tmax[mydata_4D$TT_ID == ID[j]] <- df$daily_Tmax
   }
 
 
-  library(Rssa)
-  library(oce)
+
 
   Fd <-
     118.99 * ((mydata_4D$daily_Tmax - (dTon - dToff)) / (dTon - dToff)) ^ 1.231 #m^3/s
   Fd[Fd > 1000] <- NA
 
   #despike
-  ID <- unique(mydata_4D$IT_ID)
+  ID <- unique(mydata_4D$TT_ID)
   for (j in 1:(length(ID))) {
-    ts <- Fd[mydata_4D$IT_ID == ID[j]]
+    ts <- Fd[mydata_4D$TT_ID == ID[j]]
     if (length(ts) < 11) {
       next()
     }
@@ -151,19 +165,18 @@ ttgranier <- function(mydata_4D, plot_label) {
                              Dates = NULL,
                              max.fill = 12)#gapfillSSA(series = ts, plot.results = FALSE, open.plot = FALSE)
     #ts_filt <- ts_filt[[1]]
-    Fd[mydata_4D$IT_ID == ID[j]] <- ts_filt[1:length(ts)]
+    Fd[mydata_4D$TT_ID == ID[j]] <- ts_filt[1:length(ts)]
   }
 
 
+  #Fd <- 12.95*((dTmax/(dTon-dToff))-1)*27.77 #transf from l dm-2 h-1 to g m-2 s-1
+  #plot(Fd, typ="l", main="Theat_1C", ylab = "sap flow density (l dm−2 h−1)")
+  df1 <- data.frame(mydata_4D$Timestamp, Fd, mydata_4D$id_col)
+  colnames(df1) <- c("Timestamp", "Fd", "id_col")
+  df$Timestamp <- as.POSIXct(df$Timestamp, origin = "1970-01-01")
 
-
-  if (plot_label == T){
-    #Fd <- 12.95*((dTmax/(dTon-dToff))-1)*27.77 #transf from l dm-2 h-1 to g m-2 s-1
-    #plot(Fd, typ="l", main="Theat_1C", ylab = "sap flow density (l dm−2 h−1)")
-    df <- data.frame(mydata_4D$Timestamp, Fd, mydata_4D$id_col)
-    colnames(df) <- c("Timestamp", "Fd", "id_col")
-    df$Timestamp <- as.POSIXct(df$Timestamp, origin = "1970-01-01")
-    p <- ggplot(data = df, aes(Timestamp, Fd))
+  if (plot_label == "all_in_one"){
+    p <- ggplot(data = df1, aes(Timestamp, Fd))
     p + geom_point(aes(colour = id_col), size = 0.2) +
       scale_color_gradientn(colours = hcl.colors(21, palette = "viridis")) +
       labs(x = "Timestamp", y = "sap flow (g m-2 s-1)") +
@@ -171,7 +184,21 @@ ttgranier <- function(mydata_4D, plot_label) {
       scale_x_datetime(minor_breaks = ("1 week")) +
       theme(legend.position = "none") +
       ylim(0, 50)
-    #p
+      print(p)
+  }
+
+
+  if (plot_label == "split"){
+    p <- ggplot(data = df1, aes(Timestamp, Fd))
+    p + geom_point(aes(colour = id_col), size = 0.2) +
+      scale_color_gradientn(colours = hcl.colors(21, palette = "viridis")) +
+      facet_grid(facets = mydata_4D$TT_ID ~ ., margins = FALSE) +
+      labs(x = "Timestamp", y = "sap flow (g m-2 s-1)") +
+      #labs(title = ID) +
+      scale_x_datetime(minor_breaks = ("1 week")) +
+      theme(legend.position = "none") +
+      ylim(0, 50)
+    print(p)
   }
 
 
@@ -182,7 +209,7 @@ ttgranier <- function(mydata_4D, plot_label) {
   #       height = 7,
   #       units = c("in"),
   #       dpi = 300)
-  df <- data.frame(mydata_4D$Timestamp, Fd, mydata_4D$IT_ID)
+  df <- data.frame(mydata_4D$Timestamp, Fd, mydata_4D$TT_ID)
   write.csv(sapFluxD, "../Data/C0200101_SapFluxD.csv")
   sapFluxD <<- df
 }

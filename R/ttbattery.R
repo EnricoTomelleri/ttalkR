@@ -1,12 +1,15 @@
 ttbattery <- function(mydata_4B, mydata_4D, plot_label){
+  #load required packages
+  library(ggplot2)
+
   #example call ttbattery(mydata_4B, mydata_4D, "split")
   HR_Timestamp_4D <- mydata_4D$Timestamp#as.POSIXct(mydata_4D$Timestamp, origin="1970-01-01")
   HR_Timestamp_4B <- mydata_4B$Timestamp#as.POSIXct(mydata_4B$Timestamp, origin="1970-01-01")
+
+
   #create a color index
   id_col <- mydata_4D$TT_ID
   id_col_ind <- data.frame(unique(id_col), 1:length(unique(id_col))); colnames(id_col_ind) <- c("TT_ID", "ID")
-
-
   #create index for color scale
   mydata_4D$id_col_ind <- mydata_4D$TT_ID
   for (i in 1:length(id_col_ind$ID)){
@@ -28,17 +31,12 @@ ttbattery <- function(mydata_4B, mydata_4D, plot_label){
 
 
 
-
-  library(ggplot2)
-
-
   df <- data.frame(HR_Timestamp_4D, Bat_mV, mydata_4D$id_col_ind)
-  df1 <- data.frame(HR_Timestamp_4B, mydata_4B$Battery)
+  df1 <- data.frame(HR_Timestamp_4B, mydata_4B$Battery); colnames(df1) <- c("HR_Timestamp_4B", "Bat_mV")
 
     if (plot_label=="all_in_one"){
-    colnames(df1) <- c("HR_Timestamp_4B", "Bat_mV")
-    p <- ggplot(data = df, aes(HR_Timestamp_4D, Bat_mV))
-    p + geom_point(aes(colour = mydata_4D$id_col_ind), size = 0.2) +
+    p <- ggplot(data = df, aes(HR_Timestamp_4D, Bat_mV)) +
+      geom_point(aes(colour = mydata_4D$id_col_ind), size = 0.2) +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
       geom_line(data = df1,
                 aes(HR_Timestamp_4B, Bat_mV),
@@ -60,18 +58,25 @@ ttbattery <- function(mydata_4B, mydata_4D, plot_label){
     #       height = 7,
     #       units = c("in"),
     #       dpi = 300)
+    print(p)
   }
 
   if (plot_label=="split"){
     p <- ggplot(data=df, aes(x=HR_Timestamp_4D, y=Bat_mV, color=mydata_4D$id_col_ind)) +
-      geom_point() +
+      #geom_point() +
       geom_line(aes(group = 1)) +
       facet_grid(facets = mydata_4D$TT_ID ~ ., margins = FALSE) +
       labs(x = "Timestamp") +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
       scale_x_datetime(minor_breaks = ("1 week")) +
       theme(legend.position = "none") +
-      theme(strip.text.y = element_text(angle = 0, hjust = 0))
+      theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
+      geom_segment(aes(
+        x = min(HR_Timestamp_4D, na.rm = T),
+        y = 3500,
+        xend = max(HR_Timestamp_4D, na.rm = T),
+        yend = 3500
+      ), color = "red", alpha = 0.1, linetype = 3)
 
     print(p)
   }
