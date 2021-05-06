@@ -1,4 +1,4 @@
-ttalkR <img src="logo_ttalkr.png" align="right"/>
+ttalkR <img src="logo_ttalkr.png" width="200" align="right"/>
 ======================================================================================================
 ![license](https://img.shields.io/badge/Licence-GPL--3-blue.svg) 
 
