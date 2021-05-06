@@ -1,3 +1,8 @@
+ttalkR <img src="logo_ttalkr.png" align="right"/>
+======================================================================================================
+![license](https://img.shields.io/badge/Licence-GPL--3-blue.svg) 
+
+
 # ttalkR
 
 An unified processing workflow for standardizing treetalkers data from the italian treetalkers network. Conversion of digital numbers to physical units is done according to the TT+ User Manual("TT+manual (3.2)_SA_020920""). 'ttalkR' provides tools for downloading, cleaning, quality check and diagnostic plotting. The architecture and the procedures are described in Tomelleri E. (202x, https://doi.org/...).
