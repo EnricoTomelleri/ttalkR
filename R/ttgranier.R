@@ -1,4 +1,5 @@
 ttgranier <- function(mydata_4D, plot_label) {
+  #example call ttgranier(mydata_4B, mydata_4D, "split")
 
   #load required packages
   library(Rssa)
@@ -201,6 +202,7 @@ ttgranier <- function(mydata_4D, plot_label) {
     print(p)
   }
 
+  if (plot_label == "none"){}
 
   #save the plot
   #ggsave(paste("../Figures/", site, "_SapFlow.png", sep=""),
