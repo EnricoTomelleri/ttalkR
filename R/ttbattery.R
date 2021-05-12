@@ -1,8 +1,9 @@
 ttbattery <- function(mydata_4B, mydata_4D, plot_label){
+  #example call ttbattery(mydata_4B, mydata_4D, "split")
+
   #load required packages
   library(ggplot2)
 
-  #example call ttbattery(mydata_4B, mydata_4D, "split")
   HR_Timestamp_4D <- mydata_4D$Timestamp#as.POSIXct(mydata_4D$Timestamp, origin="1970-01-01")
   HR_Timestamp_4B <- mydata_4B$Timestamp#as.POSIXct(mydata_4B$Timestamp, origin="1970-01-01")
 

@@ -54,12 +54,14 @@ ttscrape <- function(ID) {
 
   #split the dataset
   mydata_4D <- mydata_sep[mydata_sep$V3 == "4D", ]
+  mydata_4D <- mydata_4D[mydata_4D$SN>52000000,]#TreeTalkers v3.2 have and ID higher than 52000000
 
   mydata_49 <- mydata_sep[mydata_sep$V3 == "49", ]
+  mydata_49 <- mydata_49[mydata_49$SN>52000000,]#TreeTalkers v3.2 have and ID higher than 52000000
 
-  mydata_4B <- mydata_sep[mydata_sep$V3 == "4B", ]
+  mydata_4B <- mydata_sep[mydata_sep$V3 == "4B", ]#the string 4B and 4C contain only TTcloud data
 
-  mydata_4C <- mydata_sep[mydata_sep$V3 == "4C", ]
+  mydata_4C <- mydata_sep[mydata_sep$V3 == "4C", ]#the string 4B and 4C contain only TTcloud data
 
 
   header_4D <-
@@ -176,8 +178,9 @@ ttscrape <- function(ID) {
   #convert the ids to integers
   mydata_4D$TT_ID <- as.integer(mydata_4D$TT_ID)
   mydata_49$TT_ID <- as.integer(mydata_49$TT_ID)
-  mydata_4B$TT_ID <- as.integer(mydata_4B$TT_ID)
-  mydata_4C$TT_ID <- as.integer(mydata_4C$TT_ID)
+  mydata_4B$TT_ID <- as.integer(mydata_4B$TT_ID);
+  mydata_4C$TT_ID <- as.integer(mydata_4C$TT_ID);
+
 
   mydata_4D$gz_mean <- as.integer(mydata_4D$gz_mean)
 
