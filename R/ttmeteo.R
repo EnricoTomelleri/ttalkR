@@ -123,11 +123,17 @@ ttRH <- function(mydata_4D, plot_label) {
       #geom_line(data=df1, aes(HR_Timestamp_4D, Tair/10), color = "grey") +
       geom_point(aes(colour = mydata_4D$id_col_ind), size = 0.2) +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
-      labs(x = "Timestamp", y = "Tair (°C)") +
+      labs(x = "Timestamp", y = "RH (%") +
       #labs(title = site) +
       theme(legend.position = "none") +
       scale_x_datetime(minor_breaks=("1 week"))+
-      ylim(0, 100)
+      ylim(0, 120)+
+      geom_segment(aes(
+        x = min(HR_Timestamp_4D, na.rm = T),
+        y = 80,
+        xend = max(HR_Timestamp_4D, na.rm = T),
+        yend = 80
+      ), color = "red")
     print(p)
   }
 
@@ -137,7 +143,7 @@ ttRH <- function(mydata_4D, plot_label) {
       #geom_line(data=df1, aes(HR_Timestamp_4D, Tair/10), color = "grey") +
       geom_point(aes(colour = mydata_4D$id_col_ind), size = 0.2)  +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
-      labs(x = "Timestamp", y = "Tair (°C)") +
+      labs(x = "Timestamp", y = "RH (%)") +
       theme(legend.position = "none") +
       scale_x_datetime(minor_breaks=("1 week")) +
       facet_grid(facets = mydata_4D$TT_ID ~ ., margins = FALSE) +
