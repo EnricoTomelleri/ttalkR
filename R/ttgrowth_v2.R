@@ -1,4 +1,6 @@
 ttgrowth <- function(mydata_4D) {
+
+  #load required packages
   library(dendRoAnalyst)
   library(pracma)
 
@@ -60,25 +62,50 @@ ttgrowth <- function(mydata_4D) {
 
 
 
-    #apply a hampel filter
-    #myDendro_data_L0$value
-    #a <- hampel(myDendro_data_L0$value, 12, 0.5)
-
-
 
     #get nighttime data
-    myDendro_data_L0 <- myDendro_data_L0[as.POSIXlt(myDendro_data_L0$ts)$hour<5,]
+    #myDendro_data_L0 <- myDendro_data_L0[as.POSIXlt(myDendro_data_L0$ts)$hour<5,]
 
+
+    #apply a hampel filter
+    #myDendro_data_L0$value
+    myDendro_data_L1 <- myDendro_data_L0
+    myDendro_data_MAD <- hampel(myDendro_data_L0$value, 24*7, 3) #weekly time window
+
+    myDendro_data_L1$value <- myDendro_data_MAD$y
+
+    plot(myDendro_data_L1$value, typ="l")
 
 
     #convert sharp distance into growth
-    myDendro_data_L1 <- myDendro_data_L0
+    myDendro_data_L2 <- myDendro_data_L1
     #myDendro_data_L1$value <- max(a$y) - a$y
-    myDendro_data_L1$value <- max(myDendro_data_L0$value) - myDendro_data_L0$value
+    #myDendro_data_L1$value <- max(myDendro_data_L0$value) - myDendro_data_L0$value
+
+
+    library(sarbcurrent)
+    m_binseg <- cpt.mean(myDendro_data_L2$value, penalty = "BIC", method = "BinSeg", Q = 25)
+    bkpnts <- cpts(m_binseg)
+    for (k in 1:length(bkpnts)){
+    ref1 <- median(myDendro_data_L2$value[(bkpnts[k]-(24*14)):(bkpnts[k]-(24*7))])
+    ref2 <- median(myDendro_data_L2$value[(bkpnts[k]+(24*7)):(bkpnts[k]+(24*14))])
+    myDendro_data_L2$value[bkpnts[k]:length(myDendro_data_L1$value)] <- myDendro_data_L2$value[bkpnts[k]:length(myDendro_data_L2$value)] - (ref2-ref1)
+    }
+
+
+    plot(myDendro_data_L2$value, typ="l")
+    myDendro_data_L1_spl <- lowess(myDendro_data_L2$value)
+    lines(myDendro_data_L2_spl$y, col="blue")
+
+
+    library(dp)
+
+    #a<-hampel(myDendro_data_L1$value, 24, 1)
+    #plot(a)
+
 
     myDendro_data_L1 <- ungroup(myDendro_data_L1)
-    source("R/jump_locator_v2.R")
-    jump_free <- jump.locator_v2(df=myDendro_data_L1, TreeNum=1 ,v=1)
+
 
 
     daily <- daily.data(jump_free, TreeNum=1)

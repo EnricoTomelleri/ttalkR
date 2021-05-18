@@ -1,5 +1,5 @@
 ttgranier <- function(mydata_4D, plot_label) {
-  #example call ttgranier(mydata_4B, mydata_4D, "split")
+  #example call ttgranier(mydata_4D, "split")
 
   #load required packages
   library(Rssa)
@@ -152,17 +152,17 @@ ttgranier <- function(mydata_4D, plot_label) {
     118.99 * ((mydata_4D$daily_Tmax - (dTon - dToff)) / (dTon - dToff)) ^ 1.231 #m^3/s
   Fd[Fd > 1000] <- NA
 
-  #despike
+
   ID <- unique(mydata_4D$TT_ID)
   for (j in 1:(length(ID))) {
     ts <- Fd[mydata_4D$TT_ID == ID[j]]
     if (length(ts) < 11) {
       next()
     }
-    #Replace missing values in time-series data by interpolation.
+    #Replace missing values in time-series data by interpolation (max gap = 24 hours).
     ts_filt <-
       baytrends::fillMissing(ts,
-                             span = 12,
+                             span = 24,
                              Dates = NULL,
                              max.fill = 12)#gapfillSSA(series = ts, plot.results = FALSE, open.plot = FALSE)
     #ts_filt <- ts_filt[[1]]
@@ -172,16 +172,18 @@ ttgranier <- function(mydata_4D, plot_label) {
 
   #Fd <- 12.95*((dTmax/(dTon-dToff))-1)*27.77 #transf from l dm-2 h-1 to g m-2 s-1
   #plot(Fd, typ="l", main="Theat_1C", ylab = "sap flow density (l dm−2 h−1)")
-  df1 <- data.frame(mydata_4D$Timestamp, Fd, mydata_4D$id_col)
-  colnames(df1) <- c("Timestamp", "Fd", "id_col")
-  df$Timestamp <- as.POSIXct(df$Timestamp, origin = "1970-01-01")
+  df1 <- data.frame(mydata_4D$Timestamp, Fd, mydata_4D$id_col_ind)
+  colnames(df1) <- c("Timestamp", "Fd", "id_col_ind")
+  #df$Timestamp <- as.POSIXct(df$Timestamp, origin = "1970-01-01")
+
+
 
   if (plot_label == "all_in_one"){
-    p <- ggplot(data = df1, aes(Timestamp, Fd))
-    p + geom_point(aes(colour = id_col), size = 0.2) +
-      scale_color_gradientn(colours = hcl.colors(21, palette = "viridis")) +
+    p <- ggplot(data = df1, aes(Timestamp, Fd)) +
+      geom_point(aes(colour = id_col_ind), size = 0.2) +
+      scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
       labs(x = "Timestamp", y = "sap flow (g m-2 s-1)") +
-      #labs(title = ID) +
+      #labs(title = site) +
       scale_x_datetime(minor_breaks = ("1 week")) +
       theme(legend.position = "none") +
       ylim(0, 50)
@@ -189,29 +191,30 @@ ttgranier <- function(mydata_4D, plot_label) {
   }
 
 
+
   if (plot_label == "split"){
-    p <- ggplot(data = df1, aes(Timestamp, Fd))
-    p + geom_point(aes(colour = id_col), size = 0.2) +
-      scale_color_gradientn(colours = hcl.colors(21, palette = "viridis")) +
+    p <- ggplot(data = df1, aes(Timestamp, Fd, color = id_col_ind)) +
+      geom_point(aes(group = "whatever"), size = 0.2) +
+      #geom_line(aes(group = "whatever")) +
       facet_grid(facets = mydata_4D$TT_ID ~ ., margins = FALSE) +
       labs(x = "Timestamp", y = "sap flow (g m-2 s-1)") +
-      #labs(title = ID) +
+      scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
       scale_x_datetime(minor_breaks = ("1 week")) +
       theme(legend.position = "none") +
+      theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
       ylim(0, 50)
     print(p)
   }
 
   if (plot_label == "none"){}
 
-  #save the plot
-  #ggsave(paste("../Figures/", site, "_SapFlow.png", sep=""),
-  #       plot = last_plot(),
-  #       width = 10,
-  #       height = 7,
-  #       units = c("in"),
-  #       dpi = 300)
-  df <- data.frame(mydata_4D$Timestamp, Fd, mydata_4D$TT_ID)
-  write.csv(sapFluxD, "../Data/C0200101_SapFluxD.csv")
-  sapFluxD <<- df
+
+  #df <- data.frame(mydata_4D$Timestamp, Fd, mydata_4D$TT_ID)
+  #write.csv(sapFluxD, "../Data/C0200101_SapFluxD.csv")
+  #sapFluxD <<- df
+
+
+
+
+
 }

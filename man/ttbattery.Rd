@@ -14,12 +14,17 @@ ttbattery(mydata_4B, mydata_4D, plot_label)
 \arguments{
   \item{mydata_4B}{
 %%     ~~Describe \code{mydata_4B} here~~
+a ttscrape object
 }
   \item{mydata_4D}{
 %%     ~~Describe \code{mydata_4D} here~~
+a ttscrape object
 }
   \item{plot_label}{
 %%     ~~Describe \code{plot_label} here~~
+"all_in_one": all the treetalkers in a plot
+"split": each treetalker in a different panel
+"none": it doesn't plot
 }
 }
 \details{

@@ -64,8 +64,8 @@ ttbattery <- function(mydata_4B, mydata_4D, plot_label){
 
   if (plot_label=="split"){
     p <- ggplot(data=df, aes(x=HR_Timestamp_4D, y=Bat_mV, color=mydata_4D$id_col_ind)) +
-      #geom_point() +
-      geom_line(aes(group = 1)) +
+      geom_point(aes(group = "whatever"), size = 0.2) +
+      #geom_line(aes(group = "whatever")) +
       facet_grid(facets = mydata_4D$TT_ID ~ ., margins = FALSE) +
       labs(x = "Timestamp") +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +

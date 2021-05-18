@@ -2,10 +2,10 @@
 \alias{ttscrape}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-a function to do download and format ITTNet data
+a function to do download and split ITTNet data
 }
 \description{
-the function downloads ITTNet data from specific servers and format the different strings for further processing
+the function downloads ITTNet data from specific servers and split the different strings into specific data frames for further processing
 }
 \usage{
 ttscrape(ID)
@@ -20,11 +20,11 @@ ttscrape(ID)
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+the function returns data frames of type:
+mydata_4B: general sensors of each treetalker connected to this ttcloud
+mydata_49: treetalkers and ttR spectrometers' data
+mydata_4D: ttcloud data
+mydata_4C: not implemented
 }
 \references{
 %% ~put references to the literature/web site here ~

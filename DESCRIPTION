@@ -9,4 +9,4 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Imports: tidyr, ggplot2, tidyverse, signal, zoo, prospectr
-
+RoxygenNote: 7.1.1
