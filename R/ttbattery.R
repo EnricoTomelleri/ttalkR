@@ -51,7 +51,8 @@ ttbattery <- function(mydata_4B, mydata_4D, plot_label){
       labs(x = "Timestamp") +
       #labs(title = site) +
       scale_x_datetime(minor_breaks = ("1 week")) +
-      theme(legend.position = "none")
+      theme(legend.position = "none") +
+      ylim(quantile(Bat_mV, p = 0.01, na.rm=T), quantile(Bat_mV, p = 0.99, na.rm=T))
     #save the plot
     #ggsave(paste("../Figures/", site, "_BatteryVoltage.png", sep=""),
     #       plot = last_plot(),
@@ -77,7 +78,8 @@ ttbattery <- function(mydata_4B, mydata_4D, plot_label){
         y = 3500,
         xend = max(HR_Timestamp_4D, na.rm = T),
         yend = 3500
-      ), color = "red", alpha = 0.1, linetype = 3)
+      ), color = "red", alpha = 0.1, linetype = 3) +
+      ylim(quantile(Bat_mV, p = 0.01, na.rm=T), quantile(Bat_mV, p = 0.99, na.rm=T))
 
     print(p)
   }
