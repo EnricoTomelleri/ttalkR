@@ -1,10 +1,14 @@
 ttlight <- function(mydata_49, lat, lon){
 
+  lat <- 46.453676
+  lon <- 11.232666
+
+  #load required packages
   library(suncalc)
 
   ID <- unique(mydata_49$IT_ID)
 
-  filter_ttlight <- function(mydata_49)
+  #filter_ttlight <- function(mydata_49){
   ID <- unique(mydata_49$IT_ID)
   for (j in 1:length(ID)) {
     ts <- mydata_49$AS7263_610[mydata_49$IT_ID == ID[j]]
@@ -68,13 +72,12 @@ ttlight <- function(mydata_49, lat, lon){
   #solar geometry
   #"altitude" : sun altitude above the horizon in radians, e.g. 0 at the horizon and PI/2 at the zenith (straight over your head)
   #"azimuth": sun azimuth in radians (direction along the horizon,measured from south to west), e.g. 0 is south and Math.PI * 3/4 is northwest
-  lat <- 46.453676
-  lon <- 11.232666
+
   solarGeom <-  getSunlightPosition(date= mydata_49$Timestamp, lat = lat, lon = lon)
   solarGeom$altitude <- (solarGeom$altitude * 180) / (pi)
   solarGeom$azimuth <-  (solarGeom$azimuth * 180) / (pi)
 
-  TT_ID <- mydata_49$IT_ID
+  TT_ID <- mydata_49$TT_ID
   Timestamp <- mydata_49$Timestamp
 
   out <- data.frame(TT_ID,
@@ -101,29 +104,28 @@ ttlight <- function(mydata_49, lat, lon){
   #keep data with with sun in +/-20 degrees from solar noon
   out <- out[out$azimuth > -30 & out$azimuth < 30,]
 
-  write.table(x = out, file = "ttlight_test.csv", row.names = F)
 
 
 
 #plotting
+  #ID <- unique(mydata_4D$TT_ID)
+  #plot(out$AS7263_610_R[out$TT_ID == ID[21]] ~ out$Timestamp[out$TT_ID == ID[21]], typ="l", col="red")
+  #plot(out$AS7263_610_R[out$TT_ID == ID[1]] ~out$Timestamp[out$TT_ID == ID[1]], typ="l")
 
-  plot(out$AS7263_610[out$TT_ID == ID[21]] ~out$Timestamp[out$TT_ID == ID[21]], typ="l", col="red")
-  plot(out$AS7263_610[out$TT_ID == ID[1]] ~out$Timestamp[out$TT_ID == ID[1]], typ="l")
 
-
-par(mfrow=c(1,1))
-  ID <- unique(out$TT_ID)
-  for (j in 1:length(ID)){
-    for (col in 2:13){
-      channel <- out[,col]
-      ts <- channel[out$TT_ID == ID[j]]
-     if (length(ts) < 11) {
-        next()
-      }
-    #ts_filt <- savitzkyGolay(ts, 0, 1, 11)
-    out[col, out$IT_ID == ID[j]] <- ts[1:length(ts)]
-    plot(ts, typ="l", ylim=c(0,10000))
-    }
-  }
+#par(mfrow=c(1,1))
+#  ID <- unique(out$TT_ID)
+#  for (j in 1:length(ID)){
+#    for (col in 2:13){
+#      channel <- out[,col]
+#      ts <- channel[out$TT_ID == ID[j]]
+#     if (length(ts) < 11) {
+#        next()
+#      }
+#    #ts_filt <- savitzkyGolay(ts, 0, 1, 11)
+#    out[col, out$IT_ID == ID[j]] <- ts[1:length(ts)]
+#    plot(ts, typ="l", ylim=c(0,10000))
+#    }
+#  }
 }
 

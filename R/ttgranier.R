@@ -214,6 +214,18 @@ ttgranier <- function(mydata_4D, plot_label) {
   #sapFluxD <<- df
 
 
+  library(lubridate)
+  library(dplyr)
+
+
+  #######aggregate to daily
+  #df1$Day <- floor_date(df1$Timestamp, "hour")
+  #df2 <- subset(df1, select=c(-Timestamp, -id_col_ind))
+  #mydata_daily <- df2 %>%
+  #  group_by(Day) %>%
+  #  summarize(mean = median(phi, na.rm = TRUE))
+  #colnames(mydata_daily) <- c("date", "phi")
+
 
 
 
