@@ -149,7 +149,7 @@ ttRH <- function(mydata_4D, plot_label) {
       facet_grid(facets = mydata_4D$TT_ID ~ ., margins = FALSE) +
       theme(legend.position = "none") +
       theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
-      ylim(0, 100)
+      ylim(0, 120)
 
     print(p)
   }

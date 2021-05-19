@@ -186,7 +186,7 @@ ttgranier <- function(mydata_4D, plot_label) {
       #labs(title = site) +
       scale_x_datetime(minor_breaks = ("1 week")) +
       theme(legend.position = "none") +
-      ylim(0, 50)
+      ylim(0, quantile(Fd, p = 0.99, na.rm=T))
       print(p)
   }
 
@@ -202,7 +202,7 @@ ttgranier <- function(mydata_4D, plot_label) {
       scale_x_datetime(minor_breaks = ("1 week")) +
       theme(legend.position = "none") +
       theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
-      ylim(0, 50)
+      ylim(0, quantile(Fd, p = 0.99, na.rm=T))
     print(p)
   }
 

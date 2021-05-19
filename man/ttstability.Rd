@@ -1,14 +1,14 @@
-\name{ttgranier}
-\alias{ttgranier}
+\name{ttStWC}
+\alias{ttStWC}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-a function to process and plot data from Thermal dissipation probes
+a function to plot and process relative humidity data from the Capacitive sensor (MicroPCB (20x3x2) mm with copper plates).
 }
 \description{
-the function makes use of data frames created by the "ttscrape" function. It converst voltages into temperatures, it smooths the time series with a Savysky-Golay filter. It fills gaps until 24 hours an finally it estimate the sapflow for each TreeTalker in a mesh.
+the function makes use of data frames created by the "ttscrape" function.
 }
 \usage{
-ttgranier(mydata_4D, plot_label)
+ttStWC(mydata_4D, plot_label)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -34,10 +34,11 @@ a ttscrape object
 %% ...
 }
 \references{
-A. Granier, “Une nouvelle methode pour la measure du flux de seve brute dans le tronc des arbres”. Ann. Sci. For., 42, 193–200, 1985.
+%% ~put references to the literature/web site here ~
 }
 \author{
-Enrico Tomelleri}
+%%  ~~who you are~~
+}
 \note{
 %%  ~~further notes~~
 }
@@ -48,7 +49,7 @@ Enrico Tomelleri}
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-ttgranier(mydata_4D, plot_label="split")
+ttStWC(mydata_4D, "all_in_one")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory (show via RShowDoc("KEYWORDS")):

@@ -30,14 +30,14 @@ ttStWC <- function(mydata_4D, species, plot_label){
     b <- 0.6
   }
   if (species == "pine"){
-    #calibration for beech
-    m <- -4E-5
-    b <- 0.6
+    #calibration for pine
+    m <- -8E-6
+    b <- 0.3
   }
   if (species == "poplar"){
-    #calibration for beech
-    m <- -4E-5
-    b <- 0.6
+    #calibration for poplar
+    m <- -0.0001
+    b <- 1.76
   }
 
   #4.6.Ref & Heat Probes Temperature
@@ -54,9 +54,9 @@ ttStWC <- function(mydata_4D, species, plot_label){
   ID <- unique(mydata_4D$TT_ID)
   for (j in 1:length(ID)) {
     ts <- Tref_0C[mydata_4D$TT_ID == ID[j]]
-    if (length(ts) < 11) {
-      next()
-    }
+
+    if (length(na.omit(ts)) < 11) {next()}
+
     ts_filt <- savitzkyGolay(ts, 0, 1, 11)
     Tref_0C[mydata_4D$TT_ID == ID[j]] <- ts_filt[1:length(ts)]
   }
@@ -79,13 +79,13 @@ ttStWC <- function(mydata_4D, species, plot_label){
     p <- ggplot(data = df1, aes(Timestamp, StWC)) +
       geom_point(aes(colour = id_col_ind), size = 0.2) +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
-      labs(x = "Timestamp", y = "Stem water Content (StWC %)") +
+      labs(x = "Timestamp", y = "stem volumetric water content (g/cm3)") +
       #labs(title = site) +
       scale_x_datetime(minor_breaks = ("1 week")) +
       theme(legend.position = "none") +
-      ylim(0, 50)
+      ylim(0, quantile(StWC, p = 0.99, na.rm=T))
     print(p)
-  }
+    }
 
 
 
@@ -94,12 +94,12 @@ ttStWC <- function(mydata_4D, species, plot_label){
       geom_point(aes(group = "whatever"), size = 0.2) +
       #geom_line(aes(group = "whatever")) +
       facet_grid(facets = mydata_4D$TT_ID ~ ., margins = FALSE) +
-      labs(x = "Timestamp", y = "Stem water Content (StWC %)") +
+      labs(x = "Timestamp", y = "stem volumetric water content (g/cm3)") +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
       scale_x_datetime(minor_breaks = ("1 week")) +
       theme(legend.position = "none") +
       theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
-      ylim(0, 50)
+      ylim(0, quantile(StWC, p = 0.99, na.rm=T))
     print(p)
   }
 

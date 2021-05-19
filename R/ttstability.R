@@ -49,7 +49,7 @@ ttstability <- function(mydata_4D, plot_label){
       #labs(title = site) +
       theme(legend.position = "none") +
       scale_x_datetime(minor_breaks=("1 week")) +
-      ylim(-20,20)
+      ylim(quantile(StWC, p = 0.09, na.rm=T), quantile(StWC, p = 0.99, na.rm=T))
     print(p)
 
 
@@ -67,7 +67,7 @@ ttstability <- function(mydata_4D, plot_label){
       facet_grid(facets = mydata_4D$TT_ID ~ ., margins = FALSE) +
       theme(legend.position = "none") +
       theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
-      ylim(-20, 20)+
+      ylim(quantile(StWC, p = 0.09, na.rm=T), quantile(StWC, p = 0.99, na.rm=T)) +
       geom_segment(aes(
         x = min(Timestamp, na.rm = T),
         y = 0,
