@@ -14,7 +14,7 @@ devtools::install_github("EnricoTomelleri/ttalkR")
 help(package=ttalkR)
 citation("ttalkR")
 
-Enrico Tomelleri (202x)
+Enrico Tomelleri (2021)
 ttalkR: unified pre-processing of TreeTalker data 
 R package version 0.1
 
@@ -25,7 +25,7 @@ A BibTeX entry for LaTeX users is
     author = {Enrico Tomelleri},
     organization = {Free University of Bozen/Bolzano},
     address = {Bolzano, Italy},
-    year = {202x},
+    year = {2021},
     note = {R package version 0.1},
     url = {https://github.com/EnricoTomelleri/ttalkR},
   }

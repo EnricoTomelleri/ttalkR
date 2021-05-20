@@ -2,7 +2,7 @@
 \alias{ttlight}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-a function to process and plot spectrometer data
+a function to process and plot spectrometer data. Manufacturer: AMS. Model: AS7262 (Visible range), AS7263 (Near Infra-Red range).
 }
 \description{
 the function makes use of data frames created by the "ttscrape" function. It filters and plot spectrometer data from a TreeTalkers mesh.

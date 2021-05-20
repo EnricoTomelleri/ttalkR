@@ -1,14 +1,14 @@
-\name{ttStWC}
-\alias{ttStWC}
+\name{ttstability}
+\alias{ttstability}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-a function to plot and process relative humidity data from the Capacitive sensor (MicroPCB (20x3x2) mm with copper plates).
+a function to plot and process relative humidity data from the accelerometer (Silicon Labs. Model: MMA8451Q).
 }
 \description{
 the function makes use of data frames created by the "ttscrape" function.
 }
 \usage{
-ttStWC(mydata_4D, plot_label)
+ttstability(mydata_4D, plot_label)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -49,7 +49,7 @@ a ttscrape object
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-ttStWC(mydata_4D, "all_in_one")
+ttstability(mydata_4D, "all_in_one")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory (show via RShowDoc("KEYWORDS")):

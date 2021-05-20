@@ -104,28 +104,16 @@ ttlight <- function(mydata_49, lat, lon){
   #keep data with with sun in +/-20 degrees from solar noon
   out <- out[out$azimuth > -30 & out$azimuth < 30,]
 
+  #######aggregate to daily
+  #df1$Day <- floor_date(df1$Timestamp, "hour")
+  #df2 <- subset(df1, select=c(-Timestamp, -id_col_ind))
+  #mydata_daily <- df2 %>%
+  #  group_by(Day) %>%
+  #  summarize(mean = median(phi, na.rm = TRUE))
+  #colnames(mydata_daily) <- c("date", "phi")
 
 
 
-#plotting
-  #ID <- unique(mydata_4D$TT_ID)
-  #plot(out$AS7263_610_R[out$TT_ID == ID[21]] ~ out$Timestamp[out$TT_ID == ID[21]], typ="l", col="red")
-  #plot(out$AS7263_610_R[out$TT_ID == ID[1]] ~out$Timestamp[out$TT_ID == ID[1]], typ="l")
 
-
-#par(mfrow=c(1,1))
-#  ID <- unique(out$TT_ID)
-#  for (j in 1:length(ID)){
-#    for (col in 2:13){
-#      channel <- out[,col]
-#      ts <- channel[out$TT_ID == ID[j]]
-#     if (length(ts) < 11) {
-#        next()
-#      }
-#    #ts_filt <- savitzkyGolay(ts, 0, 1, 11)
-#    out[col, out$IT_ID == ID[j]] <- ts[1:length(ts)]
-#    plot(ts, typ="l", ylim=c(0,10000))
-#    }
-#  }
 }
 

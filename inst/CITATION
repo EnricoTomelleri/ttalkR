@@ -1,0 +1,13 @@
+citHeader("To cite ttalkR in publications use:")
+
+citEntry(
+  entry    = "Article",
+  title    = "ttalkR: unified pre-processing of TreeTalker data",
+  author   = as.person("Enrico Tomelleri"),
+  journal  = "Journal of ...",
+  year     = "2021",
+  textVersion = paste(
+  "Tomelleri, E. (2021).",
+  "ttalkR: unified pre-processing of TreeTalker data."
+  )
+)

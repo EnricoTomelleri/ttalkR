@@ -2,8 +2,9 @@ ttgranier <- function(mydata_4D, plot_label) {
   #example call ttgranier(mydata_4D, "split")
 
   #load required packages
-  library(Rssa)
-  library(oce)
+  library(ggplot2)
+  #library(Rssa)
+  #library(oce)
 
   #create a color index
   id_col <- mydata_4D$TT_ID
