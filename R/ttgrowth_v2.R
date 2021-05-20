@@ -1,4 +1,4 @@
-ttgrowth <- function(mydata_4D, plot_label) {
+ttgrowth <- function(mydata_4D, plot_label) { #this is a beta function
   #example call ttgrowth(mydata_4D, "all_in_one")
 
   #load required packages
