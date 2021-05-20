@@ -2,21 +2,27 @@
 \alias{ttlight}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-a function to process and plot spectrometer data. Manufacturer: AMS. Model: AS7262 (Visible range), AS7263 (Near Infra-Red range).
+to process and plot spectrometer data. Manufacturer: AMS. Model: AS7262 (Visible range), AS7263 (Near Infra-Red range).
 }
 \description{
-the function makes use of data frames created by the "ttscrape" function. It filters and plot spectrometer data from a TreeTalkers mesh.
+the function makes use of data frames created by the "ttscrape" function. It filters and plot spectrometer data from a TreeTalkers mesh based on solar geometry. The function doesn't account for topography. The filtered data include measurements with the sun position from -30 to + 30 degrees from the geographic South.
 }
 \usage{
-ttlight(mydata_49, plot_label)
+ttlight(mydata_49, lat, lon)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{mydata_49}{
 %%     ~~Describe \code{mydata_49} here~~
+a ttscrape object
 }
-  \item{plot_label}{
+  \item{lat}{
 %%     ~~Describe \code{plot_label} here~~
+central latitude of the measurement plot
+}
+  \item{lon}{
+%%     ~~Describe \code{plot_label} here~~
+central longitude of the measurement plot
 }
 }
 \details{
@@ -34,6 +40,7 @@ ttlight(mydata_49, plot_label)
 }
 \author{
 %%  ~~who you are~~
+Enrico Tomelleri
 }
 \note{
 %%  ~~further notes~~
@@ -45,6 +52,7 @@ ttlight(mydata_49, plot_label)
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
+ttscrape("C0200091")
 ttlight(mydata_49, plot_label=T)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

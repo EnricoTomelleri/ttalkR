@@ -31,6 +31,7 @@ ttgrowth(mydata_4D)
 }
 \author{
 %%  ~~who you are~~
+Enrico Tomelleri
 }
 \note{
 %%  ~~further notes~~
@@ -42,47 +43,8 @@ ttgrowth(mydata_4D)
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (mydata_4D)
-{
-    x <- mydata_4D$growt_sens
-    x[x > 850000] <- NA
-    x[x < 40000] <- NA
-    a <- 237908.4541
-    b <- -1.1171
-    c <- 199.433
-    f = (a + b * x)/(c + x)
-    f <- f * 10000
-    f <- 1e+05 - f
-    ID <- unique(mydata_4D$IT_ID)
-    for (j in 1:length(ID)) {
-        myDendro_data_L0 <- data.frame(mydata_4D$IT_ID, as.POSIXct(mydata_4D$Timestamp,
-            origin = "1970-01-01"), f)
-        colnames(myDendro_data_L0) <- c("series", "ts", "value")
-        myDendro_data_L0 <- myDendro_data_L0 \%>\% dplyr::filter(series ==
-            ID[j])
-        myDendro_data_L1 <- proc_L1(data_L0 = myDendro_data_L0,
-            reso = 240, input = "long", date_format = "\%Y-\%m-\%d \%H:\%M:\%S",
-            year = "asis", tz = "GMT")
-        myTemp_data_L0 <- data.frame(mydata_4D$IT_ID, as.POSIXct(mydata_4D$Timestamp,
-            origin = "1970-01-01"), mydata_4D$Tair/10)
-        colnames(myTemp_data_L0) <- c("series", "ts", "value")
-        myTemp_data_L0 <- myTemp_data_L0 \%>\% dplyr::filter(series ==
-            ID[j])
-        myTemp_data_L1 <- proc_L1(data_L0 = myTemp_data_L0, reso = 240,
-            input = "long", date_format = "\%Y-\%m-\%d \%H:\%M:\%S",
-            year = "asis", tz = "GMT")
-        par(mfrow = c(1, 1))
-        par(mar = c(5, 5, 5, 5))
-        myDendro_data_L2 <- proc_dendro_L2(dendro_L1 = myDendro_data_L1,
-            temp_L1 = myTemp_data_L1, interpol = 12, plot = TRUE,
-            plot_export = TRUE, plot_name = ID[j], tz = "GMT")
-    }
-  }
+ttscrape("C0200091")
+ttgrowth(mydata_4D, "all_in_one")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory (show via RShowDoc("KEYWORDS")):

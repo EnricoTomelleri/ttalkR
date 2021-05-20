@@ -8,5 +8,5 @@ Description: This package can download and process data from TreeTalkers. It was
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Imports: tidyr, ggplot2, tidyverse, signal, zoo, prospectr, pracma, sarbcurrent, changepoint
+Imports: tidyr, ggplot2, tidyverse, signal, zoo, prospectr, pracma, sarbcurrent, changepoint, suncalc
 RoxygenNote: 7.1.1

@@ -48,6 +48,7 @@ Enrico Tomelleri}
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
+ttscrape("C0200091")
 ttgranier(mydata_4D, plot_label="split")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

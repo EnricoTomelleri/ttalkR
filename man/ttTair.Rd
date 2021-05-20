@@ -38,6 +38,7 @@ a ttscrape object
 }
 \author{
 %%  ~~who you are~~
+Enrico Tomelleri
 }
 \note{
 %%  ~~further notes~~
@@ -49,6 +50,7 @@ a ttscrape object
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
+ttscrape("C0200091")
 ttTair(mydata_4D, "all_in_one")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
