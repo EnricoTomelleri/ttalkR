@@ -74,4 +74,13 @@ ttbattery <- function(mydata_4B, mydata_4D, plot_label){
     print(p)
   }
 
+  if (plot_label == "none"){}
+
+  #create a data frame for output
+  df_ttbattery <- data.frame(mydata_4D$Timestamp, Bat_mV, mydata_4D$TT_ID)
+  colnames(df_ttbattery) <- c("Timestamp", "Bat_mV", "TT_ID")
+  df_ttbattery <<- df_ttbattery
+
+
+
 }

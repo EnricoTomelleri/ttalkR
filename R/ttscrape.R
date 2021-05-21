@@ -199,8 +199,6 @@ ttscrape <- function(ID) {
   id_col[id_col != 21] <- id_col[id_col != 21] - max(id_col, na.rm = T)
   mydata_4D$id_col <- abs(id_col)
 
-  #it might happen that a ttcloud intercepts data from tt+ out of the site. I've had a case with few data points.
-  #That's why a filter on the time series length might be necessary
 
   mydata_4B <<- mydata_4B
   mydata_4D <<- mydata_4D

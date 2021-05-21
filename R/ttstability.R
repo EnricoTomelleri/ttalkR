@@ -78,6 +78,12 @@ ttstability <- function(mydata_4D, plot_label){
 
   if (plot_label == "none"){}
 
+
+  #create a data frame for output
+  df_ttstability <- data.frame(mydata_4D$Timestamp, phi, mydata_4D$TT_ID)
+  colnames(df_ttstability) <- c("Timestamp", "phi", "TT_ID")
+  df_ttstability <<- df_ttstability
+
 }
 
 

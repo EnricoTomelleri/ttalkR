@@ -82,6 +82,12 @@ ttTair <- function(mydata_4D, plot_label) {
 
   if (plot_label == "none"){}
 
+  #create a data frame for output
+  df_ttTair <- data.frame(mydata_4D$Timestamp, mydata_4D$Tair/10, mydata_4D$TT_ID)
+  colnames(df_ttTair) <- c("Timestamp", "Tair", "TT_ID")
+  df_ttTair <<- df_ttTair
+
+
 }
 
 
@@ -155,6 +161,12 @@ ttRH <- function(mydata_4D, plot_label) {
   }
 
   if (plot_label == "none"){}
+
+
+  #create a data frame for output
+  df_ttRH <- data.frame(mydata_4D$Timestamp, mydata_4D$RH/10, mydata_4D$TT_ID)
+  colnames(df_ttRH) <- c("Timestamp", "RH", "TT_ID")
+  df_ttRH <<- df_ttRH
 
 }
 

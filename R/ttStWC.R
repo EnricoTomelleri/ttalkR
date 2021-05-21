@@ -108,6 +108,9 @@ ttStWC <- function(mydata_4D, species, plot_label){
 
   if (plot_label == "none"){}
 
-
+  #create a data frame for output
+  df_ttStWC <- data.frame(mydata_4D$Timestamp, StWC, mydata_4D$TT_ID)
+  colnames(df_ttStWC) <- c("Timestamp", "StWC", "TT_ID")
+  df_ttStWC <<- df_ttStWC
 }
 

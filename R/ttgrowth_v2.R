@@ -144,6 +144,9 @@ ttgrowth <- function(mydata_4D, plot_label) { #this is a beta function
   if (plot_label == "none"){}
 
 
-
+  #create a data frame for output
+  df_ttgrowth <- data.frame(mydata_4D$Timestamp, mydata_4D$dendro, mydata_4D$TT_ID)
+  colnames(df_ttgrowth) <- c("Timestamp", "phi", "TT_ID")
+  df_ttgrowth <<- df_ttgrowth
 
 }

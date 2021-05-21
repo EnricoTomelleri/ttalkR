@@ -1,7 +1,6 @@
 ttlight <- function(mydata_49, lat, lon){
 
-  lat <- 46.453676
-  lon <- 11.232666
+  #example call(ttlight(mydata_49, lat=46.453, lon=11.232))
 
   #load required packages
   library(suncalc)
@@ -191,8 +190,9 @@ ttlight <- function(mydata_49, lat, lon){
 
   if (plot_label == "none"){}
 
+  #create a data frame for output
 
-
+  df_ttlight <<- subset(specttRal_L1_all, select=-id_col_ind)
 
 }
 

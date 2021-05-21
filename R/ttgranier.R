@@ -234,6 +234,8 @@ ttgranier <- function(mydata_4D, plot_label) {
   #colnames(mydata_daily) <- c("date", "phi")
 
 
-
-
+  #create a data frame for output
+  df_ttgranier <- data.frame(mydata_4D$Timestamp, Fd, mydata_4D$TT_ID)
+  colnames(df_ttgranier) <- c("Timestamp", "Fd", "TT_ID")
+  df_ttgranier <<- df_ttgranier
 }
