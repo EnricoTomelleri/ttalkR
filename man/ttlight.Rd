@@ -8,7 +8,7 @@ to process and plot spectrometer data. Manufacturer: AMS. Model: AS7262 (Visible
 the function makes use of data frames created by the "ttscrape" function. It filters, aggregate to daily values and plot spectrometer data from a TreeTalkers mesh. The filtering is based on solar geometry. The function doesn't account for topography. The filtered data include measurements with the sun position from -30 to + 30 degrees from the geographic South.
 }
 \usage{
-ttlight(mydata_49, lat, lon)
+ttlight(mydata_49, lat, lon, plot_label)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -53,7 +53,7 @@ Enrico Tomelleri
 }
 \examples{
 ttscrape("C0200091")
-ttlight(mydata_49, plot_label=T)
+ttlight(mydata_49, lat=46.453, lon=11.232, "all_in_one")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory (show via RShowDoc("KEYWORDS")):

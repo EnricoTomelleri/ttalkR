@@ -1,6 +1,6 @@
-ttlight <- function(mydata_49, lat, lon){
+ttlight <- function(mydata_49, lat, lon, plot_label){
 
-  #example call(ttlight(mydata_49, lat=46.453, lon=11.232))
+  #example call ttlight(mydata_49, lat=46.453, lon=11.232, "all_in_one")
 
   #load required packages
   library(suncalc)

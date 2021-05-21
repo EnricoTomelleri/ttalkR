@@ -8,7 +8,7 @@ a function to plot and process temperature data from the Thermohygrometer (NXP/F
 the function makes use of data frames created by the "ttscrape" function.
 }
 \usage{
-ttmeteo(mydata_4D, plot_label)
+ttTair(mydata_4D, plot_label)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

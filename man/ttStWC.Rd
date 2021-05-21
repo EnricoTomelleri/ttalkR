@@ -8,13 +8,17 @@ a function to plot and process relative humidity data from the Capacitive sensor
 the function makes use of data frames created by the "ttscrape" function.
 }
 \usage{
-ttStWC(mydata_4D, plot_label)
+ttStWC(mydata_4D, species, plot_label)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{mydata_4D}{
 %%     ~~Describe \code{mydata_4D} here~~
 a ttscrape object
+}
+  \item{plot_label}{
+%%     ~~Describe \code{plot_label} here~~
+"spruce", beech", "poplar", "pine"
 }
   \item{plot_label}{
 %%     ~~Describe \code{plot_label} here~~
@@ -35,6 +39,7 @@ a ttscrape object
 }
 \references{
 %% ~put references to the literature/web site here ~
+Asgharinia, S., Belelli Marchesini, L., Gianelle, D., and Valentini, R.: Design and Performance Evaluation of Internet of Things (IoT) Based Multifunctional Device for Plant Ecophysiology & Hydrology: Toward Stem Water Content & Sap Flow , EGU General Assembly 2020, Online, 4–8 May 2020, EGU2020-17021, https://doi.org/10.5194/egusphere-egu2020-17021, 2020
 }
 \author{
 %%  ~~who you are~~
