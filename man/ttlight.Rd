@@ -5,7 +5,7 @@
 to process and plot spectrometer data. Manufacturer: AMS. Model: AS7262 (Visible range), AS7263 (Near Infra-Red range).
 }
 \description{
-the function makes use of data frames created by the "ttscrape" function. It filters and plot spectrometer data from a TreeTalkers mesh based on solar geometry. The function doesn't account for topography. The filtered data include measurements with the sun position from -30 to + 30 degrees from the geographic South.
+the function makes use of data frames created by the "ttscrape" function. It filters, aggregate to daily values and plot spectrometer data from a TreeTalkers mesh. The filtering is based on solar geometry. The function doesn't account for topography. The filtered data include measurements with the sun position from -30 to + 30 degrees from the geographic South.
 }
 \usage{
 ttlight(mydata_49, lat, lon)

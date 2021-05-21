@@ -19,19 +19,9 @@ ttbattery <- function(mydata_4B, mydata_4D, plot_label){
 
   #4.8.Battery Voltage
   Bat_mV <- 2*1100*(mydata_4D$adc_Vbat/mydata_4D$adc_bandgap)
-  #jpeg(paste("../Figures/Bat_mV_", site, ".jpg", sep=""), width = 1200, height = 800)
-  #plot(mydata_4D$Timestamp, Bat_mV, pch=20, ylim=c(3300,4500), xlim=c(min(mydata_4D$Timestamp, na.rm=T),max(mydata_4D$Timestamp, na.rm=T)), main=site, xlab="Timestamp")
-  #segments(min(mydata_4D$Timestamp, na.rm=T),3500,max(mydata_4D$Timestamp, na.rm=T),3500, col="red")
-  #lines( mydata_4B$Timestamp, mydata_4B$Battery, col="cyan")
-  #col_ind <- mydata_4D$Timestamp-min(mydata_4D$Timestamp)
-  #plot(HR_Timestamp_4D, Bat_mV, pch=20, ylim=c(3300,4500), xlim=c(min(HR_Timestamp_4D, na.rm=T),max(HR_Timestamp_4D, na.rm=T)), main=site, xlab="Timestamp", col=topo.colors(21)[id_col])
-  #segments(min(HR_Timestamp_4D, na.rm=T),3500,max(HR_Timestamp_4D, na.rm=T),3500, col="red")
-  #lines(HR_Timestamp_4B, mydata_4B$Battery, col="cyan")
-  #segments(15500,0,15500,5000, col="red")
-  #dev.off()
 
 
-
+  #create a data frame for plotting
   df <- data.frame(HR_Timestamp_4D, Bat_mV, mydata_4D$id_col_ind)
   df1 <- data.frame(HR_Timestamp_4B, mydata_4B$Battery); colnames(df1) <- c("HR_Timestamp_4B", "Bat_mV")
 

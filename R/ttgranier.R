@@ -167,21 +167,25 @@ ttgranier <- function(mydata_4D, plot_label) {
                              Dates = NULL,
                              max.fill = 12)#gapfillSSA(series = ts, plot.results = FALSE, open.plot = FALSE)
     #ts_filt <- ts_filt[[1]]
+    #apply a hampel filter
+    #ts_filt <- hampel(ts_filt, 24, 3)
     Fd[mydata_4D$TT_ID == ID[j]] <- ts_filt[1:length(ts)]
+
   }
 
 
-  #Fd <- 12.95*((dTmax/(dTon-dToff))-1)*27.77 #transf from l dm-2 h-1 to g m-2 s-1
-  #plot(Fd, typ="l", main="Theat_1C", ylab = "sap flow density (l dm−2 h−1)")
+  #create a data frame for plotting
   df1 <- data.frame(mydata_4D$Timestamp, Fd, mydata_4D$id_col_ind)
   colnames(df1) <- c("Timestamp", "Fd", "id_col_ind")
-  #df$Timestamp <- as.POSIXct(df$Timestamp, origin = "1970-01-01")
 
 
 
   if (plot_label == "all_in_one"){
     p <- ggplot(data = df1, aes(Timestamp, Fd)) +
       geom_point(aes(colour = id_col_ind), size = 0.2) +
+      #geom_smooth(formula = y ~ s(x, bs = "ds")) +
+      geom_smooth() +
+      #geom_ma(ma_fun = SMA, n = 1000, color = "red") +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
       labs(x = "Timestamp", y = "sap flow (g m-2 s-1)") +
       #labs(title = site) +
@@ -198,6 +202,8 @@ ttgranier <- function(mydata_4D, plot_label) {
       geom_point(aes(group = "whatever"), size = 0.2) +
       #geom_line(aes(group = "whatever")) +
       facet_grid(facets = mydata_4D$TT_ID ~ ., margins = FALSE) +
+      geom_smooth(colour = "gray") +
+      #binomial_smooth(formula = y ~ splines::ns(x, 2)) +
       labs(x = "Timestamp", y = "sap flow (g m-2 s-1)") +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
       scale_x_datetime(minor_breaks = ("1 week")) +

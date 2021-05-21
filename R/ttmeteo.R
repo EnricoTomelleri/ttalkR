@@ -21,7 +21,7 @@ ttTair <- function(mydata_4D, plot_label) {
   }
 
 
-  #df1 <- data.frame(HR_Timestamp_4D[id_col == 21], mydata_4D$Tair[id_col == 21]); colnames(df1) <- c("HR_Timestamp_4D", "Tair")
+  #create a data frame for plotting
   df <- data.frame(HR_Timestamp_4D, mydata_4D$Tair, mydata_4D$id_col_ind)
   df1 <- data.frame(HR_Timestamp_4D, mydata_4D$Tair/10); colnames(df1) <- c("HR_Timestamp_4B", "Tair")
 
@@ -113,7 +113,7 @@ ttRH <- function(mydata_4D, plot_label) {
 
 
 
-  #df1 <- data.frame(HR_Timestamp_4D[id_col == 21], mydata_4D$Tair[id_col == 21]); colnames(df1) <- c("HR_Timestamp_4D", "Tair")
+  #create a data frame for plotting
   df <- data.frame(HR_Timestamp_4D, mydata_4D$RH, mydata_4D$id_col_ind)
   df1 <- data.frame(HR_Timestamp_4D, mydata_4D$RH); colnames(df1) <- c("HR_Timestamp_4B", "RH")
 

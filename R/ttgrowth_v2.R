@@ -34,7 +34,7 @@ ttgrowth <- function(mydata_4D, plot_label) { #this is a beta function
     myDendro_data_L0 <- data.frame(mydata_4D$TT_ID, mydata_4D$Timestamp, f)#as.POSIXct(mydata_4D$Timestamp, origin="1970-01-01"), f)
     colnames(myDendro_data_L0) <- c("series", "ts", "value")
 
-    # Subset dataset for example
+    # Subset dataset for TT_IDs
     myDendro_data_L0 <- myDendro_data_L0 %>%
       dplyr::filter(series == ID[j])
     if (length(myDendro_data_L0$value)<100){next}
@@ -107,7 +107,7 @@ ttgrowth <- function(mydata_4D, plot_label) { #this is a beta function
   }
 
 
-
+  #create a data frame for plotting
   df1 <- data.frame(mydata_4D$Timestamp, mydata_4D$dendro, mydata_4D$id_col_ind)
   colnames(df1) <- c("Timestamp", "dendrometer", "id_col_ind")
 

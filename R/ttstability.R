@@ -35,7 +35,7 @@ ttstability <- function(mydata_4D, plot_label){
   phi <- rad2deg(tanh((sqrt(Ax^2+Ay^2))/Az)) + tiltangle
 
 
-
+  #create a data frame for plotting
   df1 <- data.frame(mydata_4D$Timestamp, phi, mydata_4D$id_col_ind)
   colnames(df1) <- c("Timestamp", "phi", "id_col_ind")
 
