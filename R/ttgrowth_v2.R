@@ -4,7 +4,7 @@ ttgrowth <- function(mydata_4D, plot_label) { #this is a beta function
   #load required packages
   #library(dendRoAnalyst)
   library(pracma)
-  library(sarbcurrent)
+  #library(sarbcurrent)
   library(changepoint)
 
   #create a color index
