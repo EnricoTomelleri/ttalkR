@@ -96,7 +96,7 @@ ttStWC <- function(mydata_4D, species, plot_label){
       geom_point(aes(group = "whatever"), size = 0.2) +
       #geom_line(aes(group = "whatever")) +
       facet_grid(facets = mydata_4D$TT_ID ~ ., margins = FALSE) +
-      geom_smooth() +
+      geom_smooth(colour = "gray") +
       labs(x = "Timestamp", y = "stem volumetric water content (g/cm3)") +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
       scale_x_datetime(minor_breaks = ("1 week")) +
