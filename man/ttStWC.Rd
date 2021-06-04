@@ -18,7 +18,7 @@ a ttscrape object
 }
   \item{plot_label}{
 %%     ~~Describe \code{plot_label} here~~
-"spruce", beech", "poplar", "pine"
+"spruce", "beech", "poplar", "pine"
 }
   \item{plot_label}{
 %%     ~~Describe \code{plot_label} here~~
@@ -56,7 +56,7 @@ Enrico Tomelleri
 }
 \examples{
 ttscrape("C0200091")
-ttStWC(mydata_4D, "all_in_one")
+ttStWC(mydata_4D, "beech", "all_in_one")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory (show via RShowDoc("KEYWORDS")):
