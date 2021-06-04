@@ -54,7 +54,7 @@ a ttscrape object
 }
 \examples{
 ttscrape("C0200091")
-ttbattery(mydata_4B, mydata_4D, plot_label=TRUE)
+ttbattery(mydata_4B, mydata_4D, "all_in_one")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory (show via RShowDoc("KEYWORDS")):

@@ -14,6 +14,11 @@ ttscrape(ID)
 \arguments{
   \item{ID}{
 %%     ~~Describe \code{ID} here~~
+the ID of yout ttCloud
+}
+  \item{subset_days}{
+%%     ~~Describe \code{ID} here~~
+days to be analyzed from the end of measurements (e.g. "today"). "all" doesn't subset the timeseries.
 }
 }
 \details{
@@ -42,7 +47,7 @@ Enrico Tomelleri
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-  ttscrape("C0200091")
+  ttscrape("C0200091", 10)
   }
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the

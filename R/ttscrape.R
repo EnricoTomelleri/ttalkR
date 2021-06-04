@@ -1,4 +1,4 @@
-ttscrape <- function(ID) {
+ttscrape <- function(ID, subset_days) {
 
   library(tidyr)
   library(ggplot2)
@@ -200,8 +200,26 @@ ttscrape <- function(ID) {
   mydata_4D$id_col <- abs(id_col)
 
 
-  mydata_4B <<- mydata_4B
-  mydata_4D <<- mydata_4D
-  mydata_49 <<- mydata_49
+  if (subset_days != "all"){
+  tt_begin <- mydata_4B$Timestamp[length(mydata_4B$Timestamp)] - (24*60*60*subset_days)
+  tt_end <- mydata_4B$Timestamp[length(mydata_4B$Timestamp)]
+  mydata_4B <- mydata_4B[mydata_4B$Timestamp > tt_begin,]
+  mydata_4B <<- mydata_4B[is.na(mydata_4B$Timestamp) == FALSE,] #remove NAs
+  } else {mydata_4B <<- mydata_4B}
+
+  if (subset_days != "all"){
+    tt_begin <- mydata_4D$Timestamp[length(mydata_4D$Timestamp)] - (24*60*60*subset_days)
+    tt_end <- mydata_4D$Timestamp[length(mydata_4D$Timestamp)]
+    mydata_4D <- mydata_4D[mydata_4D$Timestamp > tt_begin,]
+    mydata_4D <<- mydata_4D[is.na(mydata_4D$Timestamp) == FALSE,] #remove NAs
+  } else {mydata_4D <<- mydata_4D}
+
+  if (subset_days != "all"){
+    tt_begin <- mydata_49$Timestamp[length(mydata_49$Timestamp)] - (24*60*60*subset_days)
+    tt_end <- mydata_49$Timestamp[length(mydata_49$Timestamp)]
+    mydata_49 <- mydata_49[mydata_49$Timestamp > tt_begin,]
+    mydata_49 <<- mydata_49[is.na(mydata_49$Timestamp) == FALSE,] #remove NAs
+  } else {mydata_49 <<- mydata_49}
+
 
 }
