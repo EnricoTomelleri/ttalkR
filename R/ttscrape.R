@@ -54,7 +54,7 @@ ttscrape <- function(ID, subset_days) {
       }
   }
 
-
+  mydata <- mydata[mydata$V1 != 0,]
   mydata_sep <-
     separate(mydata,
              V1,
