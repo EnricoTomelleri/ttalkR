@@ -42,7 +42,16 @@ ttscrape <- function(ID, subset_days) {
   if (flag0 == 0){
     if (flag1 == 0){stop()}else{mydata <- mydata1}
   }else{
-    if (flag1 == 0){mydata <- mydata0}else{mydata <- rbind(mydata0, mydata1)}
+    if (flag1 == 0){mydata <- mydata0}
+    else{
+      #for some sites the number of variables from the old to the new serve changes
+      varnum_mydata0 <- dim(mydata0)[2]
+      varnum_mydata1 <- dim(mydata1)[2]
+      varnum <- min(varnum_mydata0, varnum_mydata1)
+      mydata0 <- mydata0[,1:varnum]
+      mydata1 <- mydata1[,1:varnum,]
+      mydata <- rbind(mydata0, mydata1)
+      }
   }
 
 
@@ -170,6 +179,7 @@ ttscrape <- function(ID, subset_days) {
 
   colnames(mydata_4B) <- header_4B
 
+  header_4C <- header_4C[1:varnum]
   colnames(mydata_4C) <- header_4C
 
   #filter all the dates earlier than 2020-01-01 00:00:00
