@@ -7,7 +7,7 @@ An unified processing workflow for standardizing treetalkers data from the itali
 
 'ttalkR' has been developed within the context of the project ItTREEnet: "The Italian TREETALKER NETWORK: continuous large scale monitoring of tree functional traits and vulnerabilities to climate change". The project is funded by the Italian ministery for instruction, university and research - Progetti di ricerca di Rilevante Interesse Nazionale (PRIN 2017).
 
-To install the ttalkR package
+To install the ttalkR package (Windows users will need to install "RTools"):
 ```{r, eval = F}
 install.packages("devtools")
 devtools::install_github("EnricoTomelleri/ttalkR")
