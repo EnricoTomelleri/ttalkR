@@ -1,4 +1,9 @@
 ttscrape <- function(ID, subset_days) {
+  if(missing(subset_days)) {
+    subset_days = "all"
+  }
+
+
 
   library(tidyr)
   library(ggplot2)
@@ -17,10 +22,15 @@ ttscrape <- function(ID, subset_days) {
 
   if (RCurl::url.exists(url)==T){
     #Reading the HTML code from the website
-    mydata0 <- read.csv(url,
-                        sep = ";",
-                        header = FALSE,
-                        fill = TRUE)
+    #mydata0 <- read.csv(url,
+    #                    sep = ";",
+    #                    header = FALSE,
+    #                    fill = TRUE)
+
+    mydata0 <- data.table::fread(url,
+                                 sep = ";",
+                                 header = FALSE,
+                                 fill = TRUE)
     flag0 <- 1
   } else {flag0 <- 0}
 
@@ -31,10 +41,15 @@ ttscrape <- function(ID, subset_days) {
 
 
   if (RCurl::url.exists(url)==T){
-    mydata1 <- read.csv(url,
-                        sep = ";",
-                        header = FALSE,
-                        fill = TRUE)
+    #mydata1 <- read.csv(url,
+    #                    sep = ";",
+    #                    header = FALSE,
+    #                    fill = TRUE)
+    mydata1 <- data.table::fread(url,
+                                 sep = ";",
+                                 header = FALSE,
+                                 fill = TRUE)
+
     flag1 <- 1
   } else {flag1 <- 0}
 
@@ -44,7 +59,7 @@ ttscrape <- function(ID, subset_days) {
   }else{
     if (flag1 == 0){mydata <- mydata0}
     else{
-      #for some sites the number of variables from the old to the new serve changes
+      #for some sites the number of variables from the old to the new server changes
       varnum_mydata0 <- dim(mydata0)[2]
       varnum_mydata1 <- dim(mydata1)[2]
       varnum <- min(varnum_mydata0, varnum_mydata1)
@@ -64,13 +79,21 @@ ttscrape <- function(ID, subset_days) {
   #split the dataset
   mydata_4D <- mydata_sep[mydata_sep$V3 == "4D", ]
   mydata_4D <- mydata_4D[mydata_4D$SN>52000000,]#TreeTalkers v3.2 have and ID higher than 52000000
+  #remove thos columns with only NAs
+  mydata_4D <- Filter(function(x)!all(is.na(x)), mydata_4D)
 
   mydata_49 <- mydata_sep[mydata_sep$V3 == "49", ]
   mydata_49 <- mydata_49[mydata_49$SN>52000000,]#TreeTalkers v3.2 have and ID higher than 52000000
+  #remove thos columns with only NAs
+  mydata_49 <- Filter(function(x)!all(is.na(x)), mydata_49)
 
   mydata_4B <- mydata_sep[mydata_sep$V3 == "4B", ]#the string 4B and 4C contain only TTcloud data
+  #remove thos columns with only NAs
+  mydata_4B <- Filter(function(x)!all(is.na(x)), mydata_4B)
 
   mydata_4C <- mydata_sep[mydata_sep$V3 == "4C", ]#the string 4B and 4C contain only TTcloud data
+  #remove thos columns with only NAs
+  mydata_4C <- Filter(function(x)!all(is.na(x)), mydata_4C)
 
 
   header_4D <-
@@ -170,8 +193,13 @@ ttscrape <- function(ID, subset_days) {
       "RSSI_TT17",
       "RSSI_TT18",
       "RSSI_TT19",
-      "RSSI_TT20"
+      "RSSI_TT20",
+      "RSSI_TT21",
+      "RSSI_TT22",
+      "RSSI_TT23",
+      "RSSI_TT24"
     )
+
 
   colnames(mydata_4D) <- header_4D
 
@@ -179,7 +207,7 @@ ttscrape <- function(ID, subset_days) {
 
   colnames(mydata_4B) <- header_4B
 
-  header_4C <- header_4C[1:varnum]
+  header_4C <- header_4C[1:(dim(mydata_4C)[2])]
   colnames(mydata_4C) <- header_4C
 
   #filter all the dates earlier than 2020-01-01 00:00:00
