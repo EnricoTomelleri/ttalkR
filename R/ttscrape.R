@@ -81,15 +81,36 @@ ttscrape <- function(ID, subset_days) {
   mydata_4D <- mydata_4D[mydata_4D$SN>52000000,]#TreeTalkers v3.2 have and ID higher than 52000000
   #remove thos columns with only NAs
   mydata_4D <- Filter(function(x)!all(is.na(x)), mydata_4D)
+  #convert possible integer64 to integer
+  mydata_4D <- mydata_4D %>% mutate_if(bit64::is.integer64, as.integer)
 
   mydata_49 <- mydata_sep[mydata_sep$V3 == "49", ]
   mydata_49 <- mydata_49[mydata_49$SN>52000000,]#TreeTalkers v3.2 have and ID higher than 52000000
-  #remove thos columns with only NAs
+  #remove those columns with only NAs
   mydata_49 <- Filter(function(x)!all(is.na(x)), mydata_49)
+  mydata_49[mydata_49>999999999] <- NA
+  #convert possible integer64 to integer
+  mydata_49 <- mydata_49 %>% mutate_if(bit64::is.integer64, as.integer)
+  #convert all the bands to numeric
+  mydata_49$V5 <- as.numeric(mydata_49$V5)
+  mydata_49$V6 <- as.numeric(mydata_49$V6)
+  mydata_49$V7 <- as.numeric(mydata_49$V7)
+  mydata_49$V8 <- as.numeric(mydata_49$V8)
+  mydata_49$V9 <- as.numeric(mydata_49$V9)
+  mydata_49$V10 <- as.numeric(mydata_49$V10)
+  mydata_49$V11 <- as.numeric(mydata_49$V11)
+  mydata_49$V12 <- as.numeric(mydata_49$V12)
+  mydata_49$V13 <- as.numeric(mydata_49$V13)
+  mydata_49$V14 <- as.numeric(mydata_49$V14)
+  mydata_49$V15 <- as.numeric(mydata_49$V15)
+  mydata_49$V16 <- as.numeric(mydata_49$V16)
 
   mydata_4B <- mydata_sep[mydata_sep$V3 == "4B", ]#the string 4B and 4C contain only TTcloud data
   #remove thos columns with only NAs
   mydata_4B <- Filter(function(x)!all(is.na(x)), mydata_4B)
+  #convert possible integer64 to integer
+  mydata_4B <- mydata_4B %>% mutate_if(bit64::is.integer64, as.integer)
+
 
   mydata_4C <- mydata_sep[mydata_sep$V3 == "4C", ]#the string 4B and 4C contain only TTcloud data
   #remove thos columns with only NAs
@@ -201,19 +222,11 @@ ttscrape <- function(ID, subset_days) {
     )
 
 
-  is.integer64 <- function(x){
-    class(x)=="integer64"
-  }
-
   colnames(mydata_4D) <- header_4D
-  mydata_4D <- mydata_4D %>% mutate_if(bit64::is.integer64, as.integer)
 
   colnames(mydata_49) <- header_49
-  mydata_49 <- mydata_49 %>% mutate_if(bit64::is.integer64, as.integer)
 
   colnames(mydata_4B) <- header_4B
-  mydata_4B <- mydata_4B %>% mutate_if(bit64::is.integer64, as.integer)
-
 
   header_4C <- header_4C[1:(dim(mydata_4C)[2])]
   colnames(mydata_4C) <- header_4C
