@@ -201,11 +201,19 @@ ttscrape <- function(ID, subset_days) {
     )
 
 
+  is.integer64 <- function(x){
+    class(x)=="integer64"
+  }
+
   colnames(mydata_4D) <- header_4D
+  mydata_4D <- mydata_4D %>% mutate_if(bit64::is.integer64, as.integer)
 
   colnames(mydata_49) <- header_49
+  mydata_49 <- mydata_49 %>% mutate_if(bit64::is.integer64, as.integer)
 
   colnames(mydata_4B) <- header_4B
+  mydata_4B <- mydata_4B %>% mutate_if(bit64::is.integer64, as.integer)
+
 
   header_4C <- header_4C[1:(dim(mydata_4C)[2])]
   colnames(mydata_4C) <- header_4C
