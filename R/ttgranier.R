@@ -3,6 +3,7 @@ ttgranier <- function(mydata_4D, plot_label) {
 
   #load required packages
   library(ggplot2)
+  library(signal)
   #library(Rssa)
   #library(oce)
 

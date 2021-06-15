@@ -18,7 +18,7 @@ the ID of yout ttCloud
 }
   \item{subset_days}{
 %%     ~~Describe \code{ID} here~~
-days to be analyzed from the end of measurements (e.g. "today"). "all" doesn't subset the timeseries.
+days to be analyzed from the end of measurements. "all" doesn't subset the timeseries. If no argument is inserted, the function will pre-process all the data available (as for "all")
 }
 }
 \details{
@@ -29,7 +29,7 @@ the function returns data frames of type:
 mydata_4B: general sensors of each treetalker connected to this ttcloud
 mydata_49: treetalkers and ttR spectrometers' data
 mydata_4D: ttcloud data
-mydata_4C: not implemented
+mydata_4C: RSSI radio signal strenght between TT1 & TTcloud
 }
 \references{
 %% ~put references to the literature/web site here ~

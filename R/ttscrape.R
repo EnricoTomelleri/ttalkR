@@ -88,7 +88,11 @@ ttscrape <- function(ID, subset_days) {
   mydata_49 <- mydata_49[mydata_49$SN>52000000,]#TreeTalkers v3.2 have and ID higher than 52000000
   #remove those columns with only NAs
   mydata_49 <- Filter(function(x)!all(is.na(x)), mydata_49)
-  mydata_49[mydata_49>999999999] <- NA
+  #mydata_49[mydata_49>999999999] <- NA
+  #conditional filtering for integer64
+  #mydata_49 %>%
+  #  filter(if (bit64::is.integer64) mydata_49>999999999)
+
   #convert possible integer64 to integer
   mydata_49 <- mydata_49 %>% mutate_if(bit64::is.integer64, as.integer)
   #convert all the bands to numeric
@@ -237,7 +241,11 @@ ttscrape <- function(ID, subset_days) {
   #convert the ids to integers
   mydata_4D$TT_ID <- as.integer(mydata_4D$TT_ID)
   mydata_49$TT_ID <- as.integer(mydata_49$TT_ID)
+
+  mydata_4B$TT_ID <- substr(mydata_4B$TT_ID, 2, 8) #remove the "C" from the IDs
   mydata_4B$TT_ID <- as.integer(mydata_4B$TT_ID);
+
+  mydata_4C$TT_ID <- substr(mydata_4C$TT_ID, 2, 8) #remove the "C" from the IDs
   mydata_4C$TT_ID <- as.integer(mydata_4C$TT_ID);
 
 
@@ -252,33 +260,47 @@ ttscrape <- function(ID, subset_days) {
     as.POSIXct(mydata_4B$Timestamp, origin = "1970-01-01", tz="GMT")
   mydata_49$Timestamp <-
     as.POSIXct(mydata_49$Timestamp, origin = "1970-01-01", tz="GMT")
+  mydata_4C$Timestamp <-
+    as.POSIXct(mydata_4C$Timestamp, origin = "1970-01-01", tz="GMT")
+
+
   #create a color index
-  id_col <- mydata_4D$TT_ID
-  id_col[id_col == max(id_col, na.rm = T)] <- 21
-  id_col[id_col != 21] <- id_col[id_col != 21] - max(id_col, na.rm = T)
-  mydata_4D$id_col <- abs(id_col)
+  #id_col <- mydata_4D$TT_ID
+  #id_col[id_col == max(id_col, na.rm = T)] <- 21
+  #id_col[id_col != 21] <- id_col[id_col != 21] - max(id_col, na.rm = T)
+  #mydata_4D$id_col <- abs(id_col)
 
 
   if (subset_days != "all"){
   tt_begin <- mydata_4B$Timestamp[length(mydata_4B$Timestamp)] - (24*60*60*subset_days)
-  tt_end <- mydata_4B$Timestamp[length(mydata_4B$Timestamp)]
+  #tt_end <- mydata_4B$Timestamp[length(mydata_4B$Timestamp)]
   mydata_4B <- mydata_4B[mydata_4B$Timestamp > tt_begin,]
-  mydata_4B <<- mydata_4B[is.na(mydata_4B$Timestamp) == FALSE,] #remove NAs
-  } else {mydata_4B <<- mydata_4B}
+  mydata_4B <- mydata_4B[is.na(mydata_4B$Timestamp) == FALSE,] #remove NAs
+  } else {mydata_4B <- mydata_4B}
+  mydata_4B <<- mydata_4B %>% distinct(TT_ID, Timestamp, .keep_all = TRUE) #remove duplicates
 
   if (subset_days != "all"){
     tt_begin <- mydata_4D$Timestamp[length(mydata_4D$Timestamp)] - (24*60*60*subset_days)
-    tt_end <- mydata_4D$Timestamp[length(mydata_4D$Timestamp)]
+    #tt_end <- mydata_4D$Timestamp[length(mydata_4D$Timestamp)]
     mydata_4D <- mydata_4D[mydata_4D$Timestamp > tt_begin,]
     mydata_4D <<- mydata_4D[is.na(mydata_4D$Timestamp) == FALSE,] #remove NAs
   } else {mydata_4D <<- mydata_4D}
+  mydata_4D <<- mydata_4D %>% distinct(TT_ID, Timestamp, .keep_all = TRUE)#remove duplicates
 
   if (subset_days != "all"){
     tt_begin <- mydata_49$Timestamp[length(mydata_49$Timestamp)] - (24*60*60*subset_days)
-    tt_end <- mydata_49$Timestamp[length(mydata_49$Timestamp)]
+    #tt_end <- mydata_49$Timestamp[length(mydata_49$Timestamp)]
     mydata_49 <- mydata_49[mydata_49$Timestamp > tt_begin,]
-    mydata_49 <<- mydata_49[is.na(mydata_49$Timestamp) == FALSE,] #remove NAs
-  } else {mydata_49 <<- mydata_49}
+    mydata_49 <- mydata_49[is.na(mydata_49$Timestamp) == FALSE,] #remove NAs
+  } else {mydata_49 <- mydata_49}
+  mydata_49 <<- mydata_49 %>% distinct(TT_ID, Timestamp, .keep_all = TRUE)#remove duplicates
 
+  if (subset_days != "all"){
+    tt_begin <- mydata_4C$Timestamp[length(mydata_4C$Timestamp)] - (24*60*60*subset_days)
+    #tt_end <- mydata_4C$Timestamp[length(mydata_4C$Timestamp)]
+    mydata_4C <- mydata_4C[mydata_4C$Timestamp > tt_begin,]
+    mydata_4C <- mydata_4C[is.na(mydata_4C$Timestamp) == FALSE,] #remove NAs
+  } else {mydata_4C <- mydata_4C}
+  mydata_4C <<- mydata_4C %>% distinct(Timestamp, .keep_all = TRUE)#remove duplicates
 
 }
