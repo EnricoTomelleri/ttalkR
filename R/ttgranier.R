@@ -26,7 +26,7 @@ ttgranier <- function(mydata_4D, plot_label) {
 
 
   Tref_0C[Tref_0C < -20] <- NA
-  Tref_0C[Tref_0C > 100] <- NA
+  Tref_0C[Tref_0C > 50] <- NA
   #apply a Savitzky-Golay smoothing
   ID <- unique(mydata_4D$TT_ID)
   for (j in 1:length(ID)) {
@@ -51,7 +51,7 @@ ttgranier <- function(mydata_4D, plot_label) {
     1.15E-12 * mydata_4D$Tref_1 ^ 3
 
   Tref_1C[Tref_1C < -20] <- NA
-  Tref_1C[Tref_1C > 100] <- NA
+  Tref_1C[Tref_1C > 50] <- NA
   #apply a Savitzky-Golay smoothing
   ID <- unique(mydata_4D$TT_ID)
   for (j in 1:length(ID)) {
@@ -74,7 +74,7 @@ ttgranier <- function(mydata_4D, plot_label) {
     1.15E-12 * mydata_4D$Theat_0 ^ 3
 
   Theat_0C[Theat_0C < -20] <- NA
-  Theat_0C[Theat_0C > 100] <- NA
+  Theat_0C[Theat_0C > 50] <- NA
   #apply a Savitzky-Golay smoothing
   ID <- unique(mydata_4D$TT_ID)
   for (j in 1:length(ID)) {
@@ -98,7 +98,7 @@ ttgranier <- function(mydata_4D, plot_label) {
     1.15E-12 * mydata_4D$Theat_1 ^ 3
 
   Theat_1C[Theat_1C < -20] <- NA
-  Theat_1C[Theat_1C > 100] <- NA
+  Theat_1C[Theat_1C > 50] <- NA
   #apply a Savitzky-Golay smoothing
   ID <- unique(mydata_4D$TT_ID)
   for (j in 1:length(ID)) {
