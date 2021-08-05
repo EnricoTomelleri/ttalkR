@@ -1,4 +1,4 @@
-ttlight <- function(mydata_49, lat, lon, plot_label){
+ttlight <- function(mydata_49, lat, lon, wavelength, plot_label){
 
   #example call ttlight(mydata_49, lat=46.453, lon=11.232, "all_in_one")
 
@@ -150,22 +150,38 @@ ttlight <- function(mydata_49, lat, lon, plot_label){
   }
 
 
-  df1 <- data.frame(specttRal_L1_all$Day, specttRal_L1_all$L860_R, specttRal_L1_all$id_col_ind)
-  colnames(df1) <- c("Timestamp", "L860_R", "id_col_ind")
+
+  if (wavelength == 450){spectRal <- specttRal_L1_all$L450_R}
+  if (wavelength == 500){spectRal <- specttRal_L1_all$L500_R}
+  if (wavelength == 550){spectRal <- specttRal_L1_all$L550_R}
+  if (wavelength == 570){spectRal <- specttRal_L1_all$L570_R}
+  if (wavelength == 600){spectRal <- specttRal_L1_all$L600_R}
+  if (wavelength == 650){spectRal <- specttRal_L1_all$L650_R}
+  if (wavelength == 610){spectRal <- specttRal_L1_all$L610_R}
+  if (wavelength == 680){spectRal <- specttRal_L1_all$L680_R}
+  if (wavelength == 730){spectRal <- specttRal_L1_all$L730_R}
+  if (wavelength == 760){spectRal <- specttRal_L1_all$L760_R}
+  if (wavelength == 810){spectRal <- specttRal_L1_all$L810_R}
+  if (wavelength == 860){spectRal <- specttRal_L1_all$L860_R}
+
+
+  df1 <- data.frame(specttRal_L1_all$Day, spectRal, specttRal_L1_all$id_col_ind)
+  colnames(df1) <- c("Timestamp", "wavelength", "id_col_ind")
 
 
 
   if (plot_label == "all_in_one"){
-    df1$L860_R[df1$L860_R<50]<-NA
-    p <- ggplot(data = df1, aes(Timestamp, L860_R)) +
+    df1$wavelength[df1$wavelength<50]<-NA
+    p <- ggplot(data = df1, aes(Timestamp, wavelength)) +
       geom_point(aes(colour = id_col_ind), size = 0.2) +
       geom_smooth() +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
-      labs(x = "Timestamp", y = "median L860_R (counts/(µW/cm^2)") +
+      labs(x = "Timestamp", y = "median wavelength (counts/(µW/cm^2)") +
       #labs(title = site) +
       scale_x_datetime(minor_breaks = ("1 week")) +
       theme(legend.position = "none") +
-      ylim(quantile(df1$L860_R, p = 0.01, na.rm=T), quantile(df1$L860_R, p = 0.99, na.rm=T))
+      ylim(quantile(df1$wavelength, p = 0.01, na.rm=T), quantile(df1$wavelength, p = 0.99, na.rm=T)) +
+      labs(title=paste("wavelength:", wavelength))
     print(p)
   }
 
