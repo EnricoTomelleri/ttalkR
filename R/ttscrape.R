@@ -30,7 +30,8 @@ ttscrape <- function(ID, subset_days) {
     mydata0 <- data.table::fread(url,
                                  sep = ";",
                                  header = FALSE,
-                                 fill = TRUE)
+                                 fill = TRUE,
+                                 integer64="numeric")
     flag0 <- 1
   } else {flag0 <- 0}
 
@@ -48,7 +49,8 @@ ttscrape <- function(ID, subset_days) {
     mydata1 <- data.table::fread(url,
                                  sep = ";",
                                  header = FALSE,
-                                 fill = TRUE)
+                                 fill = TRUE,
+                                 integer64="numeric")
 
     flag1 <- 1
   } else {flag1 <- 0}
@@ -94,7 +96,7 @@ ttscrape <- function(ID, subset_days) {
   #  filter(if (bit64::is.integer64) mydata_49>999999999)
 
   #convert possible integer64 to integer
-  mydata_49 <- mydata_49 %>% mutate_if(bit64::is.integer64, as.integer)
+  #mydata_49 <- mydata_49 %>% mutate_if(bit64::is.integer64, as.integer)
   #convert all the bands to numeric
   mydata_49$V5 <- as.numeric(mydata_49$V5)
   mydata_49$V6 <- as.numeric(mydata_49$V6)
@@ -113,7 +115,7 @@ ttscrape <- function(ID, subset_days) {
   #remove thos columns with only NAs
   mydata_4B <- Filter(function(x)!all(is.na(x)), mydata_4B)
   #convert possible integer64 to integer
-  mydata_4B <- mydata_4B %>% mutate_if(bit64::is.integer64, as.integer)
+  #mydata_4B <- mydata_4B %>% mutate_if(bit64::is.integer64, as.integer)
 
 
   mydata_4C <- mydata_sep[mydata_sep$V3 == "4C", ]#the string 4B and 4C contain only TTcloud data
@@ -277,7 +279,9 @@ ttscrape <- function(ID, subset_days) {
   mydata_4B <- mydata_4B[mydata_4B$Timestamp > tt_begin,]
   mydata_4B <- mydata_4B[is.na(mydata_4B$Timestamp) == FALSE,] #remove NAs
   } else {mydata_4B <- mydata_4B}
+  mydata_4B <- mydata_4B %>% drop_na(Timestamp, TT_ID)
   mydata_4B <<- mydata_4B %>% distinct(TT_ID, Timestamp, .keep_all = TRUE) #remove duplicates
+
 
   if (subset_days != "all"){
     tt_begin <- mydata_4D$Timestamp[length(mydata_4D$Timestamp)] - (24*60*60*subset_days)
@@ -285,6 +289,7 @@ ttscrape <- function(ID, subset_days) {
     mydata_4D <- mydata_4D[mydata_4D$Timestamp > tt_begin,]
     mydata_4D <<- mydata_4D[is.na(mydata_4D$Timestamp) == FALSE,] #remove NAs
   } else {mydata_4D <<- mydata_4D}
+  mydata_4D <- mydata_4D %>% drop_na(Timestamp, TT_ID)
   mydata_4D <<- mydata_4D %>% distinct(TT_ID, Timestamp, .keep_all = TRUE)#remove duplicates
 
   if (subset_days != "all"){
@@ -293,6 +298,7 @@ ttscrape <- function(ID, subset_days) {
     mydata_49 <- mydata_49[mydata_49$Timestamp > tt_begin,]
     mydata_49 <- mydata_49[is.na(mydata_49$Timestamp) == FALSE,] #remove NAs
   } else {mydata_49 <- mydata_49}
+  mydata_49 <- mydata_49 %>% drop_na(Timestamp, TT_ID)
   mydata_49 <<- mydata_49 %>% distinct(TT_ID, Timestamp, .keep_all = TRUE)#remove duplicates
 
   if (subset_days != "all"){
@@ -301,6 +307,7 @@ ttscrape <- function(ID, subset_days) {
     mydata_4C <- mydata_4C[mydata_4C$Timestamp > tt_begin,]
     mydata_4C <- mydata_4C[is.na(mydata_4C$Timestamp) == FALSE,] #remove NAs
   } else {mydata_4C <- mydata_4C}
+  mydata_4C <- mydata_4C %>% drop_na(Timestamp, TT_ID)
   mydata_4C <<- mydata_4C %>% distinct(Timestamp, .keep_all = TRUE)#remove duplicates
 
 }
