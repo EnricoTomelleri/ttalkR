@@ -4,6 +4,7 @@ ttlight <- function(mydata_49, lat, lon, wavelength, plot_label){
 
   #load required packages
   library(suncalc)
+  library(lubridate)
 
   ID <- unique(mydata_49$IT_ID)
 
