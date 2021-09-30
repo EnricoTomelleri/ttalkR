@@ -122,6 +122,12 @@ ttgranier <- function(mydata_4D, plot_label) {
   dTmax <-
     (dTon - dToff) #max(Theat_1C-Theat_0C, na.rm=T)#max(Theat_1C-Theat_0C, na.rm=T)
 
+  dTmax_out <<- data.frame(mydata_4D$Timestamp, dTmax) #pass to global environment to check dial cycle
+  #plot(dTmax_out, col= topo.colors(24)[hour(dTmax_out$mydata_4D.Timestamp)+1])
+  #legend(x = "topright",          # Position
+  #            legend = c(1:24),  # Legend texts
+  #             fill = topo.colors(24), cex=0.5)
+
   ID <- unique(mydata_4D$TT_ID)
   for (j in 1:(length(ID))) {
     #dTmax[mydata_4D$TT_ID == ID[j]] <- (dTon[mydata_4D$TT_ID == ID[j]]  - dToff[mydata_4D$TT_ID == ID[j]] )
