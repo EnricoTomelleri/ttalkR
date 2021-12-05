@@ -1,7 +1,7 @@
 Package: ttalkR
 Type: Package
 Title: For download and standard processing of ITTNet data
-Version: 0.1
+Version: 0.2.0
 Author: Enrico Tomelleri
 Maintainer: Enrico Tomelleri <etomelleri@unibz.it>
 Description: This package can download and process data from TreeTalkers. It was designed specifically for the Italian Tree Talker Network but it can be adapted to any any other network. The conversion to engineering units are made according to the TT+ User Manual (September 2020).
