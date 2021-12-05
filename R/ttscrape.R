@@ -1,4 +1,4 @@
-ttscrape <- function(ID, subset_days) {
+ttScrape <- function(ID, subset_days) {
   if(missing(subset_days)) {
     subset_days = "all"
   }

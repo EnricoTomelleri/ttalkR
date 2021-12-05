@@ -1,5 +1,5 @@
-\name{ttgranier}
-\alias{ttgranier}
+\name{ttGranier}
+\alias{ttGranier}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 a function to process and plot data from Thermal dissipation probes
@@ -8,7 +8,7 @@ a function to process and plot data from Thermal dissipation probes
 the function makes use of data frames created by the "ttscrape" function. It converst voltages into temperatures, it smooths the time series with a Savysky-Golay filter. It fills gaps until 24 hours an finally it estimate the sapflow for each TreeTalker in a mesh.
 }
 \usage{
-ttgranier(mydata_4D, plot_label)
+ttGranier(mydata_4D, plot_label)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -49,7 +49,7 @@ Enrico Tomelleri}
 }
 \examples{
 ttscrape("C0200091")
-ttgranier(mydata_4D, plot_label="split")
+ttGranier(mydata_4D, plot_label="split")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory (show via RShowDoc("KEYWORDS")):
