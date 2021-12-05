@@ -1,27 +1,23 @@
-\name{ttStability}
-\alias{ttStability}
+\name{ttOutput}
+\alias{ttOutput}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-a function to plot and process relative humidity data from the accelerometer (Silicon Labs. Model: MMA8451Q).
+a function to create a new SQLite database and associated structure
+)
 }
 \description{
-the function makes use of data frames created by the "ttscrape" function.
+the function makes use of data frames created by the "ttalkR" package.
 }
 \usage{
-ttStability(mydata_4D, plot_label)
+ttOutput(ID)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{mydata_4D}{
+  \item{ID}{
 %%     ~~Describe \code{mydata_4D} here~~
-a ttscrape object
+the ID of yout ttCloud
 }
-  \item{plot_label}{
-%%     ~~Describe \code{plot_label} here~~
-"all_in_one": all the treetalkers in a plot
-"split": each treetalker in a different panel
-"none": it doesn't plot
-}
+
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
@@ -50,8 +46,9 @@ Enrico Tomelleri
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-ttscrape("C0200091")
-ttStability(mydata_4D, "all_in_one")
+ttscrape("C0200091", 10)
+ttBattery(mydata_4B, mydata_4D, "all_in_one")
+ttOutput("C0200091")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory (show via RShowDoc("KEYWORDS")):

@@ -1,5 +1,5 @@
-\name{ttscrape}
-\alias{ttscrape}
+\name{ttScrape}
+\alias{ttScrape}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 a function to do download and split ITTNet data
@@ -8,7 +8,7 @@ a function to do download and split ITTNet data
 the function downloads ITTNet data from specific servers and split the different strings into specific data frames for further processing
 }
 \usage{
-ttscrape(ID)
+ttScrape(ID)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -47,7 +47,7 @@ Enrico Tomelleri
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-  ttscrape("C0200091", 10)
+  ttScrape("C0200091", 10)
   }
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the

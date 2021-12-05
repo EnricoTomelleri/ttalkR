@@ -1,5 +1,5 @@
-ttgranier <- function(mydata_4D, plot_label) {
-  #example call ttgranier(mydata_4D, "split")
+ttGranier <- function(mydata_4D, plot_label) {
+  #example call ttGranier(mydata_4D, "split")
 
   #load required packages
   library(ggplot2)
@@ -242,7 +242,7 @@ ttgranier <- function(mydata_4D, plot_label) {
 
 
   #create a data frame for output
-  df_ttgranier <- data.frame(mydata_4D$Timestamp, Fd, mydata_4D$TT_ID)
-  colnames(df_ttgranier) <- c("Timestamp", "Fd", "TT_ID")
-  df_ttgranier <<- df_ttgranier
+  df_ttGranier <- data.frame(mydata_4D$Timestamp, Fd, mydata_4D$TT_ID)
+  colnames(df_ttGranier) <- c("Timestamp", "Fd", "TT_ID")
+  df_ttGranier <<- df_ttGranier
 }

@@ -1,6 +1,6 @@
-ttlight <- function(mydata_49, lat, lon, wavelength, plot_label){
+ttLight <- function(mydata_49, lat, lon, wavelength, plot_label){
 
-  #example call ttlight(mydata_49, lat=46.453, lon=11.232, "all_in_one")
+  #example call ttLight(mydata_49, lat=46.453, lon=11.232, "all_in_one")
 
   #load required packages
   library(suncalc)
@@ -8,7 +8,7 @@ ttlight <- function(mydata_49, lat, lon, wavelength, plot_label){
 
   ID <- unique(mydata_49$IT_ID)
 
-  #filter_ttlight <- function(mydata_49){
+  #filter_ttLight <- function(mydata_49){
   ID <- unique(mydata_49$IT_ID)
   for (j in 1:length(ID)) {
     ts <- mydata_49$AS7263_610[mydata_49$IT_ID == ID[j]]
@@ -209,7 +209,7 @@ ttlight <- function(mydata_49, lat, lon, wavelength, plot_label){
 
   #create a data frame for output
 
-  df_ttlight <<- subset(specttRal_L1_all, select=-id_col_ind)
+  df_ttLight <<- subset(specttRal_L1_all, select=-id_col_ind)
 
 }
 

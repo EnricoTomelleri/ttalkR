@@ -1,5 +1,5 @@
-\name{ttgrowth}
-\alias{ttgrowth}
+\name{ttGrowth}
+\alias{ttGrowth}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 a function to process and plot dendrometer data
@@ -8,7 +8,7 @@ a function to process and plot dendrometer data
 the function makes use of data frames created by the "ttscrape" function. It is makes use of the "treenetproc" R-package for analyzing the Sharp data within a mesh of TreeTalkers.
 }
 \usage{
-ttgrowth(mydata_4D)
+ttGrowth(mydata_4D)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -44,7 +44,7 @@ Enrico Tomelleri
 }
 \examples{
 ttscrape("C0200091")
-ttgrowth(mydata_4D, "all_in_one")
+ttGrowth(mydata_4D, "all_in_one")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory (show via RShowDoc("KEYWORDS")):

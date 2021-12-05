@@ -1,5 +1,5 @@
-ttgrowth <- function(mydata_4D, plot_label) { #this is a beta function
-  #example call ttgrowth(mydata_4D, "all_in_one")
+ttGrowth <- function(mydata_4D, plot_label) { #this is a beta function
+  #example call ttGrowth(mydata_4D, "all_in_one")
 
   #load required packages
   #library(dendRoAnalyst)
@@ -145,8 +145,8 @@ ttgrowth <- function(mydata_4D, plot_label) { #this is a beta function
 
 
   #create a data frame for output
-  df_ttgrowth <- data.frame(mydata_4D$Timestamp, mydata_4D$dendro, mydata_4D$TT_ID)
-  colnames(df_ttgrowth) <- c("Timestamp", "phi", "TT_ID")
-  df_ttgrowth <<- df_ttgrowth
+  df_ttGrowth <- data.frame(mydata_4D$Timestamp, mydata_4D$dendro, mydata_4D$TT_ID)
+  colnames(df_ttGrowth) <- c("Timestamp", "phi", "TT_ID")
+  df_ttGrowth <<- df_ttGrowth
 
 }

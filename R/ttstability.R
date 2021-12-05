@@ -1,4 +1,4 @@
-ttstability <- function(mydata_4D, plot_label){
+ttStability <- function(mydata_4D, plot_label){
 
   #Treetalker is able to record oscillation of tree due to gravity with Spherical Coordinate System.
   #With basic trigonometry, φ, the angle between the gravity vector and the z-axis can be assessed by using equation 10 (Fisher, 2010).
@@ -80,9 +80,9 @@ ttstability <- function(mydata_4D, plot_label){
 
 
   #create a data frame for output
-  df_ttstability <- data.frame(mydata_4D$Timestamp, phi, mydata_4D$TT_ID)
-  colnames(df_ttstability) <- c("Timestamp", "phi", "TT_ID")
-  df_ttstability <<- df_ttstability
+  df_ttStability <- data.frame(mydata_4D$Timestamp, phi, mydata_4D$TT_ID)
+  colnames(df_ttStability) <- c("Timestamp", "phi", "TT_ID")
+  df_ttStability <<- df_ttStability
 
 }
 

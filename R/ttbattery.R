@@ -1,5 +1,5 @@
-ttbattery <- function(mydata_4B, mydata_4D, plot_label){
-  #example call ttbattery(mydata_4B, mydata_4D, "split")
+ttBattery <- function(mydata_4B, mydata_4D, plot_label){
+  #example call ttBattery(mydata_4B, mydata_4D, "split")
 
   #load required packages
   library(ggplot2)
@@ -77,9 +77,9 @@ ttbattery <- function(mydata_4B, mydata_4D, plot_label){
   if (plot_label == "none"){}
 
   #create a data frame for output
-  df_ttbattery <- data.frame(mydata_4D$Timestamp, Bat_mV, mydata_4D$TT_ID)
-  colnames(df_ttbattery) <- c("Timestamp", "Bat_mV", "TT_ID")
-  df_ttbattery <<- df_ttbattery
+  df_ttBattery <- data.frame(mydata_4D$Timestamp, Bat_mV, mydata_4D$TT_ID)
+  colnames(df_ttBattery) <- c("Timestamp", "Bat_mV", "TT_ID")
+  df_ttBattery <<- df_ttBattery
 
 
 

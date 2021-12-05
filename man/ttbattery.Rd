@@ -1,5 +1,5 @@
-\name{ttbattery}
-\alias{ttbattery}
+\name{ttBattery}
+\alias{ttBattery}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 a function to do check and plot the battery status of a TT site
@@ -8,7 +8,7 @@ a function to do check and plot the battery status of a TT site
 the function makes use of data frames created by the "ttscrape" function and plots the battery voltage for all the TreeTalkes in a mesh, the TTR and the TTcloud.
 }
 \usage{
-ttbattery(mydata_4B, mydata_4D, plot_label)
+ttBattery(mydata_4B, mydata_4D, plot_label)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -54,7 +54,7 @@ a ttscrape object
 }
 \examples{
 ttscrape("C0200091")
-ttbattery(mydata_4B, mydata_4D, "all_in_one")
+ttBattery(mydata_4B, mydata_4D, "all_in_one")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory (show via RShowDoc("KEYWORDS")):
