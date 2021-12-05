@@ -9,6 +9,7 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Imports: tidyr, ggplot2, tidyverse, signal, zoo, prospectr, pracma, sarbcurrent, changepoint, suncalc
+Suggests: RSQLite
 RoxygenNote: 7.1.1
-Depends: 
-    R (>= 2.10)
+Depends: R (>= 4.0.2)
+  
