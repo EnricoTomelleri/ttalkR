@@ -11,5 +11,5 @@ LazyData: true
 Imports: tidyr, ggplot2, tidyverse, signal, zoo, prospectr, pracma, sarbcurrent, changepoint, suncalc
 Suggests: RSQLite
 RoxygenNote: 7.1.1
-Depends: R (>= 4.0.2)
+Depends: R (>= 3.3)
   
