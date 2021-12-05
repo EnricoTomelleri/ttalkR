@@ -2,7 +2,7 @@ ttBattery <- function(mydata_4B, mydata_4D, plot_label){
   #example call ttBattery(mydata_4B, mydata_4D, "split")
 
   #load required packages
-  library(ggplot2)
+  #library(ggplot2)
 
   HR_Timestamp_4D <- mydata_4D$Timestamp#as.POSIXct(mydata_4D$Timestamp, origin="1970-01-01")
   HR_Timestamp_4B <- mydata_4B$Timestamp#as.POSIXct(mydata_4B$Timestamp, origin="1970-01-01")
@@ -54,7 +54,7 @@ ttBattery <- function(mydata_4B, mydata_4D, plot_label){
   }
 
   if (plot_label=="split"){
-    p <- ggplot(data=df, aes(x=HR_Timestamp_4D, y=Bat_mV, color=mydata_4D$id_col_ind)) +
+    p <- ggplot2::ggplot(data=df, aes(x=HR_Timestamp_4D, y=Bat_mV, color=mydata_4D$id_col_ind)) +
       geom_point(aes(group = "whatever"), size = 0.2) +
       #geom_line(aes(group = "whatever")) +
       facet_grid(facets = mydata_4D$TT_ID ~ ., margins = FALSE) +
