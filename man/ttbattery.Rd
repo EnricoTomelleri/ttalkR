@@ -5,7 +5,7 @@
 a function to do check and plot the battery status of a TT site
 }
 \description{
-the function makes use of data frames created by the "ttscrape" function and plots the battery voltage for all the TreeTalkes in a mesh, the TTR and the TTcloud.
+the function makes use of data frames created by the "ttScrape" function and plots the battery voltage for all the TreeTalkes in a mesh, the TTR and the TTcloud.
 }
 \usage{
 ttBattery(mydata_4B, mydata_4D, plot_label)
@@ -14,11 +14,11 @@ ttBattery(mydata_4B, mydata_4D, plot_label)
 \arguments{
   \item{mydata_4B}{
 %%     ~~Describe \code{mydata_4B} here~~
-a ttscrape object
+a ttScrape object
 }
   \item{mydata_4D}{
 %%     ~~Describe \code{mydata_4D} here~~
-a ttscrape object
+a ttScrape object
 }
   \item{plot_label}{
 %%     ~~Describe \code{plot_label} here~~
@@ -53,7 +53,7 @@ a ttscrape object
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-ttscrape("C0200091")
+ttScrape("C0200091")
 ttBattery(mydata_4B, mydata_4D, "all_in_one")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

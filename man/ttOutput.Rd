@@ -46,7 +46,7 @@ Enrico Tomelleri
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-ttscrape("C0200091", 10)
+ttScrape("C0200091", 10)
 ttBattery(mydata_4B, mydata_4D, "all_in_one")
 ttOutput("C0200091")
 }

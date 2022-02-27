@@ -5,7 +5,7 @@
 to process and plot spectrometer data. Manufacturer: AMS. Model: AS7262 (Visible range), AS7263 (Near Infra-Red range).
 }
 \description{
-the function makes use of data frames created by the "ttscrape" function. It filters, aggregate to daily values and plot spectrometer data from a TreeTalkers mesh. The filtering is based on solar geometry. The function doesn't account for topography. The filtered data include measurements with the sun position from -30 to + 30 degrees from the geographic South.
+the function makes use of data frames created by the "ttScrape" function. It filters, aggregate to daily values and plot spectrometer data from a TreeTalkers mesh. The filtering is based on solar geometry. The function doesn't account for topography. The filtered data include measurements with the sun position from -30 to + 30 degrees from the geographic South.
 }
 \usage{
 ttLight(mydata_49, lat, lon, wavelength, plot_label)
@@ -14,7 +14,7 @@ ttLight(mydata_49, lat, lon, wavelength, plot_label)
 \arguments{
   \item{mydata_49}{
 %%     ~~Describe \code{mydata_49} here~~
-a ttscrape object
+a ttScrape object
 }
   \item{lat}{
 %%     ~~Describe \code{plot_label} here~~
@@ -62,7 +62,7 @@ Enrico Tomelleri
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-ttscrape("C0200091")
+ttScrape("C0200091")
 ttLight(mydata_49, lat=46.453, lon=11.232, 860, "all_in_one")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

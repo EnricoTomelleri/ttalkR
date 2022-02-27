@@ -5,7 +5,7 @@
 a function to plot and process relative humidity data from the accelerometer (Silicon Labs. Model: MMA8451Q).
 }
 \description{
-the function makes use of data frames created by the "ttscrape" function.
+the function makes use of data frames created by the "ttScrape" function.
 }
 \usage{
 ttStability(mydata_4D, plot_label)
@@ -14,7 +14,7 @@ ttStability(mydata_4D, plot_label)
 \arguments{
   \item{mydata_4D}{
 %%     ~~Describe \code{mydata_4D} here~~
-a ttscrape object
+a ttScrape object
 }
   \item{plot_label}{
 %%     ~~Describe \code{plot_label} here~~
@@ -50,7 +50,7 @@ Enrico Tomelleri
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-ttscrape("C0200091")
+ttScrape("C0200091")
 ttStability(mydata_4D, "all_in_one")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

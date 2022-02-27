@@ -5,7 +5,7 @@
 a function to plot and process relative humidity data from the Capacitive sensor (MicroPCB (20x3x2) mm with copper plates).
 }
 \description{
-the function makes use of data frames created by the "ttscrape" function.
+the function makes use of data frames created by the "ttScrape" function.
 }
 \usage{
 ttStWC(mydata_4D, species, plot_label)
@@ -14,7 +14,7 @@ ttStWC(mydata_4D, species, plot_label)
 \arguments{
   \item{mydata_4D}{
 %%     ~~Describe \code{mydata_4D} here~~
-a ttscrape object
+a ttScrape object
 }
   \item{plot_label}{
 %%     ~~Describe \code{plot_label} here~~
@@ -55,7 +55,7 @@ Enrico Tomelleri
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-ttscrape("C0200091")
+ttScrape("C0200091")
 ttStWC(mydata_4D, "beech", "all_in_one")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
