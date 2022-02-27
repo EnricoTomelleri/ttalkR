@@ -2,8 +2,8 @@ ttGranier <- function(mydata_4D, plot_label) {
   #example call ttGranier(mydata_4D, "split")
 
   #load required packages
-  library(ggplot2)
-  library(signal)
+  #library(ggplot2)
+  #library(signal)
   #library(Rssa)
   #library(oce)
 
@@ -189,9 +189,9 @@ ttGranier <- function(mydata_4D, plot_label) {
 
   if (plot_label == "all_in_one"){
     p <- ggplot(data = df1, aes(Timestamp, Fd)) +
-      geom_point(aes(colour = id_col_ind), size = 0.2) +
+      geom_point(aes(colour = id_col_ind), size = 0.2, na.rm=T) +
       #geom_smooth(formula = y ~ s(x, bs = "ds")) +
-      geom_smooth() +
+      #geom_smooth() +
       #geom_ma(ma_fun = SMA, n = 1000, color = "red") +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
       labs(x = "Timestamp", y = "sap flow (g m-2 s-1)") +
@@ -206,10 +206,10 @@ ttGranier <- function(mydata_4D, plot_label) {
 
   if (plot_label == "split"){
     p <- ggplot(data = df1, aes(Timestamp, Fd, color = id_col_ind)) +
-      geom_point(aes(group = "whatever"), size = 0.2) +
+      geom_point(aes(group = "whatever"), size = 0.2, na.rm=T) +
       #geom_line(aes(group = "whatever")) +
       facet_grid(facets = mydata_4D$TT_ID ~ ., margins = FALSE) +
-      geom_smooth(colour = "gray") +
+      #geom_smooth(colour = "gray") +
       #binomial_smooth(formula = y ~ splines::ns(x, 2)) +
       labs(x = "Timestamp", y = "sap flow (g m-2 s-1)") +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
@@ -244,5 +244,5 @@ ttGranier <- function(mydata_4D, plot_label) {
   #create a data frame for output
   df_ttGranier <- data.frame(mydata_4D$Timestamp, Fd, mydata_4D$TT_ID)
   colnames(df_ttGranier) <- c("Timestamp", "Fd", "TT_ID")
-  df_ttGranier <<- df_ttGranier
+  .GlobalEnv$df_ttGranier <- df_ttGranier
 }

@@ -41,7 +41,7 @@ ttStability <- function(mydata_4D, plot_label){
 
   if (plot_label == "all_in_one"){
     p <- ggplot(data=df1, aes(Timestamp, phi)) +
-      geom_point(aes(colour = id_col_ind), size = 0.2) +
+      geom_point(aes(colour = id_col_ind), size = 0.2, na.rm=T) +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
       labs(x = "Timestamp", y = "phi (degrees)") +
       #labs(title = site) +
@@ -57,7 +57,7 @@ ttStability <- function(mydata_4D, plot_label){
 
   if (plot_label == "split"){
     p <- ggplot(data=df1, aes(x = Timestamp, y = phi, color=id_col_ind)) +
-      geom_point(aes(colour = id_col_ind), size = 0.2)  +
+      geom_point(aes(colour = id_col_ind), size = 0.2, na.rm=T)  +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
       labs(x = "Timestamp", y = "phi (degrees)") +
       theme(legend.position = "none") +
@@ -82,8 +82,7 @@ ttStability <- function(mydata_4D, plot_label){
   #create a data frame for output
   df_ttStability <- data.frame(mydata_4D$Timestamp, phi, mydata_4D$TT_ID)
   colnames(df_ttStability) <- c("Timestamp", "phi", "TT_ID")
-  df_ttStability <<- df_ttStability
-
+  .GlobalEnv$df_ttStability <- df_ttStability
 }
 
 

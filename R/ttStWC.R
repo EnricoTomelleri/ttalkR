@@ -78,8 +78,8 @@ ttStWC <- function(mydata_4D, species, plot_label){
 
   if (plot_label == "all_in_one"){
     p <- ggplot(data = df1, aes(Timestamp, StWC)) +
-      geom_point(aes(colour = id_col_ind), size = 0.2) +
-      geom_smooth() +
+      geom_point(aes(colour = id_col_ind), size = 0.2, na.rm = TRUE) +
+      #geom_smooth() +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
       labs(x = "Timestamp", y = "stem volumetric water content (g/cm3)") +
       #labs(title = site) +
@@ -93,10 +93,10 @@ ttStWC <- function(mydata_4D, species, plot_label){
 
   if (plot_label == "split"){
     p <- ggplot(data = df1, aes(Timestamp, StWC, color = id_col_ind)) +
-      geom_point(aes(group = "whatever"), size = 0.2) +
-      #geom_line(aes(group = "whatever")) +
+      geom_point(aes(group = "whatever"), size = 0.2, na.rm = TRUE) +
+      geom_line(aes(group = "whatever")) +
       facet_grid(facets = mydata_4D$TT_ID ~ ., margins = FALSE) +
-      geom_smooth(colour = "gray") +
+      #geom_smooth(colour = "gray") +
       labs(x = "Timestamp", y = "stem volumetric water content (g/cm3)") +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
       scale_x_datetime(minor_breaks = ("1 week")) +
@@ -111,6 +111,6 @@ ttStWC <- function(mydata_4D, species, plot_label){
   #create a data frame for output
   df_ttStWC <- data.frame(mydata_4D$Timestamp, StWC, mydata_4D$TT_ID)
   colnames(df_ttStWC) <- c("Timestamp", "StWC", "TT_ID")
-  df_ttStWC <<- df_ttStWC
+  .GlobalEnv$df_ttStWC <- df_ttStWC
 }
 

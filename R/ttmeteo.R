@@ -6,7 +6,7 @@
 ttTair <- function(mydata_4D, plot_label) {
 
   #load required packages
-  library(ggplot2)
+  usethis::use_package("ggplot2")
 
   HR_Timestamp_4D <- mydata_4D$Timestamp#as.POSIXct(mydata_4D$Timestamp, origin="1970-01-01")
 
@@ -29,7 +29,7 @@ ttTair <- function(mydata_4D, plot_label) {
   if (plot_label == "all_in_one"){
     p <- ggplot(data=df1, aes(x = HR_Timestamp_4D, y = Tair, color=mydata_4D$id_col_ind)) +
       #geom_line(data=df1, aes(HR_Timestamp_4D, Tair/10), color = "grey") +
-      geom_point(aes(colour = mydata_4D$id_col_ind), size = 0.2) +
+      geom_point(aes(colour = mydata_4D$id_col_ind), size = 0.2, na.rm=T) +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
       labs(x = "Timestamp", y = "Tair (°C)") +
       #labs(title = site) +
@@ -55,7 +55,7 @@ ttTair <- function(mydata_4D, plot_label) {
   if (plot_label == "split"){
     p <- ggplot(data=df1, aes(x = HR_Timestamp_4D, y = Tair, color=mydata_4D$id_col_ind)) +
       #geom_line(data=df1, aes(HR_Timestamp_4D, Tair/10), color = "grey") +
-      geom_point(aes(colour = mydata_4D$id_col_ind), size = 0.2)  +
+      geom_point(aes(colour = mydata_4D$id_col_ind), size = 0.2, na.rm=T)  +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
       labs(x = "Timestamp", y = "Tair (°C)") +
       theme(legend.position = "none") +
@@ -85,8 +85,7 @@ ttTair <- function(mydata_4D, plot_label) {
   #create a data frame for output
   df_ttTair <- data.frame(mydata_4D$Timestamp, mydata_4D$Tair/10, mydata_4D$TT_ID)
   colnames(df_ttTair) <- c("Timestamp", "Tair", "TT_ID")
-  df_ttTair <<- df_ttTair
-
+  .GlobalEnv$df_ttTair <- df_ttTair
 
 }
 
@@ -127,9 +126,9 @@ ttRH <- function(mydata_4D, plot_label) {
   if (plot_label == "all_in_one"){
     p <- ggplot(data=df1, aes(x = HR_Timestamp_4D, y = RH, color=mydata_4D$id_col_ind)) +
       #geom_line(data=df1, aes(HR_Timestamp_4D, Tair/10), color = "grey") +
-      geom_point(aes(colour = mydata_4D$id_col_ind), size = 0.2) +
+      geom_point(aes(colour = mydata_4D$id_col_ind), size = 0.2, na.rm=T) +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
-      labs(x = "Timestamp", y = "RH (%") +
+      labs(x = "Timestamp", y = expression("RH (%)")) +
       #labs(title = site) +
       theme(legend.position = "none") +
       scale_x_datetime(minor_breaks=("1 week"))+
@@ -147,9 +146,9 @@ ttRH <- function(mydata_4D, plot_label) {
   if (plot_label == "split"){
     p <- ggplot(data=df1, aes(x = HR_Timestamp_4D, y = RH, color=mydata_4D$id_col_ind)) +
       #geom_line(data=df1, aes(HR_Timestamp_4D, Tair/10), color = "grey") +
-      geom_point(aes(colour = mydata_4D$id_col_ind), size = 0.2)  +
+      geom_point(aes(colour = mydata_4D$id_col_ind), size = 0.2, na.rm=T)  +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
-      labs(x = "Timestamp", y = "RH (%)") +
+      labs(x = "Timestamp", y = expression("RH (%)")) +
       theme(legend.position = "none") +
       scale_x_datetime(minor_breaks=("1 week")) +
       facet_grid(facets = mydata_4D$TT_ID ~ ., margins = FALSE) +
@@ -166,7 +165,7 @@ ttRH <- function(mydata_4D, plot_label) {
   #create a data frame for output
   df_ttRH <- data.frame(mydata_4D$Timestamp, mydata_4D$RH/10, mydata_4D$TT_ID)
   colnames(df_ttRH) <- c("Timestamp", "RH", "TT_ID")
-  df_ttRH <<- df_ttRH
+  .GlobalEnv$df_ttRH <- df_ttRH
 
 }
 
