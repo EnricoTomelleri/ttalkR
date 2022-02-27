@@ -96,7 +96,7 @@ ttTair <- function(mydata_4D, plot_label) {
 
 
 
-
+#' @export
 
 ttRH <- function(mydata_4D, plot_label) {
 
