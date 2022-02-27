@@ -3,6 +3,7 @@
 export(Mode)
 export(ttBattery)
 export(ttGranier)
+export(ttGrowth)
 export(ttLight)
 export(ttRH)
 export(ttScrape)

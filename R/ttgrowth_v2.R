@@ -7,6 +7,7 @@ Mode <- function(x) {
   ux[which.max(tabulate(match(x, ux)))]
 }
 
+#' @export
 
 ttGrowth <- function(mydata_4D, plot_label) { #this is a beta function
   #example call ttGrowth(mydata_4D, "all_in_one")
