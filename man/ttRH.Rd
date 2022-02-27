@@ -2,10 +2,10 @@
 \alias{ttRH}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-a function to plot and process relative humidity data from the Thermohygrometer (NXP/Freescale. Model: Si7006)
+A function to plot and process TreeTalker relative humidity data.
 }
 \description{
-the function makes use of data frames created by the "ttScrape" function.
+The function makes use of data frames created by the "ttScrape()" function. It processes data from a Thermohygrometer (NXP/Freescale. Model: Si7006).
 }
 \usage{
 ttRH(mydata_4D, plot_label)
@@ -35,6 +35,7 @@ a ttScrape object
 }
 \references{
 %% ~put references to the literature/web site here ~
+TT+ user manual, Nature 4.0 (version 02/09/2020).
 }
 \author{
 %%  ~~who you are~~

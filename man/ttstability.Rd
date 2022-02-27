@@ -2,10 +2,10 @@
 \alias{ttStability}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-a function to plot and process relative humidity data from the accelerometer (Silicon Labs. Model: MMA8451Q).
+A function to plot and process TreeTalker stability data.
 }
 \description{
-the function makes use of data frames created by the "ttScrape" function.
+The function makes use of data frames created by the "ttScrape()" function. It processes data from a accelerometer (Silicon Labs. Model: MMA8451Q).
 }
 \usage{
 ttStability(mydata_4D, plot_label)
@@ -35,6 +35,7 @@ a ttScrape object
 }
 \references{
 %% ~put references to the literature/web site here ~
+TT+ user manual, Nature 4.0 (version 02/09/2020).
 }
 \author{
 %%  ~~who you are~~
