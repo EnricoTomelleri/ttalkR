@@ -26,8 +26,8 @@ ttStWC <- function(mydata_4D, species, plot_label){
   }
   if (species == "beech"){
     #calibration for beech
-    m <- -4E-5
-    b <- 0.6
+    m <- -3.4e-05
+    b <- 0.54897
   }
   if (species == "pine"){
     #calibration for pine
@@ -49,7 +49,7 @@ ttStWC <- function(mydata_4D, species, plot_label){
 
 
   Tref_0C[Tref_0C < -20] <- NA
-  Tref_0C[Tref_0C > 40] <- NA
+  Tref_0C[Tref_0C > 50] <- NA
   #apply a Savitzky-Golay smoothing
   ID <- unique(mydata_4D$TT_ID)
   for (j in 1:length(ID)) {

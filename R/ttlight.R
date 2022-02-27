@@ -177,7 +177,7 @@ ttLight <- function(mydata_49, lat, lon, wavelength, plot_label){
       geom_point(aes(colour = id_col_ind), size = 0.2) +
       geom_smooth() +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
-      labs(x = "Timestamp", y = "median wavelength (counts/(µW/cm^2)") +
+      labs(x = "Timestamp", y = "daily average counts/(µW/cm^2)") +
       #labs(title = site) +
       scale_x_datetime(minor_breaks = ("1 week")) +
       theme(legend.position = "none") +
@@ -196,7 +196,7 @@ ttLight <- function(mydata_49, lat, lon, wavelength, plot_label){
       #geom_line(aes(group = "whatever")) +
       facet_grid(facets = specttRal_L1_all$TT_ID ~ ., margins = FALSE) +
       geom_smooth(colour = "gray") +
-      labs(x = "Timestamp", y = "median L860_R (counts/(µW/cm^2))") +
+      labs(x = "Timestamp", y = "daily average counts/(µW/cm^2)") +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
       scale_x_datetime(minor_breaks = ("1 week")) +
       theme(legend.position = "none") +
