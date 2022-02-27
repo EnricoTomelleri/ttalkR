@@ -1,3 +1,13 @@
+#' @export
+
+#create a user function to calculate mode of a data set
+# Create the function.
+Mode <- function(x) {
+  ux <- unique(x)
+  ux[which.max(tabulate(match(x, ux)))]
+}
+
+
 ttBattery <- function(mydata_4B, mydata_4D, plot_label){
   #example call ttBattery(mydata_4B, mydata_4D, "split")
 

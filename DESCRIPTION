@@ -12,6 +12,6 @@ Description: This package can download and process TreeTalker data. It was desig
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Imports: tidyr, ggplot2, tidyverse, signal, zoo, suncalc, lubridate, baytrends, RSQLite
+Imports: tidyr, ggplot2, tidyverse, signal, zoo, suncalc, lubridate, baytrends, RSQLite, prospectr
 Depends: R (>= 3.3)
-
+RoxygenNote: 7.1.2

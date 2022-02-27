@@ -1,3 +1,5 @@
+#' @export
+
 ttStability <- function(mydata_4D, plot_label){
 
   #Treetalker is able to record oscillation of tree due to gravity with Spherical Coordinate System.

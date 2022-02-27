@@ -1,3 +1,5 @@
+#' @export
+
 ttGranier <- function(mydata_4D, plot_label) {
   #example call ttGranier(mydata_4D, "split")
 

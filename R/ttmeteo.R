@@ -1,3 +1,4 @@
+#' @export
 
 #Air temperature and humidity
 #Thermohygrometer (+/-0.1 °C ; +/-2 % ). NXP/Freescale. Model: Si7006

@@ -1,3 +1,5 @@
+#' @export
+
 ttScrape <- function(ID, subset_days) {
   if(missing(subset_days)) {
     subset_days = "all"
@@ -5,12 +7,12 @@ ttScrape <- function(ID, subset_days) {
 
 
 
-  library(tidyr)
-  library(ggplot2)
-  library(tidyverse)
-  library(signal)
-  library(zoo)
-  library(prospectr)
+  #library(tidyr)
+  #library(ggplot2)
+  #library(tidyverse)
+  #library(signal)
+  #library(zoo)
+  #library(prospectr)
 
   #Specifying the url for desired website to be scraped
   url <-

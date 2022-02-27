@@ -1,3 +1,5 @@
+#' @export
+
 ttLight <- function(mydata_49, lat, lon, wavelength, plot_label){
 
   #example call ttLight(mydata_49, lat=46.453, lon=11.232, "all_in_one")
