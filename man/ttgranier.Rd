@@ -5,7 +5,7 @@
 a function to process and plot data from Thermal dissipation probes
 }
 \description{
-the function makes use of data frames created by the "ttscrape" function. It converst voltages into temperatures, it smooths the time series with a Savysky-Golay filter. It fills gaps until 24 hours an finally it estimate the sapflow for each TreeTalker in a mesh.
+the function makes use of data frames created by the "ttScrape" function. It converst voltages into temperatures, it smooths the time series with a Savysky-Golay filter. It fills gaps until 24 hours an finally it estimate the sapflow for each TreeTalker in a mesh.
 }
 \usage{
 ttGranier(mydata_4D, plot_label)
@@ -14,7 +14,7 @@ ttGranier(mydata_4D, plot_label)
 \arguments{
   \item{mydata_4D}{
 %%     ~~Describe \code{mydata_4D} here~~
-a ttscrape object
+a ttScrape object
 }
   \item{plot_label}{
 %%     ~~Describe \code{plot_label} here~~
@@ -48,7 +48,7 @@ Enrico Tomelleri}
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-ttscrape("C0200091")
+ttScrape("C0200091")
 ttGranier(mydata_4D, plot_label="split")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
