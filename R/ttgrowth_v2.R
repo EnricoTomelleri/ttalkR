@@ -64,69 +64,23 @@ ttGrowth <- function(mydata_4D, plot_label) { #this is a beta function
     myDendro_data_L0$dendrometer[myDendro_data_L0$dendrometer<t_05] <- NA
     myDendro_data_L0$dendrometer[myDendro_data_L0$dendrometer>t_95] <- NA
 
-    #remove missisng values
-    #myDendro_data_L0 <- na.omit(subset(myDendro_data_L0, select=-series))
-    # Missing value: NA is not allowed in the data as changepoint methods are only sensible for regularly spaced data.
-    #Replace missing values in time-series data by interpolation (max gap = 2 weeks).
+    #create a data.frame with Level 1 data
     myDendro_data_L1 <- myDendro_data_L0
-    #ts <-
-    #  baytrends::fillMissing(myDendro_data_L0$value,
-    #                         span = 24,
-    #                         Dates = NULL,
-    #                         max.fill = 24*7)
-    #ts[is.na(ts==T)] <- median(ts, na.rm=T) #replace remaining gaps with ts median
 
-    #myDendro_data_L1$value <- ts
-    #get nighttime data
-    #myDendro_data_L0 <- myDendro_data_L0[as.POSIXlt(myDendro_data_L0$ts)$hour<5,]
-
-
-    #apply a hampel filter
-    #myDendro_data_L0$value
-
-
-
+    #temporal averaging
     myDendro_data_weekly <- aggregate(dendrometer ~ YYYYww, myDendro_data_L1, median)
-    #myDendro_data_MAD <- hampel(myDendro_data_L1$value, 24*7, 2) #weekly time window
-    #tranform relative to absolute growth
+
+    #normalize the radial growth with the initial sensor distance
     myDendro_data_weekly$dendrometer <- (max(myDendro_data_weekly$dendrometer) - myDendro_data_weekly$dendrometer)
-    #myDendro_data_L1$value <- myDendro_data_MAD$y
 
-    #plot(myDendro_data_L1$dendrometer, typ="l")
-    #plot(myDendro_data_weekly$dendrometer, typ="l", col="red")
-
-
+    #create a data.frame with Level 2 data
     myDendro_data_L2 <- subset(myDendro_data_L1, select = -dendrometer)
-    #convert sharp distance into growth
+
+    #merge averaged sharp data with the specific TreeTalker data.frame
     myDendro_data_L2 <- merge(myDendro_data_L2, myDendro_data_weekly, all.x=T)
-    #myDendro_data_L1$value <- max(a$y) - a$y
-    #myDendro_data_L1$value <- max(myDendro_data_L0$value) - myDendro_data_L0$value
 
-
-
-    #m_binseg <- cpt.mean(myDendro_data_L2$value, penalty = "BIC", method = "BinSeg", Q = 100)
-    #bkpnts <- cpts(m_binseg)
-    #for (k in 1:length(bkpnts)){
-    #  if((k-(24*14))<1){next()}
-    #ref1 <- median(myDendro_data_L2$value[(bkpnts[k]-(24*14)):(bkpnts[k]-(24*7))])
-    #ref2 <- median(myDendro_data_L2$value[(bkpnts[k]+(24*7)):(bkpnts[k]+(24*14))])
-    #myDendro_data_L2$value[bkpnts[k]:length(myDendro_data_L1$value)] <- myDendro_data_L2$value[bkpnts[k]:length(myDendro_data_L2$value)] - (ref2-ref1)
-    #}
-
-
-    #plot(myDendro_data_L2$dendrometer, typ="l")
-    #myDendro_data_L2_spl <- lowess(myDendro_data_L2$value)
-    #lines(myDendro_data_L2_spl$y, col="blue")
-
-
-    #library(dp)
-
-    #a<-hampel(myDendro_data_L1$value, 24, 1)
-    #plot(a)
-
+    #insert processed data into the mydata_4D data.frame
     mydata_4D$dendrometer[mydata_4D$TT_ID == ID[j]] <- myDendro_data_L2$dendrometer
-    #mydata_4D$dendro[mydata_4D$TT_ID == ID[j]] <- myDendro_data_L2_spl$y
-    #print(paste("Device",ID[j], "OK!"))
   }
 
 
@@ -138,7 +92,7 @@ ttGrowth <- function(mydata_4D, plot_label) { #this is a beta function
 
   if (plot_label == "all_in_one"){
     p <- ggplot(data = df1, aes(Timestamp, dendrometer)) +
-      geom_point(aes(colour = id_col_ind), size = 0.2) +
+      geom_point(aes(colour = id_col_ind), size = 0.2, na.rm=T) +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
       labs(x = "Timestamp", y = "radial growth (mm)") +
       #labs(title = site) +
@@ -153,7 +107,7 @@ ttGrowth <- function(mydata_4D, plot_label) { #this is a beta function
 
   if (plot_label == "split"){
     p <- ggplot(data = df1, aes(Timestamp, dendrometer, color = id_col_ind)) +
-      geom_point(aes(group = "whatever"), size = 0.2) +
+      geom_point(aes(group = "whatever"), size = 0.2, na.rm=T) +
       #geom_line(aes(group = "whatever")) +
       facet_grid(facets = mydata_4D$TT_ID ~ ., margins = FALSE) +
       labs(x = "Timestamp", y = "radial growth (mm)") +
@@ -172,6 +126,5 @@ ttGrowth <- function(mydata_4D, plot_label) { #this is a beta function
   #create a data frame for output
   df_ttGrowth <- data.frame(mydata_4D$Timestamp, mydata_4D$dendro, mydata_4D$TT_ID)
   colnames(df_ttGrowth) <- c("Timestamp", "phi", "TT_ID")
-  df_ttGrowth <<- df_ttGrowth
-
+  .GlobalEnv$df_ttGrowth <- df_ttGrowth
 }

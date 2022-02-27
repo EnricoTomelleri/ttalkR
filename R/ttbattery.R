@@ -27,7 +27,7 @@ ttBattery <- function(mydata_4B, mydata_4D, plot_label){
 
     if (plot_label=="all_in_one"){
     p <- ggplot(data = df, aes(HR_Timestamp_4D, Bat_mV)) +
-      geom_point(aes(colour = mydata_4D$id_col_ind), size = 0.2) +
+      geom_point(aes(colour = mydata_4D$id_col_ind), size = 0.2, na.rm=T) +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
       geom_line(data = df1,
                 aes(HR_Timestamp_4B, Bat_mV),
@@ -55,7 +55,7 @@ ttBattery <- function(mydata_4B, mydata_4D, plot_label){
 
   if (plot_label=="split"){
     p <- ggplot2::ggplot(data=df, aes(x=HR_Timestamp_4D, y=Bat_mV, color=mydata_4D$id_col_ind)) +
-      geom_point(aes(group = "whatever"), size = 0.2) +
+      geom_point(aes(group = "whatever"), size = 0.2, na.rm=T) +
       #geom_line(aes(group = "whatever")) +
       facet_grid(facets = mydata_4D$TT_ID ~ ., margins = FALSE) +
       labs(x = "Timestamp") +
@@ -79,8 +79,6 @@ ttBattery <- function(mydata_4B, mydata_4D, plot_label){
   #create a data frame for output
   df_ttBattery <- data.frame(mydata_4D$Timestamp, Bat_mV, mydata_4D$TT_ID)
   colnames(df_ttBattery) <- c("Timestamp", "Bat_mV", "TT_ID")
-  df_ttBattery <<- df_ttBattery
-
-
+  .GlobalEnv$df_ttBattery <- df_ttBattery
 
 }

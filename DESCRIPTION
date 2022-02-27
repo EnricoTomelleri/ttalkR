@@ -1,15 +1,19 @@
 Package: ttalkR
 Type: Package
-Title: For download and standard processing of ITTNet data
-Version: 0.2.0
-Author: Enrico Tomelleri
-Maintainer: Enrico Tomelleri <etomelleri@unibz.it>
-Description: This package can download and process data from TreeTalkers. It was designed specifically for the Italian Tree Talker Network but it can be adapted to any any other network. The conversion to engineering units are made according to the TT+ User Manual (September 2020).
+Title: For download and standard processing of TreeTalker data
+Version: 0.9.0
+Authors@R: 
+    person(given = "Enrico",
+           family = "Tomelleri",
+           role = c("aut", "cre"),
+           email = "enrico.tomelleri@unibz.it",
+           comment = c(ORCID = "0000-0001-6546-6459"))
+Description: This package can download and process TreeTalker data. It was designed specifically for the Italian Tree Talker Network but it can be adapted to any other network. The conversion of digital numbers to engineering units are made according to the TT+ User Manual (September 2020).
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Imports: tidyr, ggplot2, tidyverse, signal, zoo, prospectr, pracma, changepoint, suncalc
+Imports: tidyr, ggplot2, tidyverse, signal, zoo, suncalc, lubridate, baytrends
 Suggests: RSQLite
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Depends: R (>= 3.3)
-  
+
