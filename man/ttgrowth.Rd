@@ -44,7 +44,7 @@ Enrico Tomelleri
 }
 \examples{
 ttScrape("C0200091")
-ttGrowth(mydata_4D, "all_in_one")
+ttGrowth(mydata_4D, "split")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory (show via RShowDoc("KEYWORDS")):

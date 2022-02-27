@@ -53,16 +53,16 @@ ttGrowth <- function(mydata_4D, plot_label) { #this is a beta function
     # Subset dataset for TT_IDs
     myDendro_data_L0 <- myDendro_data_L0 %>%
       dplyr::filter(series == ID[j])
-    if (length(myDendro_data_L0$dendrometer)<100){next}
+    if (length(na.omit(myDendro_data_L0$dendrometer))<100){next}
 
 
 
 
     #remove outliers
-    #t_05 <- quantile(myDendro_data_L0$value, p=0.05, na.rm=T)
-    #t_95 <- quantile(myDendro_data_L0$value, p=0.95, na.rm=T)
-    #myDendro_data_L0$value[myDendro_data_L0$value<t_05] <- NA
-    #myDendro_data_L0$value[myDendro_data_L0$value>t_95] <- NA
+    t_05 <- quantile(myDendro_data_L0$dendrometer, p=0.05, na.rm=T)
+    t_95 <- quantile(myDendro_data_L0$dendrometer, p=0.95, na.rm=T)
+    myDendro_data_L0$dendrometer[myDendro_data_L0$dendrometer<t_05] <- NA
+    myDendro_data_L0$dendrometer[myDendro_data_L0$dendrometer>t_95] <- NA
 
     #remove missisng values
     #myDendro_data_L0 <- na.omit(subset(myDendro_data_L0, select=-series))
@@ -92,11 +92,13 @@ ttGrowth <- function(mydata_4D, plot_label) { #this is a beta function
     myDendro_data_weekly$dendrometer <- (max(myDendro_data_weekly$dendrometer) - myDendro_data_weekly$dendrometer)
     #myDendro_data_L1$value <- myDendro_data_MAD$y
 
-    #plot(myDendro_data_L1$value, typ="l")
+    #plot(myDendro_data_L1$dendrometer, typ="l")
+    #plot(myDendro_data_weekly$dendrometer, typ="l", col="red")
 
 
+    myDendro_data_L2 <- subset(myDendro_data_L1, select = -dendrometer)
     #convert sharp distance into growth
-    myDendro_data_L2 <- merge(myDendro_data_L1, myDendro_data_weekly, all.x=T)
+    myDendro_data_L2 <- merge(myDendro_data_L2, myDendro_data_weekly, all.x=T)
     #myDendro_data_L1$value <- max(a$y) - a$y
     #myDendro_data_L1$value <- max(myDendro_data_L0$value) - myDendro_data_L0$value
 
@@ -112,7 +114,7 @@ ttGrowth <- function(mydata_4D, plot_label) { #this is a beta function
     #}
 
 
-    #plot(myDendro_data_L2$value, typ="l")
+    #plot(myDendro_data_L2$dendrometer, typ="l")
     #myDendro_data_L2_spl <- lowess(myDendro_data_L2$value)
     #lines(myDendro_data_L2_spl$y, col="blue")
 
@@ -122,8 +124,9 @@ ttGrowth <- function(mydata_4D, plot_label) { #this is a beta function
     #a<-hampel(myDendro_data_L1$value, 24, 1)
     #plot(a)
 
-    mydata_4D$dendro[mydata_4D$TT_ID == ID[j]] <- myDendro_data_L2$dendrometer
+    mydata_4D$dendrometer[mydata_4D$TT_ID == ID[j]] <- myDendro_data_L2$dendrometer
     #mydata_4D$dendro[mydata_4D$TT_ID == ID[j]] <- myDendro_data_L2_spl$y
+    #print(paste("Device",ID[j], "OK!"))
   }
 
 
@@ -137,11 +140,12 @@ ttGrowth <- function(mydata_4D, plot_label) { #this is a beta function
     p <- ggplot(data = df1, aes(Timestamp, dendrometer)) +
       geom_point(aes(colour = id_col_ind), size = 0.2) +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
-      labs(x = "Timestamp", y = "increment (mm)") +
+      labs(x = "Timestamp", y = "radial growth (mm)") +
       #labs(title = site) +
       scale_x_datetime(minor_breaks = ("1 week")) +
       theme(legend.position = "none") +
-      ylim(quantile(df1$dendrometer, p = 0.01, na.rm=T), quantile(df1$dendrometer, p = 0.99, na.rm=T))
+      ylim(0,3)
+      #ylim(quantile(df1$dendrometer, p = 0.01, na.rm=T), quantile(df1$dendrometer, p = 0.99, na.rm=T))
     print(p)
   }
 
@@ -152,12 +156,13 @@ ttGrowth <- function(mydata_4D, plot_label) { #this is a beta function
       geom_point(aes(group = "whatever"), size = 0.2) +
       #geom_line(aes(group = "whatever")) +
       facet_grid(facets = mydata_4D$TT_ID ~ ., margins = FALSE) +
-      labs(x = "Timestamp", y = "increment (mm)") +
+      labs(x = "Timestamp", y = "radial growth (mm)") +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
       scale_x_datetime(minor_breaks = ("1 week")) +
       theme(legend.position = "none") +
       theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
-      ylim(quantile(df1$dendrometer, p = 0.01, na.rm=T), quantile(df1$dendrometer, p = 0.99, na.rm=T))
+      #ylim(0,3)
+      ylim(quantile(df1$dendrometer, p = 0.01, na.rm=T), quantile(df1$dendrometer, p = 0.90, na.rm=T))
     print(p)
   }
 
