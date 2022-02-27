@@ -2,10 +2,10 @@
 \alias{ttLight}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-to process and plot spectrometer data. Manufacturer: AMS. Model: AS7262 (Visible range), AS7263 (Near Infra-Red range).
+A function to process and plot TreeTalker spectrometer data.
 }
 \description{
-the function makes use of data frames created by the "ttScrape" function. It filters, aggregate to daily values and plot spectrometer data from a TreeTalkers mesh. The filtering is based on solar geometry. The function doesn't account for topography. The filtered data include measurements with the sun position from -30 to + 30 degrees from the geographic South.
+The function makes use of data frames created by the "ttScrape()" function.  It processes data from AMS chips, Model: AS7262 (Visible range), AS7263 (Near Infra-Red range) sensors. It filters, aggregate to daily values and plot spectrometer data from a TreeTalkers mesh. The filtering is based on solar geometry base on provided coordinated (lat, lon). The function doesn't account for topography. The filtered data include measurements with the sun position from -30 to + 30 degrees from the geographic South.
 }
 \usage{
 ttLight(mydata_49, lat, lon, wavelength, plot_label)
@@ -47,6 +47,7 @@ it identifies the spectral band to be plotted. Options are: 450, 500, 550, 570, 
 }
 \references{
 %% ~put references to the literature/web site here ~
+TT+ user manual, Nature 4.0 (version 02/09/2020).
 }
 \author{
 %%  ~~who you are~~

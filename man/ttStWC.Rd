@@ -2,10 +2,10 @@
 \alias{ttStWC}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-a function to plot and process relative humidity data from the Capacitive sensor (MicroPCB (20x3x2) mm with copper plates).
+A function to plot and process relative TreeTalker humidity data.
 }
 \description{
-the function makes use of data frames created by the "ttScrape" function.
+The function makes use of data frames created by the "ttScrape()" function. It processes data from a Capacitive sensor (MicroPCB (20x3x2) mm with copper plates)
 }
 \usage{
 ttStWC(mydata_4D, species, plot_label)
@@ -39,6 +39,7 @@ a ttScrape object
 }
 \references{
 %% ~put references to the literature/web site here ~
+TT+ user manual, Nature 4.0 (version 02/09/2020).
 Asgharinia, S., Belelli Marchesini, L., Gianelle, D., and Valentini, R.: Design and Performance Evaluation of Internet of Things (IoT) Based Multifunctional Device for Plant Ecophysiology & Hydrology: Toward Stem Water Content & Sap Flow , EGU General Assembly 2020, Online, 4–8 May 2020, EGU2020-17021, https://doi.org/10.5194/egusphere-egu2020-17021, 2020
 }
 \author{

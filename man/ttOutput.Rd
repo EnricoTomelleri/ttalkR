@@ -2,11 +2,11 @@
 \alias{ttOutput}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-a function to create a new SQLite database and associated structure
+A function to create a new SQLite database and associated structure.
 )
 }
 \description{
-the function makes use of data frames created by the "ttalkR" package.
+The function makes use of data frames created by functions from the "ttalkR" package.
 }
 \usage{
 ttOutput(ID)

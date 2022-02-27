@@ -2,10 +2,10 @@
 \alias{ttGranier}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-a function to process and plot data from Thermal dissipation probes
+A function to process and plot TreeTalker data from Thermal Dissipation Probes (TDP).
 }
 \description{
-the function makes use of data frames created by the "ttScrape" function. It converst voltages into temperatures, it smooths the time series with a Savysky-Golay filter. It fills gaps until 24 hours an finally it estimate the sapflow for each TreeTalker in a mesh.
+The function makes use of data frames created by the "ttScrape()" function. It processes data from Thermal Dissipation Probes (TDP). It converst voltages into temperatures, it smooths the time series with a Savysky-Golay filter. It fills gaps until 24 hours an finally it estimate the sapflow for each TreeTalker in a mesh.
 }
 \usage{
 ttGranier(mydata_4D, plot_label)
@@ -34,6 +34,7 @@ a ttScrape object
 %% ...
 }
 \references{
+TT+ user manual, Nature 4.0 (version 02/09/2020).
 A. Granier, “Une nouvelle methode pour la measure du flux de seve brute dans le tronc des arbres”. Ann. Sci. For., 42, 193–200, 1985.
 }
 \author{

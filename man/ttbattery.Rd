@@ -2,10 +2,10 @@
 \alias{ttBattery}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-a function to do check and plot the battery status of a TT site
+A function to do check and plot the battery status of a TT site.
 }
 \description{
-the function makes use of data frames created by the "ttScrape" function and plots the battery voltage for all the TreeTalkes in a mesh, the TTR and the TTcloud.
+The function makes use of data frames created by the "ttScrape()" function and plots the battery voltage for all the TreeTalkes in a mesh, including the TTR and the TTcloud.
 }
 \usage{
 ttBattery(mydata_4B, mydata_4D, plot_label)
@@ -39,6 +39,7 @@ a ttScrape object
 }
 \references{
 %% ~put references to the literature/web site here ~
+TT+ user manual, Nature 4.0 (version 02/09/2020).
 }
 \author{
 %%  ~~who you are~~
