@@ -1,3 +1,14 @@
+#' @export
+
+#create a user function to calculate mode of a data set
+# Create the function.
+Mode <- function(x) {
+  ux <- unique(x)
+  ux[which.max(tabulate(match(x, ux)))]
+}
+
+#' @export
+
 ttBattery <- function(mydata_4B, mydata_4D, plot_label){
   #example call ttBattery(mydata_4B, mydata_4D, "split")
 
@@ -37,7 +48,7 @@ ttBattery <- function(mydata_4B, mydata_4D, plot_label){
         y = 3500,
         xend = max(HR_Timestamp_4D, na.rm = T),
         yend = 3500
-      ), color = "red") +
+      ), color = "red", na.rm=T) +
       labs(x = "Timestamp") +
       #labs(title = site) +
       scale_x_datetime(minor_breaks = ("1 week")) +
@@ -68,7 +79,7 @@ ttBattery <- function(mydata_4B, mydata_4D, plot_label){
         y = 3500,
         xend = max(HR_Timestamp_4D, na.rm = T),
         yend = 3500
-      ), color = "red", alpha = 0.1, linetype = 3) +
+      ), color = "red", alpha = 0.1, linetype = 3, na.rm=T) +
       ylim(quantile(Bat_mV, p = 0.01, na.rm=T), quantile(Bat_mV, p = 0.99, na.rm=T))
 
     print(p)

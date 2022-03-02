@@ -1,3 +1,5 @@
+#' @export
+
 ttStWC <- function(mydata_4D, species, plot_label){
   #example call ttStWC(mydata_4B, "beech", "split")
 

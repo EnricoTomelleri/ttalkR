@@ -1,3 +1,5 @@
+#' @export
+
 ttScrape <- function(ID, subset_days) {
   if(missing(subset_days)) {
     subset_days = "all"
@@ -114,6 +116,7 @@ ttScrape <- function(ID, subset_days) {
   mydata_4B <- mydata_sep[mydata_sep$V3 == "4B", ]#the string 4B and 4C contain only TTcloud data
   #remove thos columns with only NAs
   mydata_4B <- Filter(function(x)!all(is.na(x)), mydata_4B)
+  #mydata_4B$Battery <- as.numeric(mydata_4B$Battery)
   #convert possible integer64 to integer
   #mydata_4B <- mydata_4B %>% mutate_if(bit64::is.integer64, as.integer)
 

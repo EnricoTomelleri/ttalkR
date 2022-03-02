@@ -1,3 +1,14 @@
+#' @export
+
+#create a user function to calculate mode of a data set
+# Create the function.
+Mode <- function(x) {
+  ux <- unique(x)
+  ux[which.max(tabulate(match(x, ux)))]
+}
+
+#' @export
+
 ttGrowth <- function(mydata_4D, plot_label) { #this is a beta function
   #example call ttGrowth(mydata_4D, "all_in_one")
 
@@ -17,12 +28,6 @@ ttGrowth <- function(mydata_4D, plot_label) { #this is a beta function
     mydata_4D$id_col_ind <- replace(mydata_4D$id_col_ind, mydata_4D$id_col_ind==id_col_ind$TT_ID[i], id_col_ind$ID[i])
   }
 
-  #create a user function to calculate mode of a data set
-  # Create the function.
-  Mode <- function(x) {
-    ux <- unique(x)
-    ux[which.max(tabulate(match(x, ux)))]
-  }
 
 
   x <- mydata_4D$growt_sens

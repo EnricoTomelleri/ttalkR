@@ -1,3 +1,4 @@
+#' @export
 
 #Air temperature and humidity
 #Thermohygrometer (+/-0.1 °C ; +/-2 % ). NXP/Freescale. Model: Si7006
@@ -95,7 +96,7 @@ ttTair <- function(mydata_4D, plot_label) {
 
 
 
-
+#' @export
 
 ttRH <- function(mydata_4D, plot_label) {
 
