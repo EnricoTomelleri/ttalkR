@@ -22,11 +22,11 @@ ttLight <- function(mydata_49, lat, lon, wavelength, plot_label){
   }
 
 
-  #the gain correction seems to occur directly in the ams firmware
+  #the gain correction seems not to occur directly in the ams firmware
   mydata_49$gain_factor[mydata_49$gain == 0] <- 1
-  mydata_49$gain_factor[mydata_49$gain == 1] <- 1
-  mydata_49$gain_factor[mydata_49$gain == 2] <- 1
-  mydata_49$gain_factor[mydata_49$gain == 3] <- 1
+  mydata_49$gain_factor[mydata_49$gain == 1] <- 3.7
+  mydata_49$gain_factor[mydata_49$gain == 2] <- 16
+  mydata_49$gain_factor[mydata_49$gain == 3] <- 64
 
   mydata_49$integration_factor <- mydata_49$integration_T/50
 
@@ -44,31 +44,31 @@ ttLight <- function(mydata_49, lat, lon, wavelength, plot_label){
   mydata_49$AS7262_650 <- as.numeric(mydata_49$AS7262_650); mydata_49$AS7262_650[mydata_49$AS7262_650 > 65000] <- NA
 
   #Near Infrared
-  AS7263_610_R <- mydata_49$AS7263_610*mydata_49$integration_factor*mydata_49$gain_factor
+  AS7263_610_R <- mydata_49$AS7263_610*mydata_49$integration_factor/mydata_49$gain_factor
   #-312.45+(1.6699* (mydata_49$AS7263_610*mydata_49$integration_factor*mydata_49$gain_factor))
-  AS7263_680_R <- mydata_49$AS7263_680*mydata_49$integration_factor*mydata_49$gain_factor
+  AS7263_680_R <- mydata_49$AS7263_680*mydata_49$integration_factor/mydata_49$gain_factor
   #-561.56+(1.5199* (mydata_49$AS7263_680*mydata_49$integration_factor*mydata_49$gain_factor))
-  AS7263_730_R <- mydata_49$AS7263_730*mydata_49$integration_factor*mydata_49$gain_factor
+  AS7263_730_R <- mydata_49$AS7263_730*mydata_49$integration_factor/mydata_49$gain_factor
   #-1511.2+(1.6209* (mydata_49$AS7263_730*mydata_49$integration_factor*mydata_49$gain_factor))
-  AS7263_760_R <- mydata_49$AS7263_760*mydata_49$integration_factor*mydata_49$gain_factor
+  AS7263_760_R <- mydata_49$AS7263_760*mydata_49$integration_factor/mydata_49$gain_factor
   #-1012.5+(1.4549* (mydata_49$AS7263_760*mydata_49$integration_factor*mydata_49$gain_factor))
-  AS7263_810_R <- mydata_49$AS7263_760*mydata_49$integration_factor*mydata_49$gain_factor
+  AS7263_810_R <- mydata_49$AS7263_760*mydata_49$integration_factor/mydata_49$gain_factor
   #91.58+(0.8414* (mydata_49$AS7263_810*mydata_49$integration_factor*mydata_49$gain_factor))
-  AS7263_860_R <- mydata_49$AS7263_810*mydata_49$integration_factor*mydata_49$gain_factor
+  AS7263_860_R <- mydata_49$AS7263_810*mydata_49$integration_factor/mydata_49$gain_factor
   #334.88+(0.531* (mydata_49$AS7263_860*mydata_49$integration_factor*mydata_49$gain_factor))
 
   #Visible Light Spectrum
-  AS7262_450_R <- mydata_49$AS7262_450*mydata_49$integration_factor*mydata_49$gain_factor
+  AS7262_450_R <- mydata_49$AS7262_450*mydata_49$integration_factor/mydata_49$gain_factor
   #-212.62+(0.4562* (mydata_49$AS7262_450*mydata_49$integration_factor*mydata_49$gain_factor))
-  AS7262_500_R <- mydata_49$AS7262_500*mydata_49$integration_factor*mydata_49$gain_factor
+  AS7262_500_R <- mydata_49$AS7262_500*mydata_49$integration_factor/mydata_49$gain_factor
   #-232.13+(0.6257 * (mydata_49$AS7262_500*mydata_49$integration_factor*mydata_49$gain_factor))
-  AS7262_550_R <- mydata_49$AS7262_550*mydata_49$integration_factor*mydata_49$gain_factor
+  AS7262_550_R <- mydata_49$AS7262_550*mydata_49$integration_factor/mydata_49$gain_factor
   #-842.1+(1.0546 * (mydata_49$AS7262_550*mydata_49$integration_factor*mydata_49$gain_factor))
-  AS7262_570_R <- mydata_49$AS7262_570*mydata_49$integration_factor*mydata_49$gain_factor
+  AS7262_570_R <- mydata_49$AS7262_570*mydata_49$integration_factor/mydata_49$gain_factor
   #-666.72+(1.0462 * (mydata_49$AS7262_570*mydata_49$integration_factor*mydata_49$gain_factor))
-  AS7262_600_R <- mydata_49$AS7262_600*mydata_49$integration_factor*mydata_49$gain_factor
+  AS7262_600_R <- mydata_49$AS7262_600*mydata_49$integration_factor/mydata_49$gain_factor
   #-328.08+(0.8654 * (mydata_49$AS7262_600*mydata_49$integration_factor*mydata_49$gain_factor))
-  AS7262_650_R <- mydata_49$AS7262_650*mydata_49$integration_factor*mydata_49$gain_factor
+  AS7262_650_R <- mydata_49$AS7262_650*mydata_49$integration_factor/mydata_49$gain_factor
   #202.77+(0.7829* (mydata_49$AS7262_650*mydata_49$integration_factor*mydata_49$gain_factor))
 
   #solar geometry

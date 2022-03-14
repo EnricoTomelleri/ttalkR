@@ -209,7 +209,7 @@ ttGranier <- function(mydata_4D, plot_label) {
   if (plot_label == "split"){
     p <- ggplot(data = df1, aes(Timestamp, Fd, color = id_col_ind)) +
       geom_point(aes(group = "whatever"), size = 0.4, na.rm=T) +
-      geom_line(aes(group = "whatever", na.rm=T)) +
+      geom_line(aes(group = "whatever"), na.rm=T) +
       facet_grid(facets = mydata_4D$TT_ID ~ ., margins = FALSE) +
       #geom_smooth(colour = "gray") +
       #binomial_smooth(formula = y ~ splines::ns(x, 2)) +
