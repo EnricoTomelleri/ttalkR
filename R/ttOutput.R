@@ -64,6 +64,6 @@ ttOutput <- function(site_name) {
     RSQLite::dbWriteTable(myConn, "df_ttGrowth", df_ttGrowth, overwrite = T)
   }
 
-
+  RSQLite::dbDisconnect()
 
 }
