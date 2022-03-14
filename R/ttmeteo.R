@@ -66,7 +66,7 @@ ttTair <- function(mydata_4D, plot_label) {
       scale_x_datetime(minor_breaks = ("1 week")) +
       theme(legend.position = "none") +
       theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
-      ylim(-10, max(df1$Tair, na.rm=T)) +
+      ylim(-10, 40) + #max(df1$Tair, na.rm=T)) +
 
       geom_segment(aes(
         x = min(Timestamp, na.rm = T),
