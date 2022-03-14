@@ -46,9 +46,33 @@ Enrico Tomelleri
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-ttScrape("C0200091", 10)
+%ttScrape("C0200091", 10)
+%ttBattery(mydata_4B, mydata_4D, "all_in_one")
+
+
+
+load(file = "data/mydata_4D.rda")
+load(file = "data/mydata_49.rda")
+load(file = "data/mydata_4B.rda")
+
+ttTair(mydata_4D, "split")
+%load(file = "data/mydata_4D.rda")
+ttStWC(mydata_4D, "spruce", "split")
+%load(file = "data/mydata_4D.rda")
+ttStability(mydata_4D, "split")
+%load(file = "data/mydata_4D.rda")
+ttRH(mydata_4D, "split")
+%load(file = "data/mydata_49.rda")
+ttLight(mydata_49, lat=46.45, lon=11.25, 860, "split")
+%load(file = "data/mydata_4D.rda")
+ttGrowth(mydata_4D, "split")
+%load(file = "data/mydata_4D.rda")
+ttGranier(mydata_4D, "split")
+%load(file = "data/mydata_4B.rda")
+%load(file = "data/mydata_4D.rda")
 ttBattery(mydata_4B, mydata_4D, "all_in_one")
-ttOutput("C0200091")
+
+ttOutput("site_test")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory (show via RShowDoc("KEYWORDS")):

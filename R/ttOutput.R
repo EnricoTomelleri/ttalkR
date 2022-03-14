@@ -1,10 +1,13 @@
-ttOutput <- function(ID) {
+#' @export
+
+
+ttOutput <- function(site_name) {
   #library(RSQLite)
 
   #create a database and add our tables.
-  filename <- paste0("../Data/ttOutput_", ID, ".db")
+  filename <- paste0("./ttOutput_", site_name, ".db")
   myDB <- filename
-  myConn <- RSQLite::dbConnect(drv = SQLite(), dbname = myDB)
+  myConn <- RSQLite::dbConnect(RSQLite::SQLite(), dbname = myDB)
   #dbListTables(myConn)
 
 
@@ -49,10 +52,10 @@ ttOutput <- function(ID) {
     RSQLite::dbWriteTable(myConn, "df_ttStWC", df_ttStWC, overwrite = T)
   }
 
-  if (exists("df_ttAir") == F) {
-    print("Warning! the dataframe <df_ttAir> is missing.")
+  if (exists("df_ttTair") == F) {
+    print("Warning! the dataframe <df_ttTair> is missing.")
   } else{
-    RSQLite::dbWriteTable(myConn, "df_ttAir", df_ttAir, overwrite = T)
+    RSQLite::dbWriteTable(myConn, "df_ttTair", df_ttTair, overwrite = T)
   }
 
   if (exists("df_ttGrowth") == F) {
