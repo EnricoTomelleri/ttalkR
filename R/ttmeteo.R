@@ -156,7 +156,7 @@ ttRH <- function(mydata_4D, plot_label) {
       geom_line(aes(group = "whatever"), na.rm = TRUE) +
       facet_grid(facets = mydata_4D$TT_ID ~ ., margins = FALSE) +
       #geom_smooth(colour = "gray") +
-      labs(x = "Timestamp", y = "stem volumetric water content (g/cm3)") +
+      labs(x = "Timestamp", y = "RH (%)") +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
       scale_x_datetime(minor_breaks = ("1 week")) +
       theme(legend.position = "none") +
