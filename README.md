@@ -16,7 +16,7 @@ citation("ttalkR")
 
 Enrico Tomelleri (2021)
 ttalkR: unified pre-processing of TreeTalker data 
-R package version 0.1
+R package version 0.9
 
 A BibTeX entry for LaTeX users is
 
@@ -26,7 +26,7 @@ A BibTeX entry for LaTeX users is
     organization = {Free University of Bozen/Bolzano},
     address = {Bolzano, Italy},
     year = {2021},
-    note = {R package version 0.1},
+    note = {R package version 0.9},
     url = {https://github.com/EnricoTomelleri/ttalkR},
   }
 
