@@ -50,7 +50,7 @@ Enrico Tomelleri}
 }
 \examples{
 %ttScrape("C0200091")
-load(file = "data/ttTestData.rda")
+load(file = "data/mydata_4D.rda")
 ttGranier(mydata_4D, "split")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

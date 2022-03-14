@@ -64,8 +64,8 @@ Enrico Tomelleri
 }
 \examples{
 %ttScrape("C0200091")
-load(file = "data/ttTestData.rda")
-ttLight(mydata_49, lat=46.453, lon=11.232, 860, "split")
+load(file = "data/mydata_49.rda")
+ttLight(mydata_49, lat=46.45, lon=11.25, 860, "split")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory (show via RShowDoc("KEYWORDS")):
