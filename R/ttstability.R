@@ -59,7 +59,8 @@ ttStability <- function(mydata_4D, plot_label){
 
   if (plot_label == "split"){
     p <- ggplot(data=df1, aes(x = Timestamp, y = phi, color=id_col_ind)) +
-      geom_point(aes(colour = id_col_ind), size = 0.2, na.rm=T)  +
+      geom_point(aes(colour = id_col_ind), size = 0.4, na.rm=T)  +
+      geom_line(aes(group = "whatever"), na.rm = TRUE) +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
       labs(x = "Timestamp", y = "phi (degrees)") +
       theme(legend.position = "none") +
@@ -68,12 +69,13 @@ ttStability <- function(mydata_4D, plot_label){
       theme(legend.position = "none") +
       theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
       ylim(quantile(phi, p = 0.01, na.rm=T), quantile(phi, p = 0.99, na.rm=T)) +
+
       geom_segment(aes(
         x = min(Timestamp, na.rm = T),
-        y = 0,
+        y = quantile(phi, p = 0.5, na.rm=T),
         xend = max(Timestamp, na.rm = T),
-        yend = 0
-      ), color = "red")
+        yend = quantile(phi, p = 0.5, na.rm=T)),
+        color = "red", alpha = 0.1, linetype = 3)
 
     print(p)
   }

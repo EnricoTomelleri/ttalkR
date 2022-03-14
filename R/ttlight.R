@@ -75,7 +75,7 @@ ttLight <- function(mydata_49, lat, lon, wavelength, plot_label){
   #"altitude" : sun altitude above the horizon in radians, e.g. 0 at the horizon and PI/2 at the zenith (straight over your head)
   #"azimuth": sun azimuth in radians (direction along the horizon,measured from south to west), e.g. 0 is south and Math.PI * 3/4 is northwest
 
-  solarGeom <-  getSunlightPosition(date= mydata_49$Timestamp, lat = lat, lon = lon)
+  solarGeom <-  suncalc::getSunlightPosition(date= mydata_49$Timestamp, lat = lat, lon = lon)
   solarGeom$altitude <- (solarGeom$altitude * 180) / (pi)
   solarGeom$azimuth <-  (solarGeom$azimuth * 180) / (pi)
 
@@ -187,13 +187,13 @@ ttLight <- function(mydata_49, lat, lon, wavelength, plot_label){
   }
 
 
-  df1 <- data.frame(specttRal_L1_all$Day, specttRal_L1_all$L860_R, specttRal_L1_all$id_col_ind)
-  colnames(df1) <- c("Timestamp", "L860_R", "id_col_ind")
+  df1 <- data.frame(specttRal_L1_all$Day, spectRal, specttRal_L1_all$id_col_ind)
+  colnames(df1) <- c("Timestamp", "wavelength", "id_col_ind")
 
   if (plot_label == "split"){
-    p <- ggplot(data = df1, aes(Timestamp, L860_R, color = id_col_ind)) +
-      geom_point(aes(group = "whatever"), size = 0.2, na.rm=T) +
-      #geom_line(aes(group = "whatever")) +
+    p <- ggplot(data = df1, aes(Timestamp, wavelength, color = id_col_ind)) +
+      geom_point(aes(group = "whatever"), size = 0.4, na.rm=T) +
+      geom_line(aes(group = "whatever"), na.rm=T) +
       facet_grid(facets = specttRal_L1_all$TT_ID ~ ., margins = FALSE) +
       #geom_smooth(colour = "gray") +
       labs(x = "Timestamp", y = expression("daily average counts/(µW/cm"^"2)")) +
@@ -201,7 +201,8 @@ ttLight <- function(mydata_49, lat, lon, wavelength, plot_label){
       scale_x_datetime(minor_breaks = ("1 week")) +
       theme(legend.position = "none") +
       theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
-      ylim(quantile(df1$L860_R, p = 0.01, na.rm=T), quantile(df1$L860_R, p = 0.99, na.rm=T))
+      ylim(min(df1$wavelength), max(df1$wavelength))
+      #ylim(quantile(df1$wavelength, p = 0.01, na.rm=T), quantile(df1$wavelength, p = 0.99, na.rm=T))
     print(p)
   }
 

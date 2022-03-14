@@ -56,8 +56,9 @@ Enrico Tomelleri
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-ttScrape("C0200091")
-ttStWC(mydata_4D, "beech", "all_in_one")
+%ttScrape("C0200091")
+load(file = "data/ttTestData.rda")
+ttStWC(mydata_4D, "spruce", "split")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory (show via RShowDoc("KEYWORDS")):

@@ -124,7 +124,7 @@ ttGranier <- function(mydata_4D, plot_label) {
   dTmax <-
     (dTon - dToff) #max(Theat_1C-Theat_0C, na.rm=T)#max(Theat_1C-Theat_0C, na.rm=T)
 
-  dTmax_out <<- data.frame(mydata_4D$Timestamp, dTmax) #pass to global environment to check dial cycle
+  #dTmax_out <<- data.frame(mydata_4D$Timestamp, dTmax) #pass to global environment to check dial cycle
   #plot(dTmax_out, col= topo.colors(24)[hour(dTmax_out$mydata_4D.Timestamp)+1])
   #legend(x = "topright",          # Position
   #            legend = c(1:24),  # Legend texts
@@ -200,7 +200,7 @@ ttGranier <- function(mydata_4D, plot_label) {
       #labs(title = site) +
       scale_x_datetime(minor_breaks = ("1 week")) +
       theme(legend.position = "none") +
-      ylim(0, 5)  #quantile(Fd, p = 0.99, na.rm=T))
+      ylim(0, 10)  #quantile(Fd, p = 0.99, na.rm=T))
       print(p)
   }
 
@@ -208,8 +208,8 @@ ttGranier <- function(mydata_4D, plot_label) {
 
   if (plot_label == "split"){
     p <- ggplot(data = df1, aes(Timestamp, Fd, color = id_col_ind)) +
-      geom_point(aes(group = "whatever"), size = 0.2, na.rm=T) +
-      #geom_line(aes(group = "whatever")) +
+      geom_point(aes(group = "whatever"), size = 0.4, na.rm=T) +
+      geom_line(aes(group = "whatever", na.rm=T)) +
       facet_grid(facets = mydata_4D$TT_ID ~ ., margins = FALSE) +
       #geom_smooth(colour = "gray") +
       #binomial_smooth(formula = y ~ splines::ns(x, 2)) +
@@ -218,7 +218,7 @@ ttGranier <- function(mydata_4D, plot_label) {
       scale_x_datetime(minor_breaks = ("1 week")) +
       theme(legend.position = "none") +
       theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
-      ylim(0, 5)  #quantile(Fd, p = 0.99, na.rm=T))
+      ylim(0, max(Fd, na.rm=T))#quantile(Fd, p = 0.99, na.rm=T))
     print(p)
   }
 

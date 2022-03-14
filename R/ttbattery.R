@@ -50,6 +50,7 @@ ttBattery <- function(mydata_4B, mydata_4D, plot_label){
         yend = 3500
       ), color = "red", na.rm=T) +
       labs(x = "Timestamp") +
+      labs(y = "Battery voltage (mV)") +
       #labs(title = site) +
       scale_x_datetime(minor_breaks = ("1 week")) +
       theme(legend.position = "none") +
@@ -66,10 +67,11 @@ ttBattery <- function(mydata_4B, mydata_4D, plot_label){
 
   if (plot_label=="split"){
     p <- ggplot2::ggplot(data=df, aes(x=HR_Timestamp_4D, y=Bat_mV, color=mydata_4D$id_col_ind)) +
-      geom_point(aes(group = "whatever"), size = 0.2, na.rm=T) +
-      #geom_line(aes(group = "whatever")) +
+      geom_point(aes(group = "whatever"), size = 0.4, na.rm=T) +
+      geom_line(aes(group = "whatever"), na.rm=T) +
       facet_grid(facets = mydata_4D$TT_ID ~ ., margins = FALSE) +
       labs(x = "Timestamp") +
+      labs(y = "Battery voltage (mV)") +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
       scale_x_datetime(minor_breaks = ("1 week")) +
       theme(legend.position = "none") +

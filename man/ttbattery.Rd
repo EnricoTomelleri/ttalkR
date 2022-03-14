@@ -54,7 +54,8 @@ TT+ user manual, Nature 4.0 (version 02/09/2020).
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-ttScrape("C0200091")
+%ttScrape("C0200091")
+load(file = "data/ttTestData.rda")
 ttBattery(mydata_4B, mydata_4D, "all_in_one")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
