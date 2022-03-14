@@ -112,8 +112,8 @@ ttGrowth <- function(mydata_4D, plot_label) { #this is a beta function
 
   if (plot_label == "split"){
     p <- ggplot(data = df1, aes(Timestamp, dendrometer, color = id_col_ind)) +
-      geom_point(aes(group = "whatever"), size = 0.2, na.rm=T) +
-      #geom_line(aes(group = "whatever")) +
+      geom_point(aes(group = "whatever"), size = 0.4, na.rm=T) +
+      geom_line(aes(group = "whatever"), na.rm=T) +
       facet_grid(facets = mydata_4D$TT_ID ~ ., margins = FALSE) +
       labs(x = "Timestamp", y = "radial growth (mm)") +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +

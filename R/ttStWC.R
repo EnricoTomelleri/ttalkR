@@ -95,8 +95,8 @@ ttStWC <- function(mydata_4D, species, plot_label){
 
   if (plot_label == "split"){
     p <- ggplot(data = df1, aes(Timestamp, StWC, color = id_col_ind)) +
-      geom_point(aes(group = "whatever"), size = 0.2, na.rm = TRUE) +
-      geom_line(aes(group = "whatever")) +
+      geom_point(aes(group = "whatever"), size = 0.4, na.rm = TRUE) +
+      geom_line(aes(group = "whatever"), na.rm = TRUE) +
       facet_grid(facets = mydata_4D$TT_ID ~ ., margins = FALSE) +
       #geom_smooth(colour = "gray") +
       labs(x = "Timestamp", y = "stem volumetric water content (g/cm3)") +

@@ -52,29 +52,32 @@ ttTair <- function(mydata_4D, plot_label) {
     print(p)
   }
 
+  df1 <- data.frame(mydata_4D$Timestamp, mydata_4D$Tair/10, mydata_4D$id_col_ind)
+  colnames(df1) <- c("Timestamp", "Tair", "id_col_ind")
 
   if (plot_label == "split"){
-    p <- ggplot(data=df1, aes(x = HR_Timestamp_4D, y = Tair, color=mydata_4D$id_col_ind)) +
-      #geom_line(data=df1, aes(HR_Timestamp_4D, Tair/10), color = "grey") +
-      geom_point(aes(colour = mydata_4D$id_col_ind), size = 0.2, na.rm=T)  +
-      scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
-      labs(x = "Timestamp", y = "Tair (°C)") +
-      theme(legend.position = "none") +
-      scale_x_datetime(minor_breaks=("1 week")) +
+    p <- ggplot(data = df1, aes(Timestamp, Tair, color = id_col_ind)) +
+      geom_point(aes(group = "whatever"), size = 0.4, na.rm = TRUE) +
+      geom_line(aes(group = "whatever"), na.rm = TRUE) +
       facet_grid(facets = mydata_4D$TT_ID ~ ., margins = FALSE) +
+      #geom_smooth(colour = "gray") +
+      labs(x = "Timestamp", y = "Tair (°C)") +
+      scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
+      scale_x_datetime(minor_breaks = ("1 week")) +
       theme(legend.position = "none") +
       theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
-      ylim(-20, 40) +
+      ylim(-10, max(df1$Tair, na.rm=T)) +
+
       geom_segment(aes(
-        x = min(HR_Timestamp_4D, na.rm = T),
+        x = min(Timestamp, na.rm = T),
         y = 0,
-        xend = max(HR_Timestamp_4D, na.rm = T),
+        xend = max(Timestamp, na.rm = T),
         yend = 0
       ), color = "blue", alpha = 0.1, linetype = 3) +
       geom_segment(aes(
-        x = min(HR_Timestamp_4D, na.rm = T),
+        x = min(Timestamp, na.rm = T),
         y = 35,
-        xend = max(HR_Timestamp_4D, na.rm = T),
+        xend = max(Timestamp, na.rm = T),
         yend = 35
       ), color = "red", alpha = 0.1, linetype = 3)
 
@@ -127,7 +130,7 @@ ttRH <- function(mydata_4D, plot_label) {
   if (plot_label == "all_in_one"){
     p <- ggplot(data=df1, aes(x = HR_Timestamp_4D, y = RH, color=mydata_4D$id_col_ind)) +
       #geom_line(data=df1, aes(HR_Timestamp_4D, Tair/10), color = "grey") +
-      geom_point(aes(colour = mydata_4D$id_col_ind), size = 0.2, na.rm=T) +
+      geom_point(aes(colour = mydata_4D$id_col_ind), size = 0.4, na.rm=T) +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
       labs(x = "Timestamp", y = expression("RH (%)")) +
       #labs(title = site) +
@@ -144,18 +147,21 @@ ttRH <- function(mydata_4D, plot_label) {
   }
 
 
+  df1 <- data.frame(mydata_4D$Timestamp, mydata_4D$RH, mydata_4D$id_col_ind)
+  colnames(df1) <- c("Timestamp", "RH", "id_col_ind")
+
   if (plot_label == "split"){
-    p <- ggplot(data=df1, aes(x = HR_Timestamp_4D, y = RH, color=mydata_4D$id_col_ind)) +
-      #geom_line(data=df1, aes(HR_Timestamp_4D, Tair/10), color = "grey") +
-      geom_point(aes(colour = mydata_4D$id_col_ind), size = 0.2, na.rm=T)  +
-      scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
-      labs(x = "Timestamp", y = expression("RH (%)")) +
-      theme(legend.position = "none") +
-      scale_x_datetime(minor_breaks=("1 week")) +
+    p <- ggplot(data = df1, aes(Timestamp, RH, color = id_col_ind)) +
+      geom_point(aes(group = "whatever"), size = 0.4, na.rm = TRUE) +
+      geom_line(aes(group = "whatever"), na.rm = TRUE) +
       facet_grid(facets = mydata_4D$TT_ID ~ ., margins = FALSE) +
+      #geom_smooth(colour = "gray") +
+      labs(x = "Timestamp", y = "stem volumetric water content (g/cm3)") +
+      scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
+      scale_x_datetime(minor_breaks = ("1 week")) +
       theme(legend.position = "none") +
       theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
-      ylim(0, 120)
+      ylim(min(df1$RH, na.rm=T), max(df1$RH, na.rm=T))
 
     print(p)
   }

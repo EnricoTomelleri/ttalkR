@@ -63,8 +63,9 @@ Enrico Tomelleri
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-ttScrape("C0200091")
-ttLight(mydata_49, lat=46.453, lon=11.232, 860, "all_in_one")
+%ttScrape("C0200091")
+load(file = "data/ttTestData.rda")
+ttLight(mydata_49, lat=46.453, lon=11.232, 860, "split")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory (show via RShowDoc("KEYWORDS")):

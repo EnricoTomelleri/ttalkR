@@ -26,10 +26,10 @@ days to be analyzed from the end of measurements. "all" doesn't subset the times
 }
 \value{
 the function returns data frames of type:
-mydata_4B: general sensors of each treetalker connected to this ttcloud
-mydata_49: treetalkers and ttR spectrometers' data
-mydata_4D: ttcloud data
-mydata_4C: RSSI radio signal strenght between TT1 & TTcloud
+mydata_4B: ttcloud data including records to be set, TTcloud battery level and GSM field
+mydata_49: spectrometers' data for each TreeTalker
+mydata_4D: data from sensors of each TreeTalker connected to the TTcloud
+mydata_4C: RSSI radio signal strenght between the TreeTalkers and the TTcloud
 }
 \references{
 %% ~put references to the literature/web site here ~
