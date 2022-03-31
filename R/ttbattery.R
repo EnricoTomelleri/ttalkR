@@ -63,6 +63,7 @@ ttBattery <- function(mydata_4B, mydata_4D, plot_label){
     #       units = c("in"),
     #       dpi = 300)
     print(p)
+    p_ttBattery <<- p
   }
 
   if (plot_label=="split"){

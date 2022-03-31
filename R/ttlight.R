@@ -204,6 +204,7 @@ ttLight <- function(mydata_49, lat, lon, wavelength, plot_label){
       ylim(min(df1$wavelength), max(df1$wavelength))
       #ylim(quantile(df1$wavelength, p = 0.01, na.rm=T), quantile(df1$wavelength, p = 0.99, na.rm=T))
     print(p)
+    p_ttLight <<- p
   }
 
   if (plot_label == "none"){}

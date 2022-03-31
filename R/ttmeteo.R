@@ -82,6 +82,7 @@ ttTair <- function(mydata_4D, plot_label) {
       ), color = "red", alpha = 0.1, linetype = 3)
 
     print(p)
+    p_ttTair <<- p
   }
 
   if (plot_label == "none"){}
@@ -119,12 +120,36 @@ ttRH <- function(mydata_4D, plot_label) {
   }
 
 
+  #esclude unreliable values
+  mydata_4D$RH[mydata_4D$RH>120] <- NA
+  mydata_4D$RH[mydata_4D$RH<20] <- NA
+
+  RH <- mydata_4D$RH
+
+  ID <- unique(mydata_4D$TT_ID)
+  for (j in 1:(length(ID))) {
+    ts <- RH[mydata_4D$TT_ID == ID[j]]
+    if (length(ts) < 11) {
+      next()
+    }
+    #Replace missing values in time-series data by interpolation (max gap = 24 hours).
+    ts_filt <-
+      baytrends::fillMissing(ts,
+                             span = 24,
+                             Dates = NULL,
+                             max.fill = 12)#gapfillSSA(series = ts, plot.results = FALSE, open.plot = FALSE)
+    #ts_filt <- ts_filt[[1]]
+    #apply a hampel filter
+    #ts_filt <- hampel(ts_filt, 24, 3)
+    RH[mydata_4D$TT_ID == ID[j]] <- ts_filt[1:length(ts)]
+
+  }
 
 
 
   #create a data frame for plotting
-  df <- data.frame(HR_Timestamp_4D, mydata_4D$RH, mydata_4D$id_col_ind)
-  df1 <- data.frame(HR_Timestamp_4D, mydata_4D$RH); colnames(df1) <- c("HR_Timestamp_4B", "RH")
+  df <- data.frame(HR_Timestamp_4D, RH, mydata_4D$id_col_ind)
+  df1 <- data.frame(HR_Timestamp_4D, RH); colnames(df1) <- c("HR_Timestamp_4B", "RH")
 
 
   if (plot_label == "all_in_one"){
@@ -164,6 +189,7 @@ ttRH <- function(mydata_4D, plot_label) {
       ylim(min(df1$RH, na.rm=T), max(df1$RH, na.rm=T))
 
     print(p)
+    p_ttRH <<- p
   }
 
   if (plot_label == "none"){}
