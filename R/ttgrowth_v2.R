@@ -123,6 +123,7 @@ ttGrowth <- function(mydata_4D, plot_label) { #this is a beta function
       #ylim(0,3)
       ylim(quantile(df1$dendrometer, p = 0.01, na.rm=T), quantile(df1$dendrometer, p = 0.90, na.rm=T))
     print(p)
+    p_ttGrowth <<- p
   }
 
   if (plot_label == "none"){}

@@ -78,6 +78,7 @@ ttStability <- function(mydata_4D, plot_label){
         color = "red", alpha = 0.1, linetype = 3)
 
     print(p)
+    p_ttStability <<- p
   }
 
   if (plot_label == "none"){}

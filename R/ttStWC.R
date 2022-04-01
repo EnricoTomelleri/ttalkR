@@ -106,6 +106,7 @@ ttStWC <- function(mydata_4D, species, plot_label){
       theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
       ylim(0, quantile(StWC, p = 0.99, na.rm=T))
     print(p)
+    p_ttStWC <<- p
   }
 
   if (plot_label == "none"){}

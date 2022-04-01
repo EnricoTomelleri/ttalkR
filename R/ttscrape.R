@@ -34,6 +34,7 @@ ttScrape <- function(ID, subset_days) {
                                  header = FALSE,
                                  fill = TRUE,
                                  integer64="numeric")
+    #mydata0
     flag0 <- 1
   } else {flag0 <- 0}
 
@@ -42,7 +43,7 @@ ttScrape <- function(ID, subset_days) {
     paste("http://ittn.altervista.org/", ID, "/ttcloud.txt", sep = "")
   #Reading the HTML code from the website
 
-
+  #if (ID == "C0200096"){skip=400}else{skip=0}
   if (RCurl::url.exists(url)==T){
     #mydata1 <- read.csv(url,
     #                    sep = ";",
@@ -52,6 +53,7 @@ ttScrape <- function(ID, subset_days) {
                                  sep = ";",
                                  header = FALSE,
                                  fill = TRUE,
+                                 #skip = skip,
                                  integer64="numeric")
 
     flag1 <- 1
@@ -291,10 +293,10 @@ ttScrape <- function(ID, subset_days) {
     tt_begin <- mydata_4D$Timestamp[length(mydata_4D$Timestamp)] - (24*60*60*subset_days)
     #tt_end <- mydata_4D$Timestamp[length(mydata_4D$Timestamp)]
     mydata_4D <- mydata_4D[mydata_4D$Timestamp > tt_begin,]
-    mydata_4D <<- mydata_4D[is.na(mydata_4D$Timestamp) == FALSE,] #remove NAs
+    mydata_4D <- mydata_4D[is.na(mydata_4D$Timestamp) == FALSE,] #remove NAs
   } else {mydata_4D <<- mydata_4D}
   mydata_4D <- mydata_4D %>% drop_na(Timestamp, TT_ID)
-  mydata_4D <<- mydata_4D %>% distinct(TT_ID, Timestamp, .keep_all = TRUE)#remove duplicates
+  mydata_4D <- mydata_4D %>% distinct(TT_ID, Timestamp, .keep_all = TRUE)#remove duplicates
   .GlobalEnv$mydata_4D <- mydata_4D
 
   if (subset_days != "all"){
