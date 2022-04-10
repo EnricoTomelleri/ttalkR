@@ -250,7 +250,13 @@ ttScrape <- function(ID, subset_days) {
   mydata_49$TT_ID <- as.integer(mydata_49$TT_ID)
 
   mydata_4B$TT_ID <- substr(mydata_4B$TT_ID, 2, 8) #remove the "C" from the IDs
-  mydata_4B$TT_ID <- as.integer(mydata_4B$TT_ID);
+  mydata_4B$TT_ID <- as.integer(mydata_4B$TT_ID)
+  mydata_4B$Acc_Recs <- as.integer(mydata_4B$Acc_Recs)
+  mydata_4B$MCC_tel_op <- as.integer(mydata_4B$MCC_tel_op)
+  mydata_4B$MNC_tel_op <- as.integer(mydata_4B$MCC_tel_op )
+  mydata_4B$GSM_reg <- as.integer(mydata_4B$GSM_reg)
+  mydata_4B$GSM_field <- as.integer(mydata_4B$GSM_field)
+  mydata_4B$Battery <- as.integer(mydata_4B$Battery)
 
   mydata_4C$TT_ID <- substr(mydata_4C$TT_ID, 2, 8) #remove the "C" from the IDs
   mydata_4C$TT_ID <- as.integer(mydata_4C$TT_ID);
@@ -294,7 +300,7 @@ ttScrape <- function(ID, subset_days) {
     #tt_end <- mydata_4D$Timestamp[length(mydata_4D$Timestamp)]
     mydata_4D <- mydata_4D[mydata_4D$Timestamp > tt_begin,]
     mydata_4D <- mydata_4D[is.na(mydata_4D$Timestamp) == FALSE,] #remove NAs
-  } else {mydata_4D <<- mydata_4D}
+  } else {mydata_4D <- mydata_4D}
   mydata_4D <- mydata_4D %>% drop_na(Timestamp, TT_ID)
   mydata_4D <- mydata_4D %>% distinct(TT_ID, Timestamp, .keep_all = TRUE)#remove duplicates
   .GlobalEnv$mydata_4D <- mydata_4D
