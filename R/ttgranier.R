@@ -196,7 +196,7 @@ ttGranier <- function(mydata_4D, plot_label) {
       #geom_smooth() +
       #geom_ma(ma_fun = SMA, n = 1000, color = "red") +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
-      labs(x = "Timestamp", y = "sap flow (g m-2 s-1)") +
+      labs(x = "Timestamp", y = "sap flow density (l dm-2 h-1)") +
       #labs(title = site) +
       scale_x_datetime(minor_breaks = ("1 week")) +
       theme(legend.position = "none") +
@@ -213,7 +213,7 @@ ttGranier <- function(mydata_4D, plot_label) {
       facet_grid(facets = mydata_4D$TT_ID ~ ., margins = FALSE) +
       #geom_smooth(colour = "gray") +
       #binomial_smooth(formula = y ~ splines::ns(x, 2)) +
-      labs(x = "Timestamp", y = "sap flow (g m-2 s-1)") +
+      labs(x = "Timestamp", y = "sap flow density (l dm-2 h-1)") +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
       scale_x_datetime(minor_breaks = ("1 week")) +
       theme(legend.position = "none") +
