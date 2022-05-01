@@ -16,17 +16,17 @@ citation("ttalkR")
 
 Enrico Tomelleri (2021)
 ttalkR: unified pre-processing of TreeTalker data 
-R package version 0.9
+R package version 1.0.0
 
 A BibTeX entry for LaTeX users is
 
   @Manual{,
-    title = {{ttalkR}: A unified processing workflow for standardising treetalkers data across large networks },
+    title = {{ttalkR}: Toward a unified TreeTalker data curation process},
     author = {Enrico Tomelleri},
     organization = {Free University of Bozen/Bolzano},
     address = {Bolzano, Italy},
     year = {2021},
-    note = {R package version 0.9},
+    note = {R package version 1.0.0},
     url = {https://github.com/EnricoTomelleri/ttalkR},
   }
 
