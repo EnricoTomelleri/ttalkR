@@ -201,8 +201,8 @@ ttLight <- function(mydata_49, lat, lon, wavelength, plot_label){
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
       scale_x_datetime(minor_breaks = ("1 week")) +
       theme(legend.position = "none") +
-      #theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
-      theme(strip.text.y = element_blank()) + #added for the ttalkR manuscript
+      theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
+      #theme(strip.text.y = element_blank()) + #added for the ttalkR manuscript
       ylim(min(df1$wavelength), max(df1$wavelength))
       #ylim(quantile(df1$wavelength, p = 0.01, na.rm=T), quantile(df1$wavelength, p = 0.99, na.rm=T))
     print(p)

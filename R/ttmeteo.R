@@ -66,8 +66,8 @@ ttTair <- function(mydata_4D, plot_label) {
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
       scale_x_datetime(minor_breaks = ("1 week")) +
       theme(legend.position = "none") +
-      #theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
-      theme(strip.text.y = element_blank()) + #added for the ttalkR manuscript
+      theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
+      #theme(strip.text.y = element_blank()) + #added for the ttalkR manuscript
       ylim(-10, 40) + #max(df1$Tair, na.rm=T)) +
 
       geom_segment(aes(
@@ -187,8 +187,8 @@ ttRH <- function(mydata_4D, plot_label) {
       labs(x = element_blank(), y = "RH (%)") +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
       scale_x_datetime(minor_breaks = ("1 week")) +
-      theme(legend.position = "none") +
-      #theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
+      #theme(legend.position = "none") +
+      theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
       theme(strip.text.y = element_blank()) + #added for the ttalkR manuscript
       ylim(min(df1$RH, na.rm=T), max(df1$RH, na.rm=T))
 

@@ -124,8 +124,8 @@ ttGrowth_daily <- function(mydata_4D, plot_label) { #this is a beta function
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
       scale_x_datetime(minor_breaks = ("1 week")) +
       theme(legend.position = "none") +
-      #theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
-      theme(strip.text.y = element_blank()) + #added for the ttalkR manuscript
+      theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
+      #theme(strip.text.y = element_blank()) + #added for the ttalkR manuscript
       #ylim(0,3)
       ylim(quantile(df1$dendrometer, p = 0.01, na.rm=T), quantile(df1$dendrometer, p = 0.90, na.rm=T))
     print(p)
