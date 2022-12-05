@@ -9,7 +9,7 @@ Mode <- function(x) {
 
 #' @export
 
-ttGrowth <- function(mydata_4D, plot_label) { #this is a beta function
+ttGrowth_daily <- function(mydata_4D, plot_label) { #this is a beta function
   #example call ttGrowth(mydata_4D, "all_in_one")
 
   #load required packages
@@ -42,8 +42,8 @@ ttGrowth <- function(mydata_4D, plot_label) { #this is a beta function
 
 
   #create a time index for the temporal averaging
-  time_index <- paste0(year(mydata_4D$Timestamp), sprintf("%03d", week(mydata_4D$Timestamp)))
-  mydata_4D$YYYYww <-  time_index
+  time_index <- paste0(year(mydata_4D$Timestamp), sprintf("%03d", day(mydata_4D$Timestamp)))
+  mydata_4D$YYYYww <-  mydata_4D$Timestamp#time_index
 
 
 

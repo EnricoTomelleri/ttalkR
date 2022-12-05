@@ -213,11 +213,13 @@ ttGranier <- function(mydata_4D, plot_label) {
       facet_grid(facets = mydata_4D$TT_ID ~ ., margins = FALSE) +
       #geom_smooth(colour = "gray") +
       #binomial_smooth(formula = y ~ splines::ns(x, 2)) +
-      labs(x = "Timestamp", y = "sap flow density (l dm-2 h-1)") +
+      #labs(x = "Timestamp", y = "sap flow density (l dm-2 h-1)") +
+      labs(x = element_blank(), y = "sap flow density (l dm-2 h-1)") +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
       scale_x_datetime(minor_breaks = ("1 week")) +
       theme(legend.position = "none") +
-      theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
+      #theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
+      theme(strip.text.y = element_blank()) + #added for the ttalkR manuscript
       ylim(0, max(Fd, na.rm=T))#quantile(Fd, p = 0.99, na.rm=T))
     print(p)
     p_ttGranier <<- p

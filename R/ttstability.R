@@ -62,12 +62,14 @@ ttStability <- function(mydata_4D, plot_label){
       geom_point(aes(colour = id_col_ind), size = 0.4, na.rm=T)  +
       geom_line(aes(group = "whatever"), na.rm = TRUE) +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
-      labs(x = "Timestamp", y = "phi (degrees)") +
+      #labs(x = "Timestamp", y = "phi (degrees)") +
+      labs(x = element_blank(), y = "phi (degrees)") +
       theme(legend.position = "none") +
       scale_x_datetime(minor_breaks=("1 week")) +
       facet_grid(facets = mydata_4D$TT_ID ~ ., margins = FALSE) +
       theme(legend.position = "none") +
-      theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
+      #theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
+      theme(strip.text.y = element_blank()) + #added for the ttalkR manuscript
       ylim(quantile(phi, p = 0.01, na.rm=T), quantile(phi, p = 0.99, na.rm=T)) +
 
       geom_segment(aes(
@@ -75,7 +77,7 @@ ttStability <- function(mydata_4D, plot_label){
         y = quantile(phi, p = 0.5, na.rm=T),
         xend = max(Timestamp, na.rm = T),
         yend = quantile(phi, p = 0.5, na.rm=T)),
-        color = "red", alpha = 0.1, linetype = 3)
+        color = "black", alpha = 0.1, linetype = 3)
 
     print(p)
     p_ttStability <<- p
