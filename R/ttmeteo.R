@@ -7,7 +7,7 @@
 ttTair <- function(mydata_4D, plot_label) {
 
   #load required packages
-  usethis::use_package("ggplot2")
+  library(ggplot2)
 
   HR_Timestamp_4D <- mydata_4D$Timestamp#as.POSIXct(mydata_4D$Timestamp, origin="1970-01-01")
 
@@ -61,11 +61,13 @@ ttTair <- function(mydata_4D, plot_label) {
       geom_line(aes(group = "whatever"), na.rm = TRUE) +
       facet_grid(facets = mydata_4D$TT_ID ~ ., margins = FALSE) +
       #geom_smooth(colour = "gray") +
-      labs(x = "Timestamp", y = "Tair (°C)") +
+      #labs(x = "Timestamp", y = "Tair (°C)") +
+      labs(x = element_blank(), y = "Tair (°C)") +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
       scale_x_datetime(minor_breaks = ("1 week")) +
       theme(legend.position = "none") +
-      theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
+      #theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
+      theme(strip.text.y = element_blank()) + #added for the ttalkR manuscript
       ylim(-10, 40) + #max(df1$Tair, na.rm=T)) +
 
       geom_segment(aes(
@@ -181,11 +183,13 @@ ttRH <- function(mydata_4D, plot_label) {
       geom_line(aes(group = "whatever"), na.rm = TRUE) +
       facet_grid(facets = mydata_4D$TT_ID ~ ., margins = FALSE) +
       #geom_smooth(colour = "gray") +
-      labs(x = "Timestamp", y = "RH (%)") +
+      #labs(x = "Timestamp", y = "RH (%)") +
+      labs(x = element_blank(), y = "RH (%)") +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
       scale_x_datetime(minor_breaks = ("1 week")) +
       theme(legend.position = "none") +
-      theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
+      #theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
+      theme(strip.text.y = element_blank()) + #added for the ttalkR manuscript
       ylim(min(df1$RH, na.rm=T), max(df1$RH, na.rm=T))
 
     print(p)

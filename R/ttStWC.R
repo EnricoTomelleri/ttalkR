@@ -99,11 +99,13 @@ ttStWC <- function(mydata_4D, species, plot_label){
       geom_line(aes(group = "whatever"), na.rm = TRUE) +
       facet_grid(facets = mydata_4D$TT_ID ~ ., margins = FALSE) +
       #geom_smooth(colour = "gray") +
-      labs(x = "Timestamp", y = "stem volumetric water content (g/cm3)") +
+      #labs(x = "Timestamp", y = "stem volumetric water content (g/cm3)") +
+      labs(x = element_blank(), y = "stem volumetric water content (g/cm3)") +
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
       scale_x_datetime(minor_breaks = ("1 week")) +
       theme(legend.position = "none") +
-      theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
+      #theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
+      theme(strip.text.y = element_blank()) + #added for the ttalkR manuscript
       ylim(0, quantile(StWC, p = 0.99, na.rm=T))
     print(p)
     p_ttStWC <<- p

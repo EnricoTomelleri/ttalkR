@@ -1,0 +1,1247 @@
+{
+	"tables": {
+		"0c20dfc7-abaf-4bfb-8c51-f86d9ec4c7c6": {
+			"lines": [],
+			"tabletype": "na",
+			"collation": "",
+			"charset": "",
+			"rowformat": "na",
+			"paranoid": false,
+			"database": "",
+			"initautoinc": "",
+			"timestamps": false,
+			"version": false,
+			"embeddable": false,
+			"background": "#03a9f4",
+			"objectType": "table",
+			"generate": true,
+			"generateCustomCode": true,
+			"estimatedSize": "",
+			"id": "0c20dfc7-abaf-4bfb-8c51-f86d9ec4c7c6",
+			"name": "df_ttBattery",
+			"visible": true,
+			"desc": "",
+			"cols": [
+				{
+					"id": "28c4324e-947e-4e9f-95f3-f9b3d17e7e30",
+					"name": "Timestamp",
+					"datatype": "REAL",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				},
+				{
+					"id": "a9f867f8-72a1-40f3-9315-81db505db92f",
+					"name": "Bat_mV",
+					"datatype": "REAL",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				},
+				{
+					"id": "8e24bf5f-2af9-4eb7-af1c-6bcd756aa7d0",
+					"name": "TT_ID",
+					"datatype": "INTEGER",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				}
+			],
+			"relations": [],
+			"keys": [
+				{
+					"id": "45511ab5-d581-4282-8db2-0cf55715b77d",
+					"name": "Primary key",
+					"isPk": true,
+					"using": "na",
+					"cols": []
+				}
+			],
+			"indexes": [],
+			"afterScript": " ",
+			"sqlite": {
+				"withoutrowid": false
+			}
+		},
+		"d32bcacc-2fdc-45b2-af68-57761ec64c41": {
+			"lines": [],
+			"tabletype": "na",
+			"collation": "",
+			"charset": "",
+			"rowformat": "na",
+			"paranoid": false,
+			"database": "",
+			"initautoinc": "",
+			"timestamps": false,
+			"version": false,
+			"embeddable": false,
+			"background": "#03a9f4",
+			"objectType": "table",
+			"generate": true,
+			"generateCustomCode": true,
+			"estimatedSize": "",
+			"id": "d32bcacc-2fdc-45b2-af68-57761ec64c41",
+			"name": "df_ttGranier",
+			"visible": true,
+			"desc": "",
+			"cols": [
+				{
+					"id": "f29d241d-3c41-4407-b343-50c324dd4a34",
+					"name": "Timestamp",
+					"datatype": "REAL",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				},
+				{
+					"id": "be089f6a-ba10-47b4-83e7-9d82dfd16334",
+					"name": "Fd",
+					"datatype": "REAL",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				},
+				{
+					"id": "a5837c1f-51b3-487a-a9aa-86b78573ed3f",
+					"name": "TT_ID",
+					"datatype": "INTEGER",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				}
+			],
+			"relations": [],
+			"keys": [
+				{
+					"id": "b5e922aa-aec6-4610-acc1-08fba26cddda",
+					"name": "Primary key",
+					"isPk": true,
+					"using": "na",
+					"cols": []
+				}
+			],
+			"indexes": [],
+			"afterScript": " ",
+			"sqlite": {
+				"withoutrowid": false
+			}
+		},
+		"cc9299ca-fe48-4aad-89a0-1a2476512707": {
+			"lines": [],
+			"tabletype": "na",
+			"collation": "",
+			"charset": "",
+			"rowformat": "na",
+			"paranoid": false,
+			"database": "",
+			"initautoinc": "",
+			"timestamps": false,
+			"version": false,
+			"embeddable": false,
+			"background": "#03a9f4",
+			"objectType": "table",
+			"generate": true,
+			"generateCustomCode": true,
+			"estimatedSize": "",
+			"id": "cc9299ca-fe48-4aad-89a0-1a2476512707",
+			"name": "df_ttLight",
+			"visible": true,
+			"desc": "",
+			"cols": [
+				{
+					"id": "a9291d21-6e58-4cef-9212-15a80c4a8cf9",
+					"name": "Day",
+					"datatype": "REAL",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				},
+				{
+					"id": "7a1c342e-4dd5-45e6-87d0-d9147e5f798e",
+					"name": "L450_R",
+					"datatype": "REAL",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				},
+				{
+					"id": "0b12223c-1491-430b-b58b-d855bda9f989",
+					"name": "L500_R",
+					"datatype": "REAL",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				},
+				{
+					"id": "9b220323-9904-4304-9359-7cfa2d075c25",
+					"name": "L550_R",
+					"datatype": "REAL",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				},
+				{
+					"id": "e3f3f668-8a60-4056-abda-ee3e3789f2b2",
+					"name": "L570_R",
+					"datatype": "REAL",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				},
+				{
+					"id": "b95c5a77-2a84-47aa-a662-ac0c9f28678b",
+					"name": "L600_R",
+					"datatype": "REAL",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				},
+				{
+					"id": "2e5eba88-440c-4fb9-9e9a-c125cb7a76b3",
+					"name": "L650_R",
+					"datatype": "REAL",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				},
+				{
+					"id": "ad5e2ba4-ebc1-4e7f-b8e1-bc4be611c18f",
+					"name": "L610_R",
+					"datatype": "REAL",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				},
+				{
+					"id": "89cd5111-ca52-4c20-9453-b4874a832127",
+					"name": "L680_R",
+					"datatype": "REAL",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				},
+				{
+					"id": "55d038f7-f292-4ed8-9fe9-965f6d82cdf9",
+					"name": "L730_R",
+					"datatype": "REAL",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				},
+				{
+					"id": "a91a2ed8-ecc9-4aca-949f-4b60e91d97f1",
+					"name": "L760_R",
+					"datatype": "REAL",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				},
+				{
+					"id": "d9210964-8c6b-4bca-b636-64a4b1687041",
+					"name": "L810_R",
+					"datatype": "REAL",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				},
+				{
+					"id": "1149c9d1-7fb4-4754-901f-ffa22eefea53",
+					"name": "L860_R",
+					"datatype": "REAL",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				},
+				{
+					"id": "f69b7ccf-0b13-4d95-a93c-766d37410201",
+					"name": "TT_ID",
+					"datatype": "INTEGER",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				}
+			],
+			"relations": [],
+			"keys": [
+				{
+					"id": "920363b0-bb57-4d1b-8cd4-373c1b0d0322",
+					"name": "Primary key",
+					"isPk": true,
+					"using": "na",
+					"cols": []
+				}
+			],
+			"indexes": [],
+			"afterScript": " ",
+			"sqlite": {
+				"withoutrowid": false
+			}
+		},
+		"72da72ec-f887-4704-834b-1c6ac858b2fe": {
+			"lines": [],
+			"tabletype": "na",
+			"collation": "",
+			"charset": "",
+			"rowformat": "na",
+			"paranoid": false,
+			"database": "",
+			"initautoinc": "",
+			"timestamps": false,
+			"version": false,
+			"embeddable": false,
+			"background": "#03a9f4",
+			"objectType": "table",
+			"generate": true,
+			"generateCustomCode": true,
+			"estimatedSize": "",
+			"id": "72da72ec-f887-4704-834b-1c6ac858b2fe",
+			"name": "df_ttRH",
+			"visible": true,
+			"desc": "",
+			"cols": [
+				{
+					"id": "a10dac88-366a-4592-867a-d79e5695f52d",
+					"name": "Timestamp",
+					"datatype": "REAL",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				},
+				{
+					"id": "4f3703c7-b5f5-494e-8aa3-29e4c7638269",
+					"name": "RH",
+					"datatype": "REAL",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				},
+				{
+					"id": "aa0b87c9-31b5-4d89-a57b-bf57f3980e6b",
+					"name": "TT_ID",
+					"datatype": "INTEGER",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				}
+			],
+			"relations": [],
+			"keys": [
+				{
+					"id": "eafabbfd-e67f-419d-8e31-8da13b5a4b55",
+					"name": "Primary key",
+					"isPk": true,
+					"using": "na",
+					"cols": []
+				}
+			],
+			"indexes": [],
+			"afterScript": " ",
+			"sqlite": {
+				"withoutrowid": false
+			}
+		},
+		"86dd0e0e-d4e4-4e89-993b-913ac72e0230": {
+			"lines": [],
+			"tabletype": "na",
+			"collation": "",
+			"charset": "",
+			"rowformat": "na",
+			"paranoid": false,
+			"database": "",
+			"initautoinc": "",
+			"timestamps": false,
+			"version": false,
+			"embeddable": false,
+			"background": "#03a9f4",
+			"objectType": "table",
+			"generate": true,
+			"generateCustomCode": true,
+			"estimatedSize": "",
+			"id": "86dd0e0e-d4e4-4e89-993b-913ac72e0230",
+			"name": "df_ttStability",
+			"visible": true,
+			"desc": "",
+			"cols": [
+				{
+					"id": "502adc28-5722-44c9-8637-565ca98e6b7e",
+					"name": "Timestamp",
+					"datatype": "REAL",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				},
+				{
+					"id": "be4a012e-b920-449d-b931-400d51cd59fe",
+					"name": "phi",
+					"datatype": "REAL",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				},
+				{
+					"id": "daac8545-cc0e-40bf-8b18-ccc863eaa407",
+					"name": "TT_ID",
+					"datatype": "INTEGER",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				}
+			],
+			"relations": [],
+			"keys": [
+				{
+					"id": "bf96fe7b-443d-4a59-8e3d-d4abf8948ec9",
+					"name": "Primary key",
+					"isPk": true,
+					"using": "na",
+					"cols": []
+				}
+			],
+			"indexes": [],
+			"afterScript": " ",
+			"sqlite": {
+				"withoutrowid": false
+			}
+		},
+		"21bf7301-d03b-4933-af38-496e74fee756": {
+			"lines": [],
+			"tabletype": "na",
+			"collation": "",
+			"charset": "",
+			"rowformat": "na",
+			"paranoid": false,
+			"database": "",
+			"initautoinc": "",
+			"timestamps": false,
+			"version": false,
+			"embeddable": false,
+			"background": "#03a9f4",
+			"objectType": "table",
+			"generate": true,
+			"generateCustomCode": true,
+			"estimatedSize": "",
+			"id": "21bf7301-d03b-4933-af38-496e74fee756",
+			"name": "df_ttStWC",
+			"visible": true,
+			"desc": "",
+			"cols": [
+				{
+					"id": "24f65a88-1dcf-4bb0-a818-ed92868c9031",
+					"name": "Timestamp",
+					"datatype": "REAL",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				},
+				{
+					"id": "8e556aa5-8a88-4883-9543-f4039ee52daf",
+					"name": "StWC",
+					"datatype": "REAL",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				},
+				{
+					"id": "3257892c-5510-4418-af66-739c29f5543b",
+					"name": "TT_ID",
+					"datatype": "INTEGER",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				}
+			],
+			"relations": [],
+			"keys": [
+				{
+					"id": "07b32482-ad17-4f5d-bc5d-c86bbfc0979e",
+					"name": "Primary key",
+					"isPk": true,
+					"using": "na",
+					"cols": []
+				}
+			],
+			"indexes": [],
+			"afterScript": " ",
+			"sqlite": {
+				"withoutrowid": false
+			}
+		},
+		"e30296b0-4bbf-4b34-adc1-5b4df6af8f42": {
+			"lines": [],
+			"tabletype": "na",
+			"collation": "",
+			"charset": "",
+			"rowformat": "na",
+			"paranoid": false,
+			"database": "",
+			"initautoinc": "",
+			"timestamps": false,
+			"version": false,
+			"embeddable": false,
+			"background": "#03a9f4",
+			"objectType": "table",
+			"generate": true,
+			"generateCustomCode": true,
+			"estimatedSize": "",
+			"id": "e30296b0-4bbf-4b34-adc1-5b4df6af8f42",
+			"name": "df_ttTair",
+			"visible": true,
+			"desc": "",
+			"cols": [
+				{
+					"id": "4837ab47-0e33-446c-a6bf-8e5ec9ad0118",
+					"name": "Timestamp",
+					"datatype": "REAL",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				},
+				{
+					"id": "f374a0c0-eecb-4fab-8e87-25404f5dc097",
+					"name": "Tair",
+					"datatype": "REAL",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				},
+				{
+					"id": "1603a838-0e2b-4e3f-9f5b-cf2afc2d5a9e",
+					"name": "TT_ID",
+					"datatype": "INTEGER",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				}
+			],
+			"relations": [],
+			"keys": [
+				{
+					"id": "ec454925-da41-4d3e-a1ba-e37f36c66e76",
+					"name": "Primary key",
+					"isPk": true,
+					"using": "na",
+					"cols": []
+				}
+			],
+			"indexes": [],
+			"afterScript": " ",
+			"sqlite": {
+				"withoutrowid": false
+			}
+		},
+		"00a2753f-4eff-4dc1-9d05-9045a8d682b0": {
+			"lines": [],
+			"tabletype": "na",
+			"collation": "",
+			"charset": "",
+			"rowformat": "na",
+			"paranoid": false,
+			"database": "",
+			"initautoinc": "",
+			"timestamps": false,
+			"version": false,
+			"embeddable": false,
+			"background": "#03a9f4",
+			"objectType": "table",
+			"generate": true,
+			"generateCustomCode": true,
+			"estimatedSize": "",
+			"id": "00a2753f-4eff-4dc1-9d05-9045a8d682b0",
+			"name": "df_ttGrowth",
+			"visible": true,
+			"desc": "",
+			"cols": [
+				{
+					"id": "02f39d1f-4b4f-4402-bfb2-fb707a8ba623",
+					"name": "Timestamp",
+					"datatype": "REAL",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				},
+				{
+					"id": "cc4b9c68-5fc6-4d0f-a0a8-c5c1cac9d3e0",
+					"name": "phi",
+					"datatype": "REAL",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				},
+				{
+					"id": "00556391-740e-4396-9255-2a0534a1029f",
+					"name": "TT_ID",
+					"datatype": "INTEGER",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"comment": "",
+					"fk": false,
+					"after": "",
+					"json": false,
+					"sqlite": {
+						"autoincrement": false
+					},
+					"data": "",
+					"autoinc": false,
+					"charset": "",
+					"enum": "",
+					"isHidden": false,
+					"unsigned": false,
+					"zerofill": false
+				}
+			],
+			"relations": [],
+			"keys": [
+				{
+					"id": "5b961e2e-bceb-45c9-9666-d85e1c65db17",
+					"name": "Primary key",
+					"isPk": true,
+					"using": "na",
+					"cols": []
+				}
+			],
+			"indexes": [],
+			"afterScript": " ",
+			"sqlite": {
+				"withoutrowid": false
+			}
+		}
+	},
+	"relations": {},
+	"notes": {},
+	"lines": {},
+	"model": {
+		"activeDiagram": "0104e129-c77a-440b-b893-2406af16ac51",
+		"caseConvention": "under",
+		"color": "transparent",
+		"def_charset": "",
+		"def_collation": "",
+		"def_coltopk": true,
+		"def_rowformat": "na",
+		"def_tabletype": "na",
+		"desc": "",
+		"id": "617bf613-830f-43c7-9e53-884fc04c105d",
+		"isDirty": true,
+		"name": "ttOutput_site_test",
+		"parentTableInFkCols": true,
+		"path": "",
+		"replaceSpace": "_",
+		"sideSelections": true,
+		"storedin": {
+			"major": 4,
+			"minor": 6,
+			"extra": 0
+		},
+		"type": "SQLITE",
+		"version": 1,
+		"def_others": "",
+		"lastSaved": "Thu May 19 2022 17:33:34 GMT+0200 (Central European Summer Time)",
+		"cardinalityIsDisplayed": false,
+		"sqlSettings": {
+			"wrapLines": true,
+			"wrapOffset": 80,
+			"indent": true,
+			"indentationString": "spaces",
+			"indentationSize": 2,
+			"limitItemsOnLine": true,
+			"maxListItemsOnLine": 3,
+			"statementDelimiter": ";",
+			"routineDelimiter": ";",
+			"keywordCase": "upper",
+			"identiferCase": "original",
+			"includeSchema": "always",
+			"quotation": "if_needed"
+		},
+		"embeddedInParentsIsDisplayed": true,
+		"schemaContainerIsDisplayed": false,
+		"estimatedSizeIsDisplayed": false,
+		"writeFileParam": false
+	},
+	"otherObjects": {},
+	"diagrams": {
+		"0104e129-c77a-440b-b893-2406af16ac51": {
+			"id": "0104e129-c77a-440b-b893-2406af16ac51",
+			"lineColor": "transparent",
+			"description": "",
+			"diagramItems": {
+				"0c20dfc7-abaf-4bfb-8c51-f86d9ec4c7c6": {
+					"x": 254,
+					"y": 104,
+					"gHeight": 81,
+					"gWidth": 193,
+					"background": "#03a9f4",
+					"color": "#ffffff",
+					"referencedItemId": "0c20dfc7-abaf-4bfb-8c51-f86d9ec4c7c6",
+					"resized": false,
+					"autoExpand": true
+				},
+				"d32bcacc-2fdc-45b2-af68-57761ec64c41": {
+					"x": 514,
+					"y": 104,
+					"gHeight": 81,
+					"gWidth": 193,
+					"background": "#03a9f4",
+					"color": "#ffffff",
+					"referencedItemId": "d32bcacc-2fdc-45b2-af68-57761ec64c41",
+					"resized": false,
+					"autoExpand": true
+				},
+				"cc9299ca-fe48-4aad-89a0-1a2476512707": {
+					"x": 801,
+					"y": 104,
+					"gHeight": 279,
+					"gWidth": 180,
+					"background": "#03a9f4",
+					"color": "#ffffff",
+					"referencedItemId": "cc9299ca-fe48-4aad-89a0-1a2476512707",
+					"resized": false,
+					"autoExpand": true
+				},
+				"72da72ec-f887-4704-834b-1c6ac858b2fe": {
+					"x": 254,
+					"y": 263.5,
+					"gHeight": 81,
+					"gWidth": 193,
+					"background": "#03a9f4",
+					"color": "#ffffff",
+					"referencedItemId": "72da72ec-f887-4704-834b-1c6ac858b2fe",
+					"resized": false,
+					"autoExpand": true
+				},
+				"86dd0e0e-d4e4-4e89-993b-913ac72e0230": {
+					"x": 514,
+					"y": 263.5,
+					"gHeight": 81,
+					"gWidth": 193,
+					"background": "#03a9f4",
+					"color": "#ffffff",
+					"referencedItemId": "86dd0e0e-d4e4-4e89-993b-913ac72e0230",
+					"resized": false,
+					"autoExpand": true
+				},
+				"21bf7301-d03b-4933-af38-496e74fee756": {
+					"x": 788,
+					"y": 425,
+					"gHeight": 81,
+					"gWidth": 193,
+					"background": "#03a9f4",
+					"color": "#ffffff",
+					"referencedItemId": "21bf7301-d03b-4933-af38-496e74fee756",
+					"resized": false,
+					"autoExpand": true
+				},
+				"e30296b0-4bbf-4b34-adc1-5b4df6af8f42": {
+					"x": 254,
+					"y": 425,
+					"gHeight": 81,
+					"gWidth": 193,
+					"background": "#03a9f4",
+					"color": "#ffffff",
+					"referencedItemId": "e30296b0-4bbf-4b34-adc1-5b4df6af8f42",
+					"resized": false,
+					"autoExpand": true
+				},
+				"00a2753f-4eff-4dc1-9d05-9045a8d682b0": {
+					"x": 514,
+					"y": 425,
+					"gHeight": 81,
+					"gWidth": 193,
+					"background": "#03a9f4",
+					"color": "#ffffff",
+					"referencedItemId": "00a2753f-4eff-4dc1-9d05-9045a8d682b0",
+					"resized": false,
+					"autoExpand": true
+				}
+			},
+			"isOpen": true,
+			"main": true,
+			"name": "Main Diagram",
+			"keysgraphics": true,
+			"linegraphics": "basic",
+			"zoom": 1,
+			"background": "transparent",
+			"scroll": {
+				"x": 0,
+				"y": 0
+			},
+			"type": "erd"
+		}
+	},
+	"order": []
+}
