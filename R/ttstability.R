@@ -68,8 +68,8 @@ ttStability <- function(mydata_4D, plot_label){
       scale_x_datetime(minor_breaks=("1 week")) +
       facet_grid(facets = mydata_4D$TT_ID ~ ., margins = FALSE) +
       theme(legend.position = "none") +
-      #theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
-      theme(strip.text.y = element_blank()) + #added for the ttalkR manuscript
+      theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
+      #theme(strip.text.y = element_blank()) + #added for the ttalkR manuscript
       ylim(quantile(phi, p = 0.01, na.rm=T), quantile(phi, p = 0.99, na.rm=T)) +
 
       geom_segment(aes(

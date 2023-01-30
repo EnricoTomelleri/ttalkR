@@ -36,7 +36,7 @@ ttGranier <- function(mydata_4D, plot_label) {
     if (length(ts) < 11) {
       next()
     }
-    ts_filt <- savitzkyGolay(ts, 0, 1, 11)
+    ts_filt <- savitzkyGolay(ts, 0, 1, 49)
     Tref_0C[mydata_4D$TT_ID == ID[j]] <- ts_filt[1:length(ts)]
   }
 
@@ -61,7 +61,7 @@ ttGranier <- function(mydata_4D, plot_label) {
     if (length(ts) < 11) {
       next()
     }
-    ts_filt <- savitzkyGolay(ts, 0, 1, 11)
+    ts_filt <- savitzkyGolay(ts, 0, 1, 49)
     Tref_1C[mydata_4D$TT_ID == ID[j]] <- ts_filt[1:length(ts)]
   }
   #Tref_1C <- na.spline(Tref_1C)
@@ -84,7 +84,7 @@ ttGranier <- function(mydata_4D, plot_label) {
     if (length(ts) < 11) {
       next()
     }
-    ts_filt <- savitzkyGolay(ts, 0, 1, 11)
+    ts_filt <- savitzkyGolay(ts, 0, 1, 49)
     Theat_0C[mydata_4D$TT_ID == ID[j]] <- ts_filt[1:length(ts)]
   }
 
@@ -108,7 +108,7 @@ ttGranier <- function(mydata_4D, plot_label) {
     if (length(ts) < 11) {
       next()
     }
-    ts_filt <- savitzkyGolay(ts, 0, 1, 11)
+    ts_filt <- savitzkyGolay(ts, 0, 1, 49)
     Theat_1C[mydata_4D$TT_ID == ID[j]] <- ts_filt[1:length(ts)]
   }
 
@@ -218,8 +218,8 @@ ttGranier <- function(mydata_4D, plot_label) {
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
       scale_x_datetime(minor_breaks = ("1 week")) +
       theme(legend.position = "none") +
-      #theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
-      theme(strip.text.y = element_blank()) + #added for the ttalkR manuscript
+      theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
+      #theme(strip.text.y = element_blank()) + #added for the ttalkR manuscript
       ylim(0, max(Fd, na.rm=T))#quantile(Fd, p = 0.99, na.rm=T))
     print(p)
     p_ttGranier <<- p
