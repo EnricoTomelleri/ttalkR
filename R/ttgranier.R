@@ -36,7 +36,7 @@ ttGranier <- function(mydata_4D, plot_label) {
     if (length(ts) < 11) {
       next()
     }
-    ts_filt <- savitzkyGolay(ts, 0, 1, 11)
+    ts_filt <- savitzkyGolay(ts, 0, 1, 49)
     Tref_0C[mydata_4D$TT_ID == ID[j]] <- ts_filt[1:length(ts)]
   }
 
@@ -61,7 +61,7 @@ ttGranier <- function(mydata_4D, plot_label) {
     if (length(ts) < 11) {
       next()
     }
-    ts_filt <- savitzkyGolay(ts, 0, 1, 11)
+    ts_filt <- savitzkyGolay(ts, 0, 1, 49)
     Tref_1C[mydata_4D$TT_ID == ID[j]] <- ts_filt[1:length(ts)]
   }
   #Tref_1C <- na.spline(Tref_1C)
@@ -84,7 +84,7 @@ ttGranier <- function(mydata_4D, plot_label) {
     if (length(ts) < 11) {
       next()
     }
-    ts_filt <- savitzkyGolay(ts, 0, 1, 11)
+    ts_filt <- savitzkyGolay(ts, 0, 1, 49)
     Theat_0C[mydata_4D$TT_ID == ID[j]] <- ts_filt[1:length(ts)]
   }
 
@@ -108,7 +108,7 @@ ttGranier <- function(mydata_4D, plot_label) {
     if (length(ts) < 11) {
       next()
     }
-    ts_filt <- savitzkyGolay(ts, 0, 1, 11)
+    ts_filt <- savitzkyGolay(ts, 0, 1, 49)
     Theat_1C[mydata_4D$TT_ID == ID[j]] <- ts_filt[1:length(ts)]
   }
 
