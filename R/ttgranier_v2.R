@@ -1,6 +1,6 @@
 #' @export
 
-ttGranier <- function(mydata_4D, plot_label) {
+ttGranier_v2 <- function(mydata_4D, plot_label) {
   #example call ttGranier(mydata_4D, "split")
 
   #load required packages
