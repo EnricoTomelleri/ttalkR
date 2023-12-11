@@ -43,12 +43,13 @@ ttScrape <- function(ID, subset_days) {
     paste("http://ittn.altervista.org/", ID, "/ttcloud.txt", sep = "")
   #Reading the HTML code from the website
 
-  #if (ID == "C0200096"){skip=400}else{skip=0}
+  #if (ID == "C0200090"){skip <- 10}else{skip <- 0}
   if (RCurl::url.exists(url)==T){
     #mydata1 <- read.csv(url,
     #                    sep = ";",
     #                    header = FALSE,
     #                    fill = TRUE)
+    #url <- "~/Work/UNIBZ/People/AnnaCandotti/Treetalkers/ttcloud_90_23_08_2023.txt"
     mydata1 <- data.table::fread(url,
                                  sep = ";",
                                  header = FALSE,
@@ -82,6 +83,8 @@ ttScrape <- function(ID, subset_days) {
              into = c("Date", "Time", "SN"),
              sep = "[ ,]")
 
+
+
   #split the dataset
   mydata_4D <- mydata_sep[mydata_sep$V3 == "4D", ]
   mydata_4D <- mydata_4D[mydata_4D$SN>52000000,]#TreeTalkers v3.2 have and ID higher than 52000000
@@ -89,6 +92,15 @@ ttScrape <- function(ID, subset_days) {
   mydata_4D <- Filter(function(x)!all(is.na(x)), mydata_4D)
   #convert possible integer64 to integer
   mydata_4D <- mydata_4D %>% mutate_if(bit64::is.integer64, as.integer)
+
+
+  #barkbeetle experiment: time stamps are incomplete: some have just 3 digits
+  #if (ID == "C0200090"){
+  #  # value to be added
+  #  k_time <- 1625461000
+  #  # Add 'k' to three-digit values in 'Value' column
+  #  mydata_4D$V4 <- ifelse(nchar(mydata_4D$V4) == 3, mydata_4D$V4 + k_time, mydata_4D$V4)
+  #}
 
   mydata_49 <- mydata_sep[mydata_sep$V3 == "49", ]
   mydata_49 <- mydata_49[mydata_49$SN>52000000,]#TreeTalkers v3.2 have and ID higher than 52000000
@@ -243,7 +255,9 @@ ttScrape <- function(ID, subset_days) {
   colnames(mydata_4C) <- header_4C
 
   #filter all the dates earlier than 2020-01-01 00:00:00
-  mydata_4D$Timestamp[mydata_4D$Timestamp < 1577836800] <- NA
+  mydata_4D$Timestamp[mydata_4D$Timestamp < 1685628046] <- NA
+  #filter all the dates earlier than 2023-01-01 00:00:00
+  #if (ID == "C0200090"){mydata_4D$Timestamp[mydata_4D$Timestamp < 1672527600] <- NA}
 
   #convert the ids to integers
   mydata_4D$TT_ID <- as.integer(mydata_4D$TT_ID)
