@@ -1,256 +1,323 @@
-#' @export
+# fix ttgranier function with Sahla one
 
-ttGranier_v2 <- function(mydata_4D, plot_label) {
-  #example call ttGranier(mydata_4D, "split")
+library(ttalkR)
+library(prospectr)
 
-  #load required packages
-  #library(ggplot2)
-  #library(signal)
-  #library(Rssa)
-  #library(oce)
-
-  #create a color index
+# Rename and edit the function
+ttGranier_v2 <- function (mydata_4D, plot_label)
+  {
   id_col <- mydata_4D$TT_ID
-  id_col_ind <- data.frame(unique(id_col), 1:length(unique(id_col))); colnames(id_col_ind) <- c("TT_ID", "ID")
-  #create index for color scale
+  id_col_ind <- data.frame(unique(id_col), 1:length(unique(id_col)))
+  colnames(id_col_ind) <- c("TT_ID", "ID")
   mydata_4D$id_col_ind <- mydata_4D$TT_ID
-  for (i in 1:length(id_col_ind$ID)){
-    mydata_4D$id_col_ind <- replace(mydata_4D$id_col_ind, mydata_4D$id_col_ind==id_col_ind$TT_ID[i], id_col_ind$ID[i])
+  for (i in 1:length(id_col_ind$ID)) {
+    mydata_4D$id_col_ind <- replace(mydata_4D$id_col_ind,
+                                    mydata_4D$id_col_ind == id_col_ind$TT_ID[i], id_col_ind$ID[i])
   }
-
-
-  #4.6.Ref & Heat Probes Temperature
-  Tref_0C <-
-    127.6 - 0.006045 * mydata_4D$Tref_0 + 1.26E-7 * mydata_4D$Tref_0 ^ 2 -
-    1.15E-12 * mydata_4D$Tref_0 ^ 3
-  #apply a Savitzky-Golay smoothing
-  #dfn['Tref_0f'] = savgol_filter(dfn['Tref_0c'], 11, 2,mode='nearest') # window size 5, polynomial order 3
-
-
+  Tref_0C <- 127.6 - 0.006045 * mydata_4D$Tref_0 + 1.26e-07 *
+    mydata_4D$Tref_0^2 - 1.15e-12 * mydata_4D$Tref_0^3
   Tref_0C[Tref_0C < -20] <- NA
   Tref_0C[Tref_0C > 50] <- NA
-  #apply a Savitzky-Golay smoothing
   ID <- unique(mydata_4D$TT_ID)
   for (j in 1:length(ID)) {
     ts <- Tref_0C[mydata_4D$TT_ID == ID[j]]
-    if (length(ts) < 11) {
+    if (length(na.omit(ts)) < 23) {
       next()
     }
-    ts_filt <- savitzkyGolay(ts, 0, 1, 23)
-    Tref_0C[mydata_4D$TT_ID == ID[j]] <- ts_filt[1:length(ts)]
+    # Check for missing value using is.na()
+    if (is.na(ts[1])) {
+      # Replace the missing value with the first non-missing value
+      ts[1] <- na.omit(ts)[1]
+    }
+
+    # Apply na.approx() directly to the time series without using zoo::na.approx()
+    ts_filt <- signal::sgolayfilt(na.approx(ts), p = 1, n = 23)
+
+    # Update mydata_4D$Tref_1C where the condition is met
+    mydata_4D$Tref_1C[mydata_4D$TT_ID == ID[j]] <- ts_filt
   }
-
-  #Tref_0C <- na.spline(Tref_0C)
-  #Tref_0C <- sgolayfilt(Tref_0C, n=11, p=3)
-  #plot(Tref_0C, typ = "l", main = "Tref_0C")
-  ############################
-
-
-
-  ############################
-  Tref_1C <-
-    127.6 - 0.006045 * mydata_4D$Tref_1 + 1.26E-7 * mydata_4D$Tref_1 ^ 2 -
-    1.15E-12 * mydata_4D$Tref_1 ^ 3
-
+  Tref_1C <- 127.6 - 0.006045 * mydata_4D$Tref_1 + 1.26e-07 *
+    mydata_4D$Tref_1^2 - 1.15e-12 * mydata_4D$Tref_1^3
   Tref_1C[Tref_1C < -20] <- NA
   Tref_1C[Tref_1C > 50] <- NA
-  #apply a Savitzky-Golay smoothing
   ID <- unique(mydata_4D$TT_ID)
   for (j in 1:length(ID)) {
     ts <- Tref_1C[mydata_4D$TT_ID == ID[j]]
-    if (length(ts) < 11) {
+    if (length(na.omit(ts)) < 23) {
       next()
     }
-    ts_filt <- savitzkyGolay(ts, 0, 1, 23)
-    Tref_1C[mydata_4D$TT_ID == ID[j]] <- ts_filt[1:length(ts)]
+    # Check for missing value using is.na()
+    if (is.na(ts[1])) {
+      # Replace the missing value with the first non-missing value
+      ts[1] <- na.omit(ts)[1]
+    }
+
+    # Apply na.approx() directly to the time series without using zoo::na.approx()
+    ts_filt <- signal::sgolayfilt(na.approx(ts), p = 1, n = 23)
+
+    # Update mydata_4D$Tref_1C where the condition is met
+    mydata_4D$Tref_1C[mydata_4D$TT_ID == ID[j]] <- ts_filt
   }
-  #Tref_1C <- na.spline(Tref_1C)
-  #Tref_1C <- sgolayfilt(Tref_1C, n=5, p=3)
-  #plot(Tref_1C, typ = "l", main = "Tref_1C")
-  ############################
-
-
-  ############################
-  Theat_0C <-
-    127.6 - 0.006045 * mydata_4D$Theat_0 + 1.26E-7 * mydata_4D$Theat_0 ^ 2 -
-    1.15E-12 * mydata_4D$Theat_0 ^ 3
-
+  Theat_0C <- 127.6 - 0.006045 * mydata_4D$Theat_0 + 1.26e-07 *
+    mydata_4D$Theat_0^2 - 1.15e-12 * mydata_4D$Theat_0^3
   Theat_0C[Theat_0C < -20] <- NA
   Theat_0C[Theat_0C > 50] <- NA
-  #apply a Savitzky-Golay smoothing
   ID <- unique(mydata_4D$TT_ID)
   for (j in 1:length(ID)) {
     ts <- Theat_0C[mydata_4D$TT_ID == ID[j]]
-    if (length(ts) < 11) {
+    if (length(na.omit(ts)) < 23) {
       next()
     }
-    ts_filt <- savitzkyGolay(ts, 0, 1, 23)
-    Theat_0C[mydata_4D$TT_ID == ID[j]] <- ts_filt[1:length(ts)]
+    # Check for missing value using is.na()
+    if (is.na(ts[1])) {
+      # Replace the missing value with the first non-missing value
+      ts[1] <- na.omit(ts)[1]
+    }
+
+    # Apply na.approx() directly to the time series without using zoo::na.approx()
+    ts_filt <- signal::sgolayfilt(na.approx(ts), p = 1, n = 23)
+
+    # Update mydata_4D$Tref_1C where the condition is met
+    mydata_4D$Tref_1C[mydata_4D$TT_ID == ID[j]] <- ts_filt
   }
-
-  #plot(Theat_0C, typ = "l", main = "Theat_0C")
-  ############################
-
-
-
-
-  ############################
-  Theat_1C <-
-    127.6 - 0.006045 * mydata_4D$Theat_1 + 1.26E-7 * mydata_4D$Theat_1 ^ 2 -
-    1.15E-12 * mydata_4D$Theat_1 ^ 3
-
+  Theat_1C <- 127.6 - 0.006045 * mydata_4D$Theat_1 + 1.26e-07 *
+    mydata_4D$Theat_1^2 - 1.15e-12 * mydata_4D$Theat_1^3
   Theat_1C[Theat_1C < -20] <- NA
   Theat_1C[Theat_1C > 50] <- NA
-  #apply a Savitzky-Golay smoothing
   ID <- unique(mydata_4D$TT_ID)
   for (j in 1:length(ID)) {
     ts <- Theat_1C[mydata_4D$TT_ID == ID[j]]
-    if (length(ts) < 11) {
+    if (length(na.omit(ts)) < 23) {
       next()
     }
-    ts_filt <- savitzkyGolay(ts, 0, 1, 23)
-    Theat_1C[mydata_4D$TT_ID == ID[j]] <- ts_filt[1:length(ts)]
+    # Check for missing value using is.na()
+    if (is.na(ts[1])) {
+      # Replace the missing value with the first non-missing value
+      ts[1] <- na.omit(ts)[1]
+    }
+
+    # Apply na.approx() directly to the time series without using zoo::na.approx()
+    ts_filt <- signal::sgolayfilt(na.approx(ts), p = 1, n = 23)
+
+    # Update mydata_4D$Tref_1C where the condition is met
+    mydata_4D$Tref_1C[mydata_4D$TT_ID == ID[j]] <- ts_filt
   }
 
-  #plot(Theat_1C, typ = "l", main = "Theat_1C")
-  ############################
+  #
+  #
+  #
 
 
+  mydata_4D$dTon <- mydata_4D$Theat_1C - mydata_4D$Tref_1C # end of heating
+  mydata_4D$dToff <- mydata_4D$Theat_0C - mydata_4D$Tref_0C # before heating
+  #mydata_4D$dTo <- rep(NA, length(mydata_4D$dToff))
+  dTmax <- (mydata_4D$dTon -  mydata_4D$dToff)
 
+  #
+  #
+  #
 
-  #4.6.1.Sap flow
-  dTon <- Theat_1C - Tref_1C
-  dToff <- Theat_0C - Tref_0C
-  dTmax <-
-    (dTon - dToff) #max(Theat_1C-Theat_0C, na.rm=T)#max(Theat_1C-Theat_0C, na.rm=T)
+  #ID <- unique(mydata_4D$TT_ID)
+  #for (j in 1:(length(ID))) {
+  #dTmax[mydata_4D$TT_ID == ID[j]] <- (mydata_4D$dTon[mydata_4D$TT_ID == ID[j]]  - mydata_4D$dToff[mydata_4D$TT_ID == ID[j]] )
+  #df <-       data.frame(dTmax[mydata_4D$TT_ID == ID[j]], mydata_4D$SDate[mydata_4D$TT_ID == ID[j]])
+  #colnames(df) <- c("dTmax", "Date")
 
-  #dTmax_out <<- data.frame(mydata_4D$Timestamp, dTmax) #pass to global environment to check dial cycle
-  #plot(dTmax_out, col= topo.colors(24)[hour(dTmax_out$mydata_4D.Timestamp)+1])
-  #legend(x = "topright",          # Position
-  #            legend = c(1:24),  # Legend texts
-  #             fill = topo.colors(24), cex=0.5)
+  #if (length(na.omit(df$dTmax)) < 11) {
+  #  next()     }
+  #dTmax_day_ID <- aggregate(dTmax  ~  Date,df, max,symplify  =  F, na.action  =  na.omit)
+  #daily_Tmax <- rep(NA, length(df$dTmax))
+  #df <- cbind(df, daily_Tmax)
+  #for (i in 1:length(df$daily_Tmax)) {
+  #df$daily_Tmax[i] <- max(df$dTmax[df$Date  ==  df$Date[i]])
+  #}
+  #mydata_4D$daily_Tmax[mydata_4D$TT_ID == ID[j]] <- df$daily_Tmax
+  #}
 
+  #
+  #
+  #
 
+#  ID <- unique(mydata_4D$TT_ID)
+#  for (j in 1:(length(ID))) {
+#    df <-       data.frame(mydata_4D$dTon[mydata_4D$TT_ID == ID[j]], mydata_4D$dToff[mydata_4D$TT_ID == ID[j]], mydata_4D$SDate[mydata_4D$TT_ID == ID[j]], mydata_4D$STime[mydata_4D$TT_ID == ID[j]])
+#    colnames(df) <- c("dTon", "dToff", "Date", "Time")
+#
+#    if (length(na.omit(df$dTmax)) < 11) {
+#      next()     }
+#
+#    dTo <- aggregate((dTon[Time < "03:00:00"] - dToff[Time < "03:00:00"])  ~  Date[Time < "03:00:00"], df, max, symplify  =  F, na.action  =  na.omit)
+#    colnames(dTo) <- c("Date", "dTo")
+#
+#    daily_To <- rep(NA, length(df$dTon))
+#    df <- cbind(df, daily_To)
+#    for (i in 1:length(df$daily_To)) {
+#      if (any(dTo$Date  ==  df$Date[i]) == F) {next()}
+#      df$daily_To[i] <- dTo$dTo[dTo$Date  ==  df$Date[i]]
+#    }
+#    mydata_4D$dTo[mydata_4D$TT_ID == ID[j]] <- df$daily_To
+#  }
+
+  #new version
   ID <- unique(mydata_4D$TT_ID)
   for (j in 1:(length(ID))) {
-    #dTmax[mydata_4D$TT_ID == ID[j]] <- (dTon[mydata_4D$TT_ID == ID[j]]  - dToff[mydata_4D$TT_ID == ID[j]] )
-    df <-
-      data.frame(dTmax[mydata_4D$TT_ID == ID[j]], mydata_4D$SDate[mydata_4D$TT_ID == ID[j]])
-    colnames(df) <- c("dTmax", "Date")
-    if (length(na.omit(df$dTmax)) < 11) {
+    df <- data.frame(
+      dTon = mydata_4D$dTon[mydata_4D$TT_ID == ID[j]],
+      dToff = mydata_4D$dToff[mydata_4D$TT_ID == ID[j]],
+      Date = mydata_4D$AcDate[mydata_4D$TT_ID == ID[j]],
+      Time = mydata_4D$AcTime[mydata_4D$TT_ID == ID[j]]
+    )
+    colnames(df) <- c("dTon", "dToff", "Date", "AcTime")
+
+    if (sum(!is.na(df$dTon)) < 11) {
       next()
     }
-    dTmax_day_ID <-
-      aggregate(dTmax  ~  Date,
-                df,
-                max,
-                symplify  =  F,
-                na.action  =  na.omit)
-    daily_Tmax <- rep(NA, length(df$dTmax))
-    df <- cbind(df, daily_Tmax)
 
-    for (i in 1:length(df$daily_Tmax)) {
-      df$daily_Tmax[i] <- max(df$dTmax[df$Date  ==  df$Date[i]])
+    dTo <- aggregate(dTon[AcTime < "03"] - dToff[AcTime < "03"] ~ Date[AcTime < "03"], df, max, simplify = FALSE, na.action = na.omit)
+    colnames(dTo) <- c("Date", "dTo")
+
+    daily_To <- rep(NA, length(df$dTon))
+    df <- cbind(df, daily_To)
+    for (i in 1:length(df$daily_To)) {
+      if (!any(dTo$Date == df$Date[i])) {
+        next()
+      }
+      df$daily_To[i] <- dTo$dTo[dTo$Date == df$Date[i]]
     }
-
-    mydata_4D$daily_Tmax[mydata_4D$TT_ID == ID[j]] <- df$daily_Tmax
+    mydata_4D$dTo[mydata_4D$TT_ID == ID[j]] <- df$daily_To
   }
+  #
+  #
+  #
+
+  #dTo <- mydata_4D$daily_Tmax # dTo
+  #dTu <- dTmax # questo è il segnale a un dato valore di flusso, va estratto credo per ogni lettura di ogni tree talker?
+
+  mydata_4D$dTo[sapply(mydata_4D$dTo, is.null)] <- NA
+  mydata_4D$dTo <- as.numeric(unlist(mydata_4D$dTo, use.names = F)) #under no flux conditions (nighttime?)
+  mydata_4D$dTu <- as.numeric(unlist(mydata_4D$dTon - mydata_4D$dToff)) #for every half an hour
+  #
+  # Calculate K
+  #
 
 
+  #head(dTo)
+  #head(dTu)
+
+  # clean_data$K1 <- ((clean_data$DT_max24h / clean_data$DT) -1) # FORMULA SHALA LINEA 280
+
+  #K = (dTo / dTu) - 1 # modified by E
+  #K <- (dTo - dTu) / dTu
+  K <- (mydata_4D$dTo - mydata_4D$dTu) / mydata_4D$dTu
+
+  #When temperature is lower than 0, assume K1 is 0, as the equation might
+  #yield negative values
+  K <- ifelse(K < 0, 0, K)
+
+  #
+  #
+  #
+
+  #ID <- unique(mydata_4D$TT_ID)
+  #for (j in 1:(length(ID))) {
+  #  print(head(df))
+  #  df <- data.frame(dTmax[mydata_4D$TT_ID == ID[j]], mydata_4D$SDate[mydata_4D$TT_ID ==
+  #                                                                      ID[j]])
+  #  colnames(df) <- c("dTmax", "Date")
+  #  if (length(na.omit(df$dTmax)) < 11) {
+  #    (next)()
+  #  }
+  #  dTmax_day_ID <- aggregate(dTmax ~ Date, df, max, symplify = F,
+  #                            na.action = na.omit)
+  #  daily_Tmax <- rep(NA, length(df$dTmax))
+  #  df <- cbind(df, daily_Tmax)
+  #  for (i in 1:length(df$daily_Tmax)) {
+  #    df$daily_Tmax[i] <- max(df$dTmax[df$Date == df$Date[i]])
+  #  }
+  #  mydata_4D$daily_Tmax[mydata_4D$TT_ID == ID[j]] <- df$daily_Tmax
+  #}
 
 
-  Fd <-
-    118.99 * ((mydata_4D$daily_Tmax - (dTon - dToff)) / (dTon - dToff)) ^ 1.231 #m^3/s
+  #mydata_4D$Fd <- 118.99 * ((mydata_4D$daily_Tmax - (dTon - dToff))/(dTon -
+  #                                                           dToff))^1.231
+  #Fd_Do = (11.3 * (K / (1 - K))) ^ 0.707 # new Fd
+  #mydata_4D$Fd_Do <- (11.3 * K / (1 - K)) ^ 0.707 # new Fd
+  mydata_4D$Fd_Do <- 4.2841 * K ^ 1.231
+  #
+  #
+  #
 
+  #Fd[Fd > 1000] <- NA
+  #Fd_Do[Fd_Do > 1000] <- NA  # Assuming a  range for Fd_Do, adjusted according to literature / to be double checked
+  #ID <- unique(mydata_4D$TT_ID)
+  #for (j in 1:(length(ID))) {
+  #  ts <- Fd[mydata_4D$TT_ID == ID[j]]
+  #  ts_ldr <- Fd_Do[mydata_4D$TT_ID == ID[j]]  # # # # # # #  NEW LINE
 
-  Fd[Fd > 1000] <- NA
+  #  if (length(ts) < 11) {
+  #    (next)()
+  #  }
+  #  ts_filt <- baytrends::fillMissing(ts, span = 24, Dates = NULL,
+  #                                    max.fill = 12)
+  #  ts_ldr_filt <- baytrends::fillMissing(ts_ldr, span = 24, Dates = NULL, max.fill = 12) # # # # # # #  NEW LINE
 
+  # Fd[mydata_4D$TT_ID == ID[j]] <- ts_filt[1:length(ts)]
+  # Fd_Do[mydata_4D$TT_ID == ID[j]] <- ts_ldr_filt[1:length(ts_ldr)] # # # # # # #  NEW LINE
 
-  ID <- unique(mydata_4D$TT_ID)
-  for (j in 1:(length(ID))) {
-    ts <- Fd[mydata_4D$TT_ID == ID[j]]
-    if (length(ts) < 11) {
-      next()
-    }
-    #Replace missing values in time-series data by interpolation (max gap = 24 hours).
-    ts_filt <-
-      baytrends::fillMissing(ts,
-                             span = 24,
-                             Dates = NULL,
-                             max.fill = 12)#gapfillSSA(series = ts, plot.results = FALSE, open.plot = FALSE)
-    #ts_filt <- ts_filt[[1]]
-    #apply a hampel filter
-    #ts_filt <- hampel(ts_filt, 24, 3)
-    Fd[mydata_4D$TT_ID == ID[j]] <- ts_filt[1:length(ts)]
+  #}
+  df1 <- data.frame(mydata_4D$Timestamp, mydata_4D$Fd_Do, mydata_4D$id_col_ind) # # # # # # #  NEW LINE
+  colnames(df1) <- c("Timestamp", "Fd_Do", "id_col_ind") # # # # # # #  NEW LINE
 
-  }
-
-
-  #create a data frame for plotting
-  df1 <- data.frame(mydata_4D$Timestamp, Fd, mydata_4D$id_col_ind)
-  colnames(df1) <- c("Timestamp", "Fd", "id_col_ind")
-
-
-
-  if (plot_label == "all_in_one"){
-    p <- ggplot(data = df1, aes(Timestamp, Fd)) +
-      geom_point(aes(colour = id_col_ind), size = 0.2, na.rm=T) +
-      #geom_smooth(formula = y ~ s(x, bs = "ds")) +
-      #geom_smooth() +
-      #geom_ma(ma_fun = SMA, n = 1000, color = "red") +
+  if (plot_label == "all_in_one") {
+    p <- ggplot(data = df1) +
+      #geom_point(aes(x = Timestamp, y = Fd, colour = id_col_ind), size = 0.2, na.rm = TRUE) +
+      geom_point(aes(x = Timestamp, y = Fd_Do, colour = id_col_ind), shape = 2, size = 0.2, na.rm = TRUE) + # # # # # # #  NEW LINE
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
-      labs(x = "Timestamp", y = "sap flow density (l dm-2 h-1)") +
-      #labs(title = site) +
-      scale_x_datetime(minor_breaks = ("1 week")) +
+      labs(x = "Timestamp", y = "Sap flow density / l*dm-2*h-1") + # # # # # # #  NEW LINE
+      scale_x_datetime(minor_breaks = "1 week") +
       theme(legend.position = "none") +
-      ylim(0, 10)  #quantile(Fd, p = 0.99, na.rm=T))
-      print(p)
+      ylim(0, quantile(df1$Fd_Do, 0.99, na.rm=T))
+
+    print(p)
   }
 
-
-
-  if (plot_label == "split"){
-    p <- ggplot(data = df1, aes(Timestamp, Fd, color = id_col_ind)) +
-      geom_point(aes(group = "whatever"), size = 0.4, na.rm=T) +
-      geom_line(aes(group = "whatever"), na.rm=T) +
-      facet_grid(facets = mydata_4D$TT_ID ~ ., margins = FALSE) +
-      #geom_smooth(colour = "gray") +
-      #binomial_smooth(formula = y ~ splines::ns(x, 2)) +
-      #labs(x = "Timestamp", y = "sap flow density (l dm-2 h-1)") +
-      labs(x = element_blank(), y = "sap flow density (l dm-2 h-1)") +
+  if (plot_label == "split") {
+    p <- ggplot(data = df1) +
+      # Point plot for Fd
+      #geom_point(aes(x = Timestamp, y = Fd, colour = id_col_ind), size = 0.4, na.rm = TRUE) +
+      #geom_line(aes(x = Timestamp, y = Fd, group = id_col_ind), na.rm = TRUE) +
+      # Point plot for Fd_Do
+      geom_point(aes(x = Timestamp, y = Fd_Do, colour = id_col_ind), shape = 2, size = 0.4, na.rm = TRUE) +# # # # # # #  NEW LINE
+      geom_line(aes(x = Timestamp, y = Fd_Do, group = id_col_ind), na.rm = TRUE) +# # # # # # #  NEW LINE
+      # Facet grid for each TT_ID
+      facet_grid(facets = TT_ID ~ ., scales = "free", margins = FALSE) +
+      # Labels and other aesthetics
+      labs(x = element_blank(), y = "Sap flow density / l*dm-2*h-1") +# # # # # # #  NEW LINE
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
-      scale_x_datetime(minor_breaks = ("1 week")) +
+      scale_x_datetime(minor_breaks = "1 week") +
       theme(legend.position = "none") +
       theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
-      #theme(strip.text.y = element_blank()) + #added for the ttalkR manuscript
-      ylim(0, max(Fd, na.rm=T))#quantile(Fd, p = 0.99, na.rm=T))
+      ylim(0, quantile(df1$Fd_Do, 0.99, na.rm=T))
+
     print(p)
     p_ttGranier <<- p
   }
-
-  if (plot_label == "none"){}
-
-
-  #df <- data.frame(mydata_4D$Timestamp, Fd, mydata_4D$TT_ID)
-  #write.csv(sapFluxD, "../Data/C0200101_SapFluxD.csv")
-  #sapFluxD <<- df
-
-
   library(lubridate)
   library(dplyr)
+  #df_ttGranier <- data.frame(mydata_4D$Timestamp, Fd, mydata_4D$TT_ID)
+  #colnames(df_ttGranier) <- c("Timestamp", "Fd", "TT_ID")
 
+  #
+  #
+  #
 
-  #######aggregate to daily
-  #df1$Day <- floor_date(df1$Timestamp, "hour")
-  #df2 <- subset(df1, select=c(-Timestamp, -id_col_ind))
-  #mydata_daily <- df2 %>%
-  #  group_by(Day) %>%
-  #  summarize(mean = median(phi, na.rm = TRUE))
-  #colnames(mydata_daily) <- c("date", "phi")
+  df_ttGranier <- data.frame(mydata_4D$Timestamp, mydata_4D$Fd_Do, mydata_4D$TT_ID)# # # # # # #  NEW LINE
+  colnames(df_ttGranier) <- c("Timestamp", "Fd_Do", "TT_ID")# # # # # # #  NEW LINE
 
+  #
+  #
+  #
 
-  #create a data frame for output
-  df_ttGranier <- data.frame(mydata_4D$Timestamp, Fd, mydata_4D$TT_ID)
-  colnames(df_ttGranier) <- c("Timestamp", "Fd", "TT_ID")
-  .GlobalEnv$df_ttGranier <- df_ttGranier
+   .GlobalEnv$df_ttGranier <- df_ttGranier
 }
+
