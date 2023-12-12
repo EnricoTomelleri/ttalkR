@@ -24,17 +24,24 @@ ttGranier_v2 <- function (mydata_4D, plot_label)
     if (length(na.omit(ts)) < 23) {
       next()
     }
-    # Check for missing value using is.na()
+
+    #------------------------
+    # Check for missing value using is.na() at the beginning of ts
     if (is.na(ts[1])) {
       # Replace the missing value with the first non-missing value
       ts[1] <- na.omit(ts)[1]
     }
-
+    # Check for missing value using is.na() at the end of ts
+    if (is.na(ts[length(ts)])) {
+      # Replace the missing value with the first non-missing value
+      ts[length(ts)] <- na.omit(ts)[length(na.omit(ts))]
+    }
     # Apply na.approx() directly to the time series without using zoo::na.approx()
-    ts_filt <- signal::sgolayfilt(na.approx(ts), p = 1, n = 23)
+    ts_filt <- signal::sgolayfilt(na.approx(ts, maxgap=100000), p = 1, n = 23)
 
     # Update mydata_4D$Tref_1C where the condition is met
     mydata_4D$Tref_1C[mydata_4D$TT_ID == ID[j]] <- ts_filt
+    #------------------------
   }
   Tref_1C <- 127.6 - 0.006045 * mydata_4D$Tref_1 + 1.26e-07 *
     mydata_4D$Tref_1^2 - 1.15e-12 * mydata_4D$Tref_1^3
@@ -46,17 +53,23 @@ ttGranier_v2 <- function (mydata_4D, plot_label)
     if (length(na.omit(ts)) < 23) {
       next()
     }
-    # Check for missing value using is.na()
+    #------------------------
+    # Check for missing value using is.na() at the beginning of ts
     if (is.na(ts[1])) {
       # Replace the missing value with the first non-missing value
       ts[1] <- na.omit(ts)[1]
     }
-
+    # Check for missing value using is.na() at the end of ts
+    if (is.na(ts[length(ts)])) {
+      # Replace the missing value with the first non-missing value
+      ts[length(ts)] <- na.omit(ts)[length(na.omit(ts))]
+    }
     # Apply na.approx() directly to the time series without using zoo::na.approx()
-    ts_filt <- signal::sgolayfilt(na.approx(ts), p = 1, n = 23)
+    ts_filt <- signal::sgolayfilt(na.approx(ts, maxgap=100000), p = 1, n = 23)
 
     # Update mydata_4D$Tref_1C where the condition is met
     mydata_4D$Tref_1C[mydata_4D$TT_ID == ID[j]] <- ts_filt
+    #------------------------
   }
   Theat_0C <- 127.6 - 0.006045 * mydata_4D$Theat_0 + 1.26e-07 *
     mydata_4D$Theat_0^2 - 1.15e-12 * mydata_4D$Theat_0^3
@@ -68,17 +81,23 @@ ttGranier_v2 <- function (mydata_4D, plot_label)
     if (length(na.omit(ts)) < 23) {
       next()
     }
-    # Check for missing value using is.na()
+    #------------------------
+    # Check for missing value using is.na() at the beginning of ts
     if (is.na(ts[1])) {
       # Replace the missing value with the first non-missing value
       ts[1] <- na.omit(ts)[1]
     }
-
+    # Check for missing value using is.na() at the end of ts
+    if (is.na(ts[length(ts)])) {
+      # Replace the missing value with the first non-missing value
+      ts[length(ts)] <- na.omit(ts)[length(na.omit(ts))]
+    }
     # Apply na.approx() directly to the time series without using zoo::na.approx()
-    ts_filt <- signal::sgolayfilt(na.approx(ts), p = 1, n = 23)
+    ts_filt <- signal::sgolayfilt(na.approx(ts, maxgap=100000), p = 1, n = 23)
 
     # Update mydata_4D$Tref_1C where the condition is met
     mydata_4D$Tref_1C[mydata_4D$TT_ID == ID[j]] <- ts_filt
+    #------------------------
   }
   Theat_1C <- 127.6 - 0.006045 * mydata_4D$Theat_1 + 1.26e-07 *
     mydata_4D$Theat_1^2 - 1.15e-12 * mydata_4D$Theat_1^3
@@ -90,17 +109,23 @@ ttGranier_v2 <- function (mydata_4D, plot_label)
     if (length(na.omit(ts)) < 23) {
       next()
     }
-    # Check for missing value using is.na()
+    #------------------------
+    # Check for missing value using is.na() at the beginning of ts
     if (is.na(ts[1])) {
       # Replace the missing value with the first non-missing value
       ts[1] <- na.omit(ts)[1]
     }
-
+    # Check for missing value using is.na() at the end of ts
+    if (is.na(ts[length(ts)])) {
+      # Replace the missing value with the first non-missing value
+      ts[length(ts)] <- na.omit(ts)[length(na.omit(ts))]
+    }
     # Apply na.approx() directly to the time series without using zoo::na.approx()
-    ts_filt <- signal::sgolayfilt(na.approx(ts), p = 1, n = 23)
+    ts_filt <- signal::sgolayfilt(na.approx(ts, maxgap=100000), p = 1, n = 23)
 
     # Update mydata_4D$Tref_1C where the condition is met
     mydata_4D$Tref_1C[mydata_4D$TT_ID == ID[j]] <- ts_filt
+    #------------------------
   }
 
   #
@@ -169,7 +194,7 @@ ttGranier_v2 <- function (mydata_4D, plot_label)
     )
     colnames(df) <- c("dTon", "dToff", "Date", "AcTime")
 
-    if (sum(!is.na(df$dTon)) < 11) {
+    if (sum(!is.na(df$dToff)) < 11) {
       next()
     }
 
