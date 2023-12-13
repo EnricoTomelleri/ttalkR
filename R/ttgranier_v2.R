@@ -37,13 +37,13 @@ ttGranier_v2 <- function (mydata_4D, plot_label)
       ts[length(ts)] <- na.omit(ts)[length(na.omit(ts))]
     }
     # Apply na.approx() directly to the time series without using zoo::na.approx()
-    ts_filt <- signal::sgolayfilt(na.approx(ts, maxgap=100000), p = 1, n = 7)
-
-    # Update mydata_4D$Tref_1C where the condition is met
-    mydata_4D$Tref_0C[mydata_4D$TT_ID == ID[j]] <- ts_filt
+    ts_filt <- signal::sgolayfilt(na.approx(ts, maxgap=100000), p = 1, n = 23)
 
     #reinsert missing values
     ts_filt[is.na(ts) == T] <- NA
+
+    # Update mydata_4D$Tref_1C where the condition is met
+    mydata_4D$Tref_0C[mydata_4D$TT_ID == ID[j]] <- ts_filt
     #------------------------
   }
   Tref_1C <- 127.6 - 0.006045 * mydata_4D$Tref_1 + 1.26e-07 *
@@ -68,13 +68,13 @@ ttGranier_v2 <- function (mydata_4D, plot_label)
       ts[length(ts)] <- na.omit(ts)[length(na.omit(ts))]
     }
     # Apply na.approx() directly to the time series without using zoo::na.approx()
-    ts_filt <- signal::sgolayfilt(na.approx(ts, maxgap=100000), p = 1, n = 7)
-
-    # Update mydata_4D$Tref_1C where the condition is met
-    mydata_4D$Tref_1C[mydata_4D$TT_ID == ID[j]] <- ts_filt
+    ts_filt <- signal::sgolayfilt(na.approx(ts, maxgap=100000), p = 1, n = 23)
 
     #reinsert missing values
     ts_filt[is.na(ts) == T] <- NA
+
+    # Update mydata_4D$Tref_1C where the condition is met
+    mydata_4D$Tref_1C[mydata_4D$TT_ID == ID[j]] <- ts_filt
     #------------------------
   }
   Theat_0C <- 127.6 - 0.006045 * mydata_4D$Theat_0 + 1.26e-07 *
@@ -99,13 +99,13 @@ ttGranier_v2 <- function (mydata_4D, plot_label)
       ts[length(ts)] <- na.omit(ts)[length(na.omit(ts))]
     }
     # Apply na.approx() directly to the time series without using zoo::na.approx()
-    ts_filt <- signal::sgolayfilt(na.approx(ts, maxgap=100000), p = 1, n = 7)
-
-    # Update mydata_4D$Tref_1C where the condition is met
-    mydata_4D$Theat_0C[mydata_4D$TT_ID == ID[j]] <- ts_filt
+    ts_filt <- signal::sgolayfilt(na.approx(ts, maxgap=100000), p = 1, n = 23)
 
     #reinsert missing values
     ts_filt[is.na(ts) == T] <- NA
+
+    # Update mydata_4D$Tref_1C where the condition is met
+    mydata_4D$Theat_0C[mydata_4D$TT_ID == ID[j]] <- ts_filt
     #------------------------
   }
   Theat_1C <- 127.6 - 0.006045 * mydata_4D$Theat_1 + 1.26e-07 *
@@ -130,13 +130,13 @@ ttGranier_v2 <- function (mydata_4D, plot_label)
       ts[length(ts)] <- na.omit(ts)[length(na.omit(ts))]
     }
     # Apply na.approx() directly to the time series without using zoo::na.approx()
-    ts_filt <- signal::sgolayfilt(na.approx(ts, maxgap=100000), p = 1, n = 7)
-
-    # Update mydata_4D$Tref_1C where the condition is met
-    mydata_4D$Theat_1C[mydata_4D$TT_ID == ID[j]] <- ts_filt
+    ts_filt <- signal::sgolayfilt(na.approx(ts, maxgap=100000), p = 1, n = 23)
 
     #reinsert missing values
     ts_filt[is.na(ts) == T] <- NA
+
+    # Update mydata_4D$Tref_1C where the condition is met
+    mydata_4D$Theat_1C[mydata_4D$TT_ID == ID[j]] <- ts_filt
     #------------------------
   }
 
@@ -327,7 +327,7 @@ ttGranier_v2 <- function (mydata_4D, plot_label)
       geom_point(aes(x = Timestamp, y = Fd_Do, colour = id_col_ind), shape = 2, size = 0.4, na.rm = TRUE) +# # # # # # #  NEW LINE
       geom_line(aes(x = Timestamp, y = Fd_Do, group = id_col_ind), na.rm = TRUE) +# # # # # # #  NEW LINE
       # Facet grid for each TT_ID
-      facet_grid(facets = TT_ID ~ ., scales = "free", margins = FALSE) +
+      facet_grid(facets = mydata_4D$TT_ID ~ ., scales = "free", margins = FALSE) +
       # Labels and other aesthetics
       labs(x = element_blank(), y = "Sap flow density / l*dm-2*h-1") +# # # # # # #  NEW LINE
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
