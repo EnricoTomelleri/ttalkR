@@ -37,7 +37,7 @@ ttGranier_v2 <- function (mydata_4D, plot_label)
       ts[length(ts)] <- na.omit(ts)[length(na.omit(ts))]
     }
     # Apply na.approx() directly to the time series without using zoo::na.approx()
-    ts_filt <- signal::sgolayfilt(na.approx(ts, maxgap=100000), p = 1, n = 23)
+    ts_filt <- signal::sgolayfilt(na.approx(ts, maxgap=100000), p = 1, n = 13)
 
     #reinsert missing values
     ts_filt[is.na(ts) == T] <- NA
@@ -68,7 +68,7 @@ ttGranier_v2 <- function (mydata_4D, plot_label)
       ts[length(ts)] <- na.omit(ts)[length(na.omit(ts))]
     }
     # Apply na.approx() directly to the time series without using zoo::na.approx()
-    ts_filt <- signal::sgolayfilt(na.approx(ts, maxgap=100000), p = 1, n = 23)
+    ts_filt <- signal::sgolayfilt(na.approx(ts, maxgap=100000), p = 1, n = 13)
 
     #reinsert missing values
     ts_filt[is.na(ts) == T] <- NA
@@ -99,7 +99,7 @@ ttGranier_v2 <- function (mydata_4D, plot_label)
       ts[length(ts)] <- na.omit(ts)[length(na.omit(ts))]
     }
     # Apply na.approx() directly to the time series without using zoo::na.approx()
-    ts_filt <- signal::sgolayfilt(na.approx(ts, maxgap=100000), p = 1, n = 23)
+    ts_filt <- signal::sgolayfilt(na.approx(ts, maxgap=100000), p = 1, n = 13)
 
     #reinsert missing values
     ts_filt[is.na(ts) == T] <- NA
@@ -130,7 +130,7 @@ ttGranier_v2 <- function (mydata_4D, plot_label)
       ts[length(ts)] <- na.omit(ts)[length(na.omit(ts))]
     }
     # Apply na.approx() directly to the time series without using zoo::na.approx()
-    ts_filt <- signal::sgolayfilt(na.approx(ts, maxgap=100000), p = 1, n = 23)
+    ts_filt <- signal::sgolayfilt(na.approx(ts, maxgap=100000), p = 1, n = 13)
 
     #reinsert missing values
     ts_filt[is.na(ts) == T] <- NA
@@ -311,7 +311,7 @@ ttGranier_v2 <- function (mydata_4D, plot_label)
       geom_point(aes(x = Timestamp, y = Fd_Do, colour = id_col_ind), shape = 2, size = 0.2, na.rm = TRUE) + # # # # # # #  NEW LINE
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
       labs(x = "Timestamp", y = "Sap flow density / l*dm-2*h-1") + # # # # # # #  NEW LINE
-      scale_x_datetime(minor_breaks = "1 week") +
+      scale_x_datetime(minor_breaks = "1 day") +
       theme(legend.position = "none") +
       ylim(0, quantile(df1$Fd_Do, 0.95, na.rm=T))
 
@@ -331,7 +331,7 @@ ttGranier_v2 <- function (mydata_4D, plot_label)
       # Labels and other aesthetics
       labs(x = element_blank(), y = "Sap flow density / l*dm-2*h-1") +# # # # # # #  NEW LINE
       scale_color_gradientn(colours = hcl.colors(30, palette = "viridis")) +
-      scale_x_datetime(minor_breaks = "1 week") +
+      scale_x_datetime(minor_breaks = "1 day") +
       theme(legend.position = "none") +
       theme(strip.text.y = element_text(angle = 0, hjust = 0)) +
       ylim(0, quantile(df1$Fd_Do, 0.95, na.rm=T))
