@@ -249,7 +249,7 @@ ttGranier_v2 <- function (mydata_4D, plot_label)
 
   #When temperature is lower than 0, assume K1 is 0, as the equation might
   #yield negative values
-  K <- ifelse(K < 0, 0, K)
+  #K <- ifelse(K < 0, 0, K)
 
   #
   #
@@ -325,7 +325,7 @@ ttGranier_v2 <- function (mydata_4D, plot_label)
       #geom_line(aes(x = Timestamp, y = Fd, group = id_col_ind), na.rm = TRUE) +
       # Point plot for Fd_Do
       geom_point(aes(x = Timestamp, y = Fd_Do, colour = id_col_ind), shape = 2, size = 0.4, na.rm = TRUE) +# # # # # # #  NEW LINE
-      geom_line(aes(x = Timestamp, y = Fd_Do, group = id_col_ind), na.rm = TRUE) +# # # # # # #  NEW LINE
+      #geom_line(aes(x = Timestamp, y = Fd_Do, group = id_col_ind), na.rm = TRUE) +# # # # # # #  NEW LINE
       # Facet grid for each TT_ID
       facet_grid(facets = mydata_4D$TT_ID ~ ., scales = "free", margins = FALSE) +
       # Labels and other aesthetics
