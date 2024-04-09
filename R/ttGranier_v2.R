@@ -1,4 +1,5 @@
-#' @export
+# fix ttgranier function with Sahla one
+
 
 # Rename and edit the function
 ttGranier_v2 <- function (mydata_4D, plot_label)
@@ -224,8 +225,8 @@ ttGranier_v2 <- function (mydata_4D, plot_label)
   #
   #
 
-
-
+  #dTo <- mydata_4D$daily_Tmax # dTo
+  #dTu <- dTmax # questo è il segnale a un dato valore di flusso, va estratto credo per ogni lettura di ogni tree talker?
 
   mydata_4D$dTo[sapply(mydata_4D$dTo, is.null)] <- NA
   mydata_4D$dTo <- as.numeric(unlist(mydata_4D$dTo, use.names = F)) #under no flux conditions (nighttime?)
