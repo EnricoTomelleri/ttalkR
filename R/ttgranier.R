@@ -36,7 +36,7 @@ ttGranier <- function(mydata_4D, plot_label) {
     if (length(ts) < 11) {
       next()
     }
-    ts_filt <- savitzkyGolay(ts, 0, 1, 49)
+    ts_filt <- savitzkyGolay(ts, 0, 1, 23)
     Tref_0C[mydata_4D$TT_ID == ID[j]] <- ts_filt[1:length(ts)]
   }
 
@@ -61,7 +61,7 @@ ttGranier <- function(mydata_4D, plot_label) {
     if (length(ts) < 11) {
       next()
     }
-    ts_filt <- savitzkyGolay(ts, 0, 1, 49)
+    ts_filt <- savitzkyGolay(ts, 0, 1, 23)
     Tref_1C[mydata_4D$TT_ID == ID[j]] <- ts_filt[1:length(ts)]
   }
   #Tref_1C <- na.spline(Tref_1C)
@@ -84,7 +84,7 @@ ttGranier <- function(mydata_4D, plot_label) {
     if (length(ts) < 11) {
       next()
     }
-    ts_filt <- savitzkyGolay(ts, 0, 1, 49)
+    ts_filt <- savitzkyGolay(ts, 0, 1, 23)
     Theat_0C[mydata_4D$TT_ID == ID[j]] <- ts_filt[1:length(ts)]
   }
 
@@ -108,7 +108,7 @@ ttGranier <- function(mydata_4D, plot_label) {
     if (length(ts) < 11) {
       next()
     }
-    ts_filt <- savitzkyGolay(ts, 0, 1, 49)
+    ts_filt <- savitzkyGolay(ts, 0, 1, 23)
     Theat_1C[mydata_4D$TT_ID == ID[j]] <- ts_filt[1:length(ts)]
   }
 
@@ -129,6 +129,7 @@ ttGranier <- function(mydata_4D, plot_label) {
   #legend(x = "topright",          # Position
   #            legend = c(1:24),  # Legend texts
   #             fill = topo.colors(24), cex=0.5)
+
 
   ID <- unique(mydata_4D$TT_ID)
   for (j in 1:(length(ID))) {
@@ -160,6 +161,8 @@ ttGranier <- function(mydata_4D, plot_label) {
 
   Fd <-
     118.99 * ((mydata_4D$daily_Tmax - (dTon - dToff)) / (dTon - dToff)) ^ 1.231 #m^3/s
+
+
   Fd[Fd > 1000] <- NA
 
 
