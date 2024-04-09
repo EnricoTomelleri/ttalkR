@@ -1,8 +1,5 @@
 #' @export
 
-library(ttalkR)
-library(prospectr)
-
 # Rename and edit the function
 ttGranier_v2 <- function (mydata_4D, plot_label)
   {
