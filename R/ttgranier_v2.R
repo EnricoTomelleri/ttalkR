@@ -18,7 +18,7 @@ ttGranier_v2 <- function (mydata_4D, plot_label)
   ID <- unique(mydata_4D$TT_ID)
   for (j in 1:length(ID)) {
     ts <- Tref_0C[mydata_4D$TT_ID == ID[j]]
-    if (length(na.omit(ts)) < 23) {
+    if (length(na.omit(ts)) < 11) {
       next()
     }
 
@@ -50,7 +50,7 @@ ttGranier_v2 <- function (mydata_4D, plot_label)
   ID <- unique(mydata_4D$TT_ID)
   for (j in 1:length(ID)) {
     ts <- Tref_1C[mydata_4D$TT_ID == ID[j]]
-    if (length(na.omit(ts)) < 23) {
+    if (length(na.omit(ts)) < 11) {
       next()
     }
     #------------------------
@@ -81,7 +81,7 @@ ttGranier_v2 <- function (mydata_4D, plot_label)
   ID <- unique(mydata_4D$TT_ID)
   for (j in 1:length(ID)) {
     ts <- Theat_0C[mydata_4D$TT_ID == ID[j]]
-    if (length(na.omit(ts)) < 23) {
+    if (length(na.omit(ts)) < 11) {
       next()
     }
     #------------------------
@@ -112,7 +112,7 @@ ttGranier_v2 <- function (mydata_4D, plot_label)
   ID <- unique(mydata_4D$TT_ID)
   for (j in 1:length(ID)) {
     ts <- Theat_1C[mydata_4D$TT_ID == ID[j]]
-    if (length(na.omit(ts)) < 23) {
+    if (length(na.omit(ts)) < 11) {
       next()
     }
     #------------------------

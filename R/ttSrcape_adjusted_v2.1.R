@@ -1,3 +1,5 @@
+#' @export
+
 ttScrape_v2 <- function (ID, subset_days)
   {
     if (missing(subset_days)) {
