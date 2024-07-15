@@ -142,7 +142,6 @@ ttScrape_v2 <- function (ID, subset_days)
                                       tz = "GMT")
     mydata_4C$Timestamp <- as.POSIXct(mydata_4C$Timestamp, origin = "1970-01-01",
                                       tz = "GMT")
-
     #--------------
 
     ####
