@@ -12,6 +12,9 @@ ttScrape_v2 <- function (ID, subset_days)
     library(zoo)
     library(lubridate)
     library(prospectr)
+
+    options(timeout=200)
+
     url <- paste("http://naturetalkers.altervista.org/", ID,
                  "/ttcloud.txt", sep = "")
     if (RCurl::url.exists(url) == T) {
@@ -106,6 +109,7 @@ ttScrape_v2 <- function (ID, subset_days)
     header_4C <- header_4C[1:(dim(mydata_4C)[2])]
     colnames(mydata_4C) <- header_4C
     mydata_4D$Timestamp[mydata_4D$Timestamp < 1577836800] <- NA
+    mydata_4D$Timestamp <- as.numeric(as.character(mydata_4D$Timestamp))
     mydata_4D$TT_ID <- as.integer(mydata_4D$TT_ID)
     mydata_49$TT_ID <- as.integer(mydata_49$TT_ID)
     mydata_4B$TT_ID <- substr(mydata_4B$TT_ID, 2, 8)
