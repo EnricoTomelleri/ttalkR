@@ -67,6 +67,7 @@ ttScrape_v2 <- function (ID, subset_days)
         mydata_49 <- mydata_sep[mydata_sep$V3 == "49", ]
     mydata_49 <- mydata_49[mydata_49$SN > 5.2e+07, ]
     mydata_49 <- Filter(function(x) !all(is.na(x)), mydata_49)
+
     mydata_49$V5 <- as.numeric(mydata_49$V5)
     mydata_49$V6 <- as.numeric(mydata_49$V6)
     mydata_49$V7 <- as.numeric(mydata_49$V7)
@@ -79,6 +80,7 @@ ttScrape_v2 <- function (ID, subset_days)
     mydata_49$V14 <- as.numeric(mydata_49$V14)
     mydata_49$V15 <- as.numeric(mydata_49$V15)
     mydata_49$V16 <- as.numeric(mydata_49$V16)
+
     mydata_4B <- mydata_sep[mydata_sep$V3 == "4B", ]
     mydata_4B <- Filter(function(x) !all(is.na(x)), mydata_4B)
     mydata_4C <- mydata_sep[mydata_sep$V3 == "4C", ]
@@ -133,36 +135,20 @@ ttScrape_v2 <- function (ID, subset_days)
     mydata_4C$TT_ID <- substr(mydata_4C$TT_ID, 2, 8)
     mydata_4C$TT_ID <- as.integer(mydata_4C$TT_ID)
     mydata_4D$gz_mean <- as.integer(mydata_4D$gz_mean)
+
     #--------------
-    mydata_4D$Timestamp <- as.POSIXct(mydata_4D$Timestamp, origin = "1970-01-01",
-                                      tz = "GMT")
-    mydata_4B$Timestamp <- as.POSIXct(mydata_4B$Timestamp, origin = "1970-01-01",
-                                      tz = "GMT")
-    mydata_49$Timestamp <- as.POSIXct(mydata_49$Timestamp, origin = "1970-01-01",
-                                      tz = "GMT")
-    mydata_4C$Timestamp <- as.POSIXct(mydata_4C$Timestamp, origin = "1970-01-01",
-                                      tz = "GMT")
+    mydata_4D$Timestamp <- as.POSIXct(mydata_4D$Timestamp, origin = "1970-01-01", tz = "GMT")
+    mydata_4B$Timestamp <- as.POSIXct(mydata_4B$Timestamp, origin = "1970-01-01", tz = "GMT")
+    mydata_49$Timestamp <- as.POSIXct(mydata_49$Timestamp, origin = "1970-01-01", tz = "GMT")
+    mydata_4C$Timestamp <- as.POSIXct(mydata_4C$Timestamp, origin = "1970-01-01", tz = "GMT")
     #--------------
 
-    ####
-
+    #--------------
     mydata_4D$Timestamp <- floor_date(mydata_4D$Timestamp, "hour") #  FLOORING DATE TO THE HOUR, AS SOMETIMES THE MINUTE IS NOT 00 (12:00:01 will become 12:00:00)
-
-
-    ####
-
     mydata_4B$Timestamp <- floor_date(mydata_4B$Timestamp, "hour") #  FLOORING DATE TO THE HOUR, AS SOMETIMES THE MINUTE IS NOT 00 (12:00:01 will become 12:00:00)
-
-
-    ####
-
     mydata_49$Timestamp <- floor_date(mydata_49$Timestamp, "hour") #  FLOORING DATE TO THE HOUR, AS SOMETIMES THE MINUTE IS NOT 00 (12:00:01 will become 12:00:00)
-
-    ####
-
     mydata_4C$Timestamp <- floor_date(mydata_4C$Timestamp, "hour") #  FLOORING DATE TO THE HOUR, AS SOMETIMES THE MINUTE IS NOT 00 (12:00:01 will become 12:00:00)
-
-    ####
+    #--------------
 
 
     if (subset_days != "all") {
