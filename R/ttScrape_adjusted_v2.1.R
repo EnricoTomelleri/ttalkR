@@ -67,6 +67,7 @@ ttScrape_v2 <- function (ID, subset_days)
         mydata_49 <- mydata_sep[mydata_sep$V3 == "49", ]
     mydata_49 <- mydata_49[mydata_49$SN > 5.2e+07, ]
     mydata_49 <- Filter(function(x) !all(is.na(x)), mydata_49)
+
     mydata_49$V5 <- as.numeric(mydata_49$V5)
     mydata_49$V6 <- as.numeric(mydata_49$V6)
     mydata_49$V7 <- as.numeric(mydata_49$V7)
@@ -79,6 +80,7 @@ ttScrape_v2 <- function (ID, subset_days)
     mydata_49$V14 <- as.numeric(mydata_49$V14)
     mydata_49$V15 <- as.numeric(mydata_49$V15)
     mydata_49$V16 <- as.numeric(mydata_49$V16)
+
     mydata_4B <- mydata_sep[mydata_sep$V3 == "4B", ]
     mydata_4B <- Filter(function(x) !all(is.na(x)), mydata_4B)
     mydata_4C <- mydata_sep[mydata_sep$V3 == "4C", ]
