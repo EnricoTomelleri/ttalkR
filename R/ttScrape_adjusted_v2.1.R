@@ -116,12 +116,16 @@ ttScrape_v2 <- function (ID, subset_days)
     #--------------
     mydata_4D$Timestamp <- as.double(mydata_4D$Timestamp)
     mydata_4D$Timestamp[mydata_4D$Timestamp < 1577836800] <- NA
+    mydata_4D$Timestamp[mydata_4D$Timestamp > 1727283932] <- NA
     mydata_4B$Timestamp <- as.double(mydata_4B$Timestamp)
     mydata_4B$Timestamp[mydata_4B$Timestamp < 1577836800] <- NA
+    mydata_4D$Timestamp[mydata_4D$Timestamp > 1727283932] <- NA
     mydata_49$Timestamp <- as.double(mydata_49$Timestamp)
     mydata_49$Timestamp[mydata_49$Timestamp < 1577836800] <- NA
+    mydata_4D$Timestamp[mydata_4D$Timestamp > 1727283932] <- NA
     mydata_4C$Timestamp <- as.double(mydata_4C$Timestamp)
     mydata_4C$Timestamp[mydata_4C$Timestamp < 1577836800] <- NA
+    mydata_4D$Timestamp[mydata_4D$Timestamp > 1727283932] <- NA
     #--------------
 
     mydata_4D$TT_ID <- as.integer(mydata_4D$TT_ID)
