@@ -13,7 +13,7 @@ ttScrape_v2 <- function (ID, subset_days)
     library(lubridate)
     library(prospectr)
 
-    options(timeout=200)
+    options(timeout=800)
 
     url <- paste("http://naturetalkers.altervista.org/", ID,
                  "/ttcloud.txt", sep = "")
@@ -60,11 +60,13 @@ ttScrape_v2 <- function (ID, subset_days)
     mydata_sep <- separate(mydata, V1, into = c("Date", "Time",
                                                 "SN"), sep = "[ ,]")
     mydata_4D <- mydata_sep[mydata_sep$V3 == "4D", ]
+    mydata_4D$SN <- as.numeric(mydata_4D$SN)
     mydata_4D <- mydata_4D[mydata_4D$SN > 5.2e+07, ]
     mydata_4D <- Filter(function(x) !all(is.na(x)), mydata_4D)
     mydata_4D <- mydata_4D %>% mutate_if(bit64::is.integer64,
                                          as.numeric)
-        mydata_49 <- mydata_sep[mydata_sep$V3 == "49", ]
+    mydata_49 <- mydata_sep[mydata_sep$V3 == "49", ]
+    mydata_49$SN <- as.numeric(mydata_49$SN)
     mydata_49 <- mydata_49[mydata_49$SN > 5.2e+07, ]
     mydata_49 <- Filter(function(x) !all(is.na(x)), mydata_49)
 
@@ -112,13 +114,13 @@ ttScrape_v2 <- function (ID, subset_days)
     colnames(mydata_4C) <- header_4C
 
     #--------------
-    mydata_4D$Timestamp <- as.integer(mydata_4D$Timestamp)
+    mydata_4D$Timestamp <- as.double(mydata_4D$Timestamp)
     mydata_4D$Timestamp[mydata_4D$Timestamp < 1577836800] <- NA
-    mydata_4B$Timestamp <- as.integer(mydata_4B$Timestamp)
+    mydata_4B$Timestamp <- as.double(mydata_4B$Timestamp)
     mydata_4B$Timestamp[mydata_4B$Timestamp < 1577836800] <- NA
-    mydata_49$Timestamp <- as.integer(mydata_49$Timestamp)
+    mydata_49$Timestamp <- as.double(mydata_49$Timestamp)
     mydata_49$Timestamp[mydata_49$Timestamp < 1577836800] <- NA
-    mydata_4C$Timestamp <- as.integer(mydata_4C$Timestamp)
+    mydata_4C$Timestamp <- as.double(mydata_4C$Timestamp)
     mydata_4C$Timestamp[mydata_4C$Timestamp < 1577836800] <- NA
     #--------------
 
