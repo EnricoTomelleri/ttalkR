@@ -2,6 +2,9 @@
 
 ttScrape_v2 <- function (ID, subset_days)
   {
+
+    rm(list = ls()) #clear workspace
+
     if (missing(subset_days)) {
       subset_days = "all"
     }
@@ -14,6 +17,7 @@ ttScrape_v2 <- function (ID, subset_days)
     library(prospectr)
 
     options(timeout=800)
+
 
     url <- paste("http://naturetalkers.altervista.org/", ID,
                  "/ttcloud.txt", sep = "")
@@ -143,10 +147,10 @@ ttScrape_v2 <- function (ID, subset_days)
     mydata_4D$gz_mean <- as.integer(mydata_4D$gz_mean)
 
     #--------------
-    mydata_4D$Timestamp <- as.POSIXct(mydata_4D$Timestamp, origin = "1970-01-01", tz = "GMT")
-    mydata_4B$Timestamp <- as.POSIXct(mydata_4B$Timestamp, origin = "1970-01-01", tz = "GMT")
-    mydata_49$Timestamp <- as.POSIXct(mydata_49$Timestamp, origin = "1970-01-01", tz = "GMT")
-    mydata_4C$Timestamp <- as.POSIXct(mydata_4C$Timestamp, origin = "1970-01-01", tz = "GMT")
+    mydata_4D$Timestamp <- as.POSIXct(mydata_4D$Timestamp, origin = "1970-01-01", tz = "UTC")
+    mydata_4B$Timestamp <- as.POSIXct(mydata_4B$Timestamp, origin = "1970-01-01", tz = "UTC")
+    mydata_49$Timestamp <- as.POSIXct(mydata_49$Timestamp, origin = "1970-01-01", tz = "UTC")
+    mydata_4C$Timestamp <- as.POSIXct(mydata_4C$Timestamp, origin = "1970-01-01", tz = "UTC")
     #--------------
 
     #--------------
@@ -156,7 +160,7 @@ ttScrape_v2 <- function (ID, subset_days)
     mydata_4C$Timestamp <- floor_date(mydata_4C$Timestamp, "hour") #  FLOORING DATE TO THE HOUR, AS SOMETIMES THE MINUTE IS NOT 00 (12:00:01 will become 12:00:00)
     #--------------
 
-
+    #subset data frame 4B
     if (subset_days != "all") {
       tt_begin <- mydata_4B$Timestamp[length(mydata_4B$Timestamp)] -
         (24 * 60 * 60 * subset_days)
@@ -171,6 +175,8 @@ ttScrape_v2 <- function (ID, subset_days)
     mydata_4B <- mydata_4B %>% drop_na(Timestamp, TT_ID)
     mydata_4B <- mydata_4B %>% distinct(TT_ID, Timestamp, .keep_all = TRUE)
     .GlobalEnv$mydata_4B <- mydata_4B
+
+    #subset data frame 4D
     if (subset_days != "all") {
       tt_begin <- mydata_4D$Timestamp[length(mydata_4D$Timestamp)] -
         (24 * 60 * 60 * subset_days)
@@ -184,6 +190,8 @@ ttScrape_v2 <- function (ID, subset_days)
     }
     mydata_4D <- mydata_4D %>% drop_na(Timestamp, TT_ID)
     mydata_4D <- mydata_4D %>% distinct(TT_ID, Timestamp, .keep_all = TRUE)
+
+    #subset data frame 49
     if (subset_days != "all") {
       tt_begin <- mydata_49$Timestamp[length(mydata_49$Timestamp)] -
         (24 * 60 * 60 * subset_days)
@@ -197,6 +205,8 @@ ttScrape_v2 <- function (ID, subset_days)
     }
     mydata_49 <- mydata_49 %>% drop_na(Timestamp, TT_ID)
     mydata_49 <- mydata_49 %>% distinct(TT_ID, Timestamp, .keep_all = TRUE)
+
+    #subset data frame 4C
     if (subset_days != "all") {
       tt_begin <- mydata_4C$Timestamp[length(mydata_4C$Timestamp)] -
         (24 * 60 * 60 * subset_days)
@@ -225,8 +235,8 @@ ttScrape_v2 <- function (ID, subset_days)
     # Function to ensure all TT_IDs are present for each timestamp
     complete_TT_IDs <- function(data) {
       # Find the minimum and maximum timestamps in the data
-      min_timestamp <- min(data$Timestamp, na.rm = TRUE)
-      max_timestamp <- max(data$Timestamp, na.rm = TRUE)
+      min_timestamp <- quantile(data$Timestamp, p=0.01, na.rm=T) #min(data$Timestamp, na.rm = TRUE)
+      max_timestamp <- quantile(data$Timestamp, p=0.99, na.rm=T) #max(data$Timestamp, na.rm = TRUE)
 
       # Generate a sequence of timestamps from the minimum to maximum, spaced by hour
       full_timestamps <- seq(from = min_timestamp, to = max_timestamp, by = "hour")
