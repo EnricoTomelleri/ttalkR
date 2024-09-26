@@ -3,7 +3,7 @@
 ttScrape_v2 <- function (ID, subset_days)
   {
 
-    rm(list = ls()) #clear workspace
+    #rm(list = ls()) #clear workspace
 
     if (missing(subset_days)) {
       subset_days = "all"
@@ -235,8 +235,8 @@ ttScrape_v2 <- function (ID, subset_days)
     # Function to ensure all TT_IDs are present for each timestamp
     complete_TT_IDs <- function(data) {
       # Find the minimum and maximum timestamps in the data
-      min_timestamp <- quantile(data$Timestamp, p=0.01, na.rm=T) #min(data$Timestamp, na.rm = TRUE)
-      max_timestamp <- quantile(data$Timestamp, p=0.99, na.rm=T) #max(data$Timestamp, na.rm = TRUE)
+      min_timestamp <- quantile(data$Timestamp, p=0.001, na.rm=T) #min(data$Timestamp, na.rm = TRUE)
+      max_timestamp <- quantile(data$Timestamp, p=0.999, na.rm=T) #max(data$Timestamp, na.rm = TRUE)
 
       # Generate a sequence of timestamps from the minimum to maximum, spaced by hour
       full_timestamps <- seq(from = min_timestamp, to = max_timestamp, by = "hour")
