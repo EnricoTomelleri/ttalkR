@@ -2,6 +2,9 @@
 
 ttScrape_v2 <- function (ID, subset_days)
   {
+
+    rm(list = ls()) #clear workspace
+
     if (missing(subset_days)) {
       subset_days = "all"
     }
@@ -14,6 +17,7 @@ ttScrape_v2 <- function (ID, subset_days)
     library(prospectr)
 
     options(timeout=800)
+
 
     url <- paste("http://naturetalkers.altervista.org/", ID,
                  "/ttcloud.txt", sep = "")
