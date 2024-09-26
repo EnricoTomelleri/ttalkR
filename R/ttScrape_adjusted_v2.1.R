@@ -1,9 +1,9 @@
 #' @export
 
+#rm(list = ls()) #clear workspace
+
 ttScrape_v2 <- function (ID, subset_days)
   {
-
-    rm(list = ls()) #clear workspace
 
     if (missing(subset_days)) {
       subset_days = "all"
